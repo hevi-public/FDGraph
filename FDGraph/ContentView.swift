@@ -10,12 +10,25 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello, World!")
+        GraphUIView()
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+    }
+}
+
+struct GraphUIView: UIViewControllerRepresentable {
+    
+    typealias UIViewControllerType = GraphController
+    
+    func makeUIViewController(context: UIViewControllerRepresentableContext<GraphUIView>) -> GraphController {
+        GraphController()
+    }
+    
+    func updateUIViewController(_ uiViewController: GraphController, context: UIViewControllerRepresentableContext<GraphUIView>) {
+        
     }
 }

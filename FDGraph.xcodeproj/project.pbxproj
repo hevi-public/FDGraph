@@ -16,6 +16,14 @@
 		D7D2B4EC24E71E3900EBC1C8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7D2B4EA24E71E3900EBC1C8 /* LaunchScreen.storyboard */; };
 		D7D2B4F724E71E3900EBC1C8 /* FDGraphTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B4F624E71E3900EBC1C8 /* FDGraphTests.swift */; };
 		D7D2B50224E71E3900EBC1C8 /* FDGraphUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B50124E71E3900EBC1C8 /* FDGraphUITests.swift */; };
+		D7D2B51524E7281B00EBC1C8 /* GraphController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B51024E7281B00EBC1C8 /* GraphController.swift */; };
+		D7D2B51624E7281B00EBC1C8 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B51124E7281B00EBC1C8 /* GraphView.swift */; };
+		D7D2B51724E7281B00EBC1C8 /* EdgeLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B51224E7281B00EBC1C8 /* EdgeLayer.swift */; };
+		D7D2B51824E7281B00EBC1C8 /* Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B51324E7281B00EBC1C8 /* Circle.swift */; };
+		D7D2B51924E7281B00EBC1C8 /* GraphScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B51424E7281B00EBC1C8 /* GraphScrollView.swift */; };
+		D7D2B51C24E7555700EBC1C8 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B51B24E7555700EBC1C8 /* Node.swift */; };
+		D7D2B51E24E75C1D00EBC1C8 /* Edge.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B51D24E75C1D00EBC1C8 /* Edge.swift */; };
+		D7D2B52024E75F0900EBC1C8 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B51F24E75F0900EBC1C8 /* Graph.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +59,15 @@
 		D7D2B4FD24E71E3900EBC1C8 /* FDGraphUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FDGraphUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7D2B50124E71E3900EBC1C8 /* FDGraphUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FDGraphUITests.swift; sourceTree = "<group>"; };
 		D7D2B50324E71E3900EBC1C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D7D2B51024E7281B00EBC1C8 /* GraphController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphController.swift; sourceTree = "<group>"; };
+		D7D2B51124E7281B00EBC1C8 /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
+		D7D2B51224E7281B00EBC1C8 /* EdgeLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EdgeLayer.swift; sourceTree = "<group>"; };
+		D7D2B51324E7281B00EBC1C8 /* Circle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Circle.swift; sourceTree = "<group>"; };
+		D7D2B51424E7281B00EBC1C8 /* GraphScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphScrollView.swift; sourceTree = "<group>"; };
+		D7D2B51B24E7555700EBC1C8 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
+		D7D2B51D24E75C1D00EBC1C8 /* Edge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Edge.swift; sourceTree = "<group>"; };
+		D7D2B51F24E75F0900EBC1C8 /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
+		D7D2B52124E82DC100EBC1C8 /* FDGraph.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FDGraph.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +118,9 @@
 		D7D2B4DB24E71E3300EBC1C8 /* FDGraph */ = {
 			isa = PBXGroup;
 			children = (
+				D7D2B52124E82DC100EBC1C8 /* FDGraph.entitlements */,
+				D7D2B51A24E7553B00EBC1C8 /* engine */,
+				D7D2B50F24E7281B00EBC1C8 /* views */,
 				D7D2B4DC24E71E3300EBC1C8 /* AppDelegate.swift */,
 				D7D2B4DE24E71E3300EBC1C8 /* SceneDelegate.swift */,
 				D7D2B4E324E71E3300EBC1C8 /* ContentView.swift */,
@@ -137,6 +157,28 @@
 				D7D2B50324E71E3900EBC1C8 /* Info.plist */,
 			);
 			path = FDGraphUITests;
+			sourceTree = "<group>";
+		};
+		D7D2B50F24E7281B00EBC1C8 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				D7D2B51024E7281B00EBC1C8 /* GraphController.swift */,
+				D7D2B51124E7281B00EBC1C8 /* GraphView.swift */,
+				D7D2B51224E7281B00EBC1C8 /* EdgeLayer.swift */,
+				D7D2B51324E7281B00EBC1C8 /* Circle.swift */,
+				D7D2B51424E7281B00EBC1C8 /* GraphScrollView.swift */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		D7D2B51A24E7553B00EBC1C8 /* engine */ = {
+			isa = PBXGroup;
+			children = (
+				D7D2B51B24E7555700EBC1C8 /* Node.swift */,
+				D7D2B51D24E75C1D00EBC1C8 /* Edge.swift */,
+				D7D2B51F24E75F0900EBC1C8 /* Graph.swift */,
+			);
+			path = engine;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,10 +312,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7D2B52024E75F0900EBC1C8 /* Graph.swift in Sources */,
+				D7D2B51E24E75C1D00EBC1C8 /* Edge.swift in Sources */,
 				D7D2B4E224E71E3300EBC1C8 /* FDGraph.xcdatamodeld in Sources */,
+				D7D2B51C24E7555700EBC1C8 /* Node.swift in Sources */,
+				D7D2B51824E7281B00EBC1C8 /* Circle.swift in Sources */,
 				D7D2B4DD24E71E3300EBC1C8 /* AppDelegate.swift in Sources */,
 				D7D2B4E424E71E3300EBC1C8 /* ContentView.swift in Sources */,
+				D7D2B51924E7281B00EBC1C8 /* GraphScrollView.swift in Sources */,
+				D7D2B51524E7281B00EBC1C8 /* GraphController.swift in Sources */,
 				D7D2B4DF24E71E3300EBC1C8 /* SceneDelegate.swift in Sources */,
+				D7D2B51724E7281B00EBC1C8 /* EdgeLayer.swift in Sources */,
+				D7D2B51624E7281B00EBC1C8 /* GraphView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,17 +488,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FDGraph/FDGraph.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"FDGraph/Preview Content\"";
 				DEVELOPMENT_TEAM = 7VSX9U5N94;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = FDGraph/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = hu.hevi.FDGraph;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -458,17 +511,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FDGraph/FDGraph.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"FDGraph/Preview Content\"";
 				DEVELOPMENT_TEAM = 7VSX9U5N94;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = FDGraph/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = hu.hevi.FDGraph;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
