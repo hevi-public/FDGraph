@@ -8,16 +8,38 @@
 
 import UIKit
 
-class Node {
+public class Node: Particle {
   
     var mass: CGFloat
-    var radius: CGFloat
-    var position: CGPoint
+    public var position: CGPoint
+    public var velocity: CGPoint
+    public var fixed: Bool = false
     
-    init(mass: CGFloat, radius: CGFloat) {
+    var view: UIView
+    
+    init(mass: CGFloat, view: UIView) {
         self.mass = mass
-        self.radius = radius
         self.position = CGPoint.zero
+        self.velocity = CGPoint.zero
+        self.view = view
     }
     
-} 
+    public func tick() {
+        view.center = position
+    }
+    
+}
+
+extension Node: Equatable {
+    
+    public static func == (lhs: Node, rhs: Node) -> Bool {
+        return lhs.view == rhs.view
+    }
+}
+
+extension Node: Hashable {
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(view.hashValue)
+    }
+}

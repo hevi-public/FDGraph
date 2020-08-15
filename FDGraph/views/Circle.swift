@@ -11,8 +11,6 @@ import UIKit
 
 public class Circle: UIView {
     
-    private(set) var node: Node?
-    
     let cirucumference: CGFloat
     var radius: CGFloat {
         get {
@@ -33,10 +31,10 @@ public class Circle: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    static func createCircle(node: Node) -> Circle {
+    static func createCircle(radius: CGFloat) -> Circle {
         
         let frame = CGRect(origin: CGPoint(x: Int.random(in: 2...10), y: Int.random(in: 2...10)),
-                           size: CGSize(width: node.radius * 2, height: node.radius * 2))
+                           size: CGSize(width: radius * 2, height: radius * 2))
         
         let cirucumference = frame.width
         let radius = cirucumference / 2
@@ -45,7 +43,6 @@ public class Circle: UIView {
         let baseHeight = cirucumference
         
         let v = Circle(frame: frame)
-        v.node = node
         
         let layer = CAShapeLayer()
         layer.frame = frame

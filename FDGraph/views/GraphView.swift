@@ -64,7 +64,7 @@ class GraphView: UIView {
     }
     
     public func addCircle(node: Node) {
-        let circle = Circle.createCircle(node: node)
+        let circle = Circle.createCircle(radius: 10)
         
 //        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
 //        circle.addGestureRecognizer(tapGesture)
@@ -85,14 +85,14 @@ class GraphView: UIView {
             let height = circle.bounds.height
             
             
-            guard let node = circle.node else { continue }
-            
-            let x = self.bounds.width / 2 + (node.position.x - node.radius)
-            let y = self.bounds.height / 2 + (node.position.y - node.radius)
-            
-            
-            
-            circle.frame = CGRect(x: x, y: y, width: width, height: height)
+//            guard let node = circle.node else { continue }
+//            
+//            let x = self.bounds.width / 2 + (node.position.x - node.radius)
+//            let y = self.bounds.height / 2 + (node.position.y - node.radius)
+//            
+//            
+//            
+//            circle.frame = CGRect(x: x, y: y, width: width, height: height)
         }
     }
     
