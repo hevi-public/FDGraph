@@ -8,50 +8,6 @@
 
 import CoreGraphics
 
-fileprivate struct Link: Hashable {
-    let a: Node
-    let b: Node
-    let strength: CGFloat?
-    let distance: CGFloat?
-    
-    init(between a: Node, and b: Node, strength: CGFloat? = nil, distance: CGFloat? = nil) {
-        self.a = a
-        self.b = b
-        self.strength = strength
-        self.distance = distance
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(a.hashValue)
-        hasher.combine(b.hashValue)
-    }
-    
-    public func tick(alpha: CGFloat, degrees: Dictionary<Node, UInt>, distance: CGFloat, particles: inout Set<Node>) {
-        guard let fromIndex = particles.firstIndex(of: a),
-            let toIndex = particles.firstIndex(of: b) else { return }
-        
-        var from = particles[fromIndex]
-        var to = particles[toIndex]
-        
-        let fromDegree = CGFloat(degrees[a] ?? 0)
-        let toDegree = CGFloat(degrees[b] ?? 0)
-        
-        let bias = fromDegree / (fromDegree + toDegree)
-        let distance = (self.distance ?? distance)
-        let strength = (self.strength ?? 0.7 / CGFloat(min(fromDegree, toDegree)))
-        
-        let delta = (to.position + to.velocity - from.position - from.velocity).jiggled
-        let magnitude = delta.magnitude
-        let value = delta * ((magnitude - distance) / magnitude) * alpha * strength
-        
-        to.velocity -= value * bias;
-        from.velocity += (value * (1 - bias))
-        
-        particles.update(with: from)
-        particles.update(with: to)
-    }
-}
-
 public final class Links: Force {
     
     var distance: CGFloat = 40
@@ -105,8 +61,48 @@ public final class Links: Force {
     }
 }
 
-fileprivate func ==(lhs: Link, rhs: Link) -> Bool {
-    return ((lhs.a == rhs.a && lhs.b == rhs.b) || (lhs.a == rhs.b && lhs.b == rhs.a))
+fileprivate struct Link: Hashable {
+    let a: Node
+    let b: Node
+    let strength: CGFloat?
+    let distance: CGFloat?
+    
+    init(between a: Node, and b: Node, strength: CGFloat? = nil, distance: CGFloat? = nil) {
+        self.a = a
+        self.b = b
+        self.strength = strength
+        self.distance = distance
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(a.hashValue)
+        hasher.combine(b.hashValue)
+    }
+    
+    public func tick(alpha: CGFloat, degrees: Dictionary<Node, UInt>, distance: CGFloat, particles: inout Set<Node>) {
+        guard let fromIndex = particles.firstIndex(of: a),
+            let toIndex = particles.firstIndex(of: b) else { return }
+        
+        var from = particles[fromIndex]
+        var to = particles[toIndex]
+        
+        let fromDegree = CGFloat(degrees[a] ?? 0)
+        let toDegree = CGFloat(degrees[b] ?? 0)
+        
+        let bias = fromDegree / (fromDegree + toDegree)
+        let distance = (self.distance ?? distance)
+        let strength = (self.strength ?? 0.7 / CGFloat(min(fromDegree, toDegree)))
+        
+        let delta = (to.position + to.velocity - from.position - from.velocity).jiggled
+        let magnitude = delta.magnitude
+        let value = delta * ((magnitude - distance) / magnitude) * alpha * strength
+        
+        to.velocity -= value * bias;
+        from.velocity += (value * (1 - bias))
+        
+        particles.update(with: from)
+        particles.update(with: to)
+    }
 }
 
 fileprivate class LinkBetween {
@@ -121,3 +117,9 @@ fileprivate class LinkBetween {
         self.link = link
     }
 }
+
+fileprivate func ==(lhs: Link, rhs: Link) -> Bool {
+    return ((lhs.a == rhs.a && lhs.b == rhs.b) || (lhs.a == rhs.b && lhs.b == rhs.a))
+}
+
+

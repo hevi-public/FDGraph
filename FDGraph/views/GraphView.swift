@@ -74,7 +74,12 @@ class GraphView: UIView {
         
         self.layer.insertSublayer(edgeLayer, at: 0)
         
-        
+        links.link(between: nodes[0], and: nodes[1])
+        links.link(between: nodes[2], and: nodes[1])
+        links.link(between: nodes[2], and: nodes[3])
+        links.link(between: nodes[2], and: nodes[4])
+        links.link(between: nodes[2], and: nodes[5])
+        links.link(between: nodes[2], and: nodes[6])
         
         graph.nodes.forEach { (node) in
             simulation.particles.update(with: node)
