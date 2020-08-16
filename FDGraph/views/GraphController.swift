@@ -184,6 +184,7 @@ class GraphController: UIViewController {
         
         self.view.isMultipleTouchEnabled = true
         self.graphView.isMultipleTouchEnabled = true
+        
 
     }
     

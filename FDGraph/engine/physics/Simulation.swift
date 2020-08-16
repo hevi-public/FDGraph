@@ -9,19 +9,6 @@
 import CoreGraphics
 import QuartzCore
 
-public protocol Particle: Hashable {
-    var position: CGPoint { get set }
-    var velocity: CGPoint { get set }
-    var fixed: Bool { get set }
-    
-    func tick()
-}
-
-public protocol Force {
-
-    func tick(alpha: CGFloat, particles: inout Set<Node>)
-}
-
 public class Simulation {
     
     private let alphaTarget: CGFloat = 0

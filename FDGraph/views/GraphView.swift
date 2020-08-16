@@ -15,6 +15,28 @@ class GraphView: UIView {
 //    private var tapCircleCallback: (Node) -> ()
     
     private weak var displayLink: CADisplayLink?
+    
+    public lazy var simulation: Simulation = {
+        let simulation: Simulation = Simulation()
+        simulation.insert(force: self.manyParticle)
+        simulation.insert(force: self.links)
+        simulation.insert(force: self.viewParticleCenter)
+        simulation.insert(tick: { self.linkLayer.path = self.links.path(from: &$0) })
+        return simulation
+    }()
+    
+    private lazy var linkLayer: CAShapeLayer = {
+        let linkLayer = CAShapeLayer()
+        linkLayer.strokeColor = UIColor.gray.cgColor
+        linkLayer.fillColor = UIColor.clear.cgColor
+        linkLayer.lineWidth = 1
+        self.layer.insertSublayer(linkLayer, at: 0)
+        return linkLayer
+    }()
+    
+    internal let viewParticleCenter: Center!
+    private let manyParticle: ManyParticle = ManyParticle()
+    private let links: Links = Links()
 
     private var graph: Graph
     
@@ -32,10 +54,13 @@ class GraphView: UIView {
         
         self.graph = graph
         
+        
+        
+        
 //        self.tickCallback = tickCallback
 //        self.tapCircleCallback = tapCircleCallback
         
-        
+        self.viewParticleCenter = Center(CGPoint(x: frame.width / 2, y: frame.height / 2))
         
         super.init(frame: frame)
         
@@ -46,6 +71,14 @@ class GraphView: UIView {
         }
         
         self.layer.insertSublayer(edgeLayer, at: 0)
+        
+        
+        
+        graph.nodes.forEach { (node) in
+            simulation.particles.update(with: node)
+        }
+        
+        simulation.start()
         
         /////////
 //        for i in 0...edges.count - 1 {
@@ -86,12 +119,12 @@ class GraphView: UIView {
             
             
 //            guard let node = circle.node else { continue }
-//            
+//
 //            let x = self.bounds.width / 2 + (node.position.x - node.radius)
 //            let y = self.bounds.height / 2 + (node.position.y - node.radius)
-//            
-//            
-//            
+//
+//
+//
 //            circle.frame = CGRect(x: x, y: y, width: width, height: height)
         }
     }
