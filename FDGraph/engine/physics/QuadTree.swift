@@ -7,6 +7,7 @@
 //
 
 import CoreGraphics
+import UIKit
 
 public enum QuadTree<T> {
     case Leaf(CGPoint, T)

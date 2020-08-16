@@ -66,8 +66,10 @@ class GraphView: UIView {
         
         let nodes = graph.nodes
         
+        nodes[0].view.center = CGPoint(x: nodes[0].view.center.x - 20, y: nodes[0].view.center.y - 20)
+        
         for i in 0...nodes.count - 1 {
-            self.addCircle(node: nodes[i])
+            self.addSubview(nodes[i].view)
         }
         
         self.layer.insertSublayer(edgeLayer, at: 0)
@@ -96,17 +98,17 @@ class GraphView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func addCircle(node: Node) {
-        let circle = Circle.createCircle(radius: 10)
-        
-//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
-//        circle.addGestureRecognizer(tapGesture)
-        circles.append(circle)
-        
-        self.addSubview(circle)
-        
-//        self.tick()
-    }
+//    public func addCircle(node: Node) {
+////        let circle = Circle.createCircle(radius: 10)
+//
+////        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
+////        circle.addGestureRecognizer(tapGesture)
+//        circles.append(circle)
+//
+//        self.addSubview(circle)
+//
+////        self.tick()
+//    }
     
     func updateCircles() {
 
@@ -156,22 +158,22 @@ class GraphView: UIView {
     
     // - MARK: Simulation
     
-    public func start() {
-        guard displayLink == nil else { return }
-        print("simulation start...")
-        let link = CADisplayLink(target: self, selector: #selector(tick))
-        link.add(to: RunLoop.main, forMode: RunLoop.Mode.common)
-        displayLink = link
-    }
+//    public func start() {
+//        guard displayLink == nil else { return }
+//        print("simulation start...")
+//        let link = CADisplayLink(target: self, selector: #selector(tick))
+//        link.add(to: RunLoop.main, forMode: RunLoop.Mode.common)
+//        displayLink = link
+//    }
+//    
+//    public func stop() {
+//        print("simulation stop...")
+//        displayLink?.remove(from: RunLoop.main, forMode: RunLoop.Mode.common)
+//    }
     
-    public func stop() {
-        print("simulation stop...")
-        displayLink?.remove(from: RunLoop.main, forMode: RunLoop.Mode.common)
-    }
-    
-    @objc private func tick() {
-//        self.tickCallback()
-    }
+//    @objc private func tick() {
+////        self.tickCallback()
+//    }
 //
 //    @objc func handleTap(sender: UITapGestureRecognizer) {
 //        guard let node = (sender.view as? Circle)?.node else { return }

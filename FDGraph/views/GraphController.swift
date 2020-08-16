@@ -30,7 +30,7 @@ class GraphController: UIViewController {
         let mass = CGFloat(100)
         let radius = CGFloat(10)
         
-        let node = [
+        let nodes = [
             Node(mass: mass, view: Circle.createCircle(radius: radius)),
             Node(mass: mass, view: Circle.createCircle(radius: radius * 1.1)),
             Node(mass: mass, view: Circle.createCircle(radius: radius)),
@@ -112,7 +112,7 @@ class GraphController: UIViewController {
 //            Edge(to: node[16], from: node[20])
         ]
         
-        let graph = Graph(nodes: node, edges: edges)
+        let graph = Graph(nodes: nodes, edges: edges)
 //            .timeStep(value: 60)
 //            .force(name: "link", force: Link()
 //                .springLength(value: 400)
@@ -171,7 +171,7 @@ class GraphController: UIViewController {
         scrollView.display(self.graphView)
         self.view.addSubview(scrollView)
         
-        self.graphView.start()
+//        self.graphView.start()
         
         scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true

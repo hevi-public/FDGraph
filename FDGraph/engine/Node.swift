@@ -19,7 +19,10 @@ public class Node: Particle {
     
     init(mass: CGFloat, view: UIView) {
         self.mass = mass
-        self.position = CGPoint.zero
+        let randomX = CGFloat.random(in: 0 ..< 1) / 10
+        let randomY = CGFloat.random(in: 0 ..< 1) / 10
+        
+        self.position = CGPoint(x: randomX, y: randomY)
         self.velocity = CGPoint.zero
         self.view = view
     }
