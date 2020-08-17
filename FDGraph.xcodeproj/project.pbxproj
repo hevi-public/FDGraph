@@ -136,7 +136,6 @@
 			children = (
 				D7D2B52124E82DC100EBC1C8 /* FDGraph.entitlements */,
 				D7D2B51A24E7553B00EBC1C8 /* engine */,
-				D7D2B50F24E7281B00EBC1C8 /* views */,
 				D7D2B4DC24E71E3300EBC1C8 /* AppDelegate.swift */,
 				D7D2B4DE24E71E3300EBC1C8 /* SceneDelegate.swift */,
 				D7D2B4E324E71E3300EBC1C8 /* ContentView.swift */,
@@ -190,6 +189,7 @@
 		D7D2B51A24E7553B00EBC1C8 /* engine */ = {
 			isa = PBXGroup;
 			children = (
+				D7D2B50F24E7281B00EBC1C8 /* views */,
 				D7D2B52224E83FAB00EBC1C8 /* physics */,
 				D7D2B51B24E7555700EBC1C8 /* Node.swift */,
 				D7D2B53924EAFB6300EBC1C8 /* GraphEngine.swift */,
