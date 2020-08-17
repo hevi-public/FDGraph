@@ -65,7 +65,7 @@ class GraphController: UIViewController {
         
         
         
-        self.graphView = GraphView(nodes: nodes)
+        self.graphView = GraphView(nodes: nodes, width: GraphController.GRAPH_CANVAS_SIZE, height: GraphController.GRAPH_CANVAS_SIZE)
 //        ,
 //                                   tickCallback: tickCallback,
 //                                   tapCircleCallback: tapCircleCallback)

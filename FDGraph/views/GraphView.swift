@@ -23,13 +23,13 @@ class GraphView: UIView {
     
     let edgeLayer: EdgeLayer = EdgeLayer()
     
-    init(nodes: [Node])
+    init(nodes: [Node], width: CGFloat, height: CGFloat)
 //    ,
 //         tickCallback: @escaping () -> (),
 //         tapCircleCallback: @escaping (Node) -> ())
     {
         
-        let frame = CGRect(x: 0, y: 0, width: GraphController.GRAPH_CANVAS_SIZE, height: GraphController.GRAPH_CANVAS_SIZE)
+        let frame = CGRect(x: 0, y: 0, width: width, height: height)
         
         
         
@@ -57,25 +57,8 @@ class GraphView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // - MARK: Simulation
-    
-//    public func start() {
-//        guard displayLink == nil else { return }
-//        print("simulation start...")
-//        let link = CADisplayLink(target: self, selector: #selector(tick))
-//        link.add(to: RunLoop.main, forMode: RunLoop.Mode.common)
-//        displayLink = link
-//    }
-//    
-//    public func stop() {
-//        print("simulation stop...")
-//        displayLink?.remove(from: RunLoop.main, forMode: RunLoop.Mode.common)
-//    }
-    
-//    @objc private func tick() {
-////        self.tickCallback()
-//    }
-//
+ 
+
 //    @objc func handleTap(sender: UITapGestureRecognizer) {
 //        guard let node = (sender.view as? Circle)?.node else { return }
 //
