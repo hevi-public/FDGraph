@@ -79,7 +79,7 @@ public class Simulation {
             force(alpha, &particles)
         }
         
-        for var particle in particles {
+        for particle in particles {
             if particle.fixed {
                 particle.velocity = .zero
             } else {

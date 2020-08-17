@@ -83,8 +83,8 @@ fileprivate struct Link: Hashable {
         guard let fromIndex = particles.firstIndex(of: a),
             let toIndex = particles.firstIndex(of: b) else { return }
         
-        var from = particles[fromIndex]
-        var to = particles[toIndex]
+        let from = particles[fromIndex]
+        let to = particles[toIndex]
         
         let fromDegree = CGFloat(degrees[a] ?? 0)
         let toDegree = CGFloat(degrees[b] ?? 0)

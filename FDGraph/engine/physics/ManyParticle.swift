@@ -32,7 +32,7 @@ public final class ManyParticle: Force {
             return value
         })
                 
-        for var particle in particles {
+        for particle in particles {
             guard !particle.fixed else { continue }
             tree?.visit({ (quad) in
                 let value = quad.value
