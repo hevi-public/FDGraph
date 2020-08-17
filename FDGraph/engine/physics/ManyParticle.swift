@@ -12,9 +12,9 @@ fileprivate typealias Charge = (CGFloat, CGPoint)
 
 public final class ManyParticle: Force {
     
-    var strength: CGFloat = -75
+    var strength: CGFloat = -25 // -75
     
-    private var distanceMin2: CGFloat = 1
+    private var distanceMin2: CGFloat = 400
     private var distanceMax2: CGFloat = CGFloat.infinity
     private var theta2: CGFloat = 0.81
     

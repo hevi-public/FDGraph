@@ -23,7 +23,6 @@
 		D7D2B51924E7281B00EBC1C8 /* GraphScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B51424E7281B00EBC1C8 /* GraphScrollView.swift */; };
 		D7D2B51C24E7555700EBC1C8 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B51B24E7555700EBC1C8 /* Node.swift */; };
 		D7D2B51E24E75C1D00EBC1C8 /* Edge.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B51D24E75C1D00EBC1C8 /* Edge.swift */; };
-		D7D2B52024E75F0900EBC1C8 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B51F24E75F0900EBC1C8 /* Graph.swift */; };
 		D7D2B52E24E86ED600EBC1C8 /* Simulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B52724E86ED600EBC1C8 /* Simulation.swift */; };
 		D7D2B53024E86ED600EBC1C8 /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B52924E86ED600EBC1C8 /* Links.swift */; };
 		D7D2B53124E86ED600EBC1C8 /* Center.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B52A24E86ED600EBC1C8 /* Center.swift */; };
@@ -74,7 +73,6 @@
 		D7D2B51424E7281B00EBC1C8 /* GraphScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphScrollView.swift; sourceTree = "<group>"; };
 		D7D2B51B24E7555700EBC1C8 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		D7D2B51D24E75C1D00EBC1C8 /* Edge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Edge.swift; sourceTree = "<group>"; };
-		D7D2B51F24E75F0900EBC1C8 /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		D7D2B52124E82DC100EBC1C8 /* FDGraph.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FDGraph.entitlements; sourceTree = "<group>"; };
 		D7D2B52724E86ED600EBC1C8 /* Simulation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Simulation.swift; sourceTree = "<group>"; };
 		D7D2B52924E86ED600EBC1C8 /* Links.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Links.swift; sourceTree = "<group>"; };
@@ -193,7 +191,6 @@
 				D7D2B52224E83FAB00EBC1C8 /* physics */,
 				D7D2B51B24E7555700EBC1C8 /* Node.swift */,
 				D7D2B51D24E75C1D00EBC1C8 /* Edge.swift */,
-				D7D2B51F24E75F0900EBC1C8 /* Graph.swift */,
 			);
 			path = engine;
 			sourceTree = "<group>";
@@ -344,7 +341,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D7D2B52024E75F0900EBC1C8 /* Graph.swift in Sources */,
 				D7D2B53824E878B800EBC1C8 /* Particle.swift in Sources */,
 				D7D2B51E24E75C1D00EBC1C8 /* Edge.swift in Sources */,
 				D7D2B4E224E71E3300EBC1C8 /* FDGraph.xcdatamodeld in Sources */,
