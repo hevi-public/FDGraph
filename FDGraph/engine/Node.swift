@@ -16,13 +16,16 @@ public class Node: Particle {
     
     var view: UIView
     
-    init(view: UIView) {
+    init(radius: CGFloat) {
+        
+        
         let randomX = CGFloat.random(in: 0 ..< 1) / 10
         let randomY = CGFloat.random(in: 0 ..< 1) / 10
         
         self.position = CGPoint(x: randomX, y: randomY)
         self.velocity = CGPoint.zero
-        self.view = view
+        self.view = Circle.createCircle(radius: radius)
+       
     }
     
     public func tick() {
