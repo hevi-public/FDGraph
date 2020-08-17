@@ -10,7 +10,7 @@ import CoreGraphics
 
 public final class Links: Force {
     
-    var distance: CGFloat = 40
+    private var DEFAULT_DISTANCE: CGFloat = 40
         
     private var links: Set<Link> = []
     private var degrees: Dictionary<Node, UInt> = [:]
@@ -45,7 +45,7 @@ public final class Links: Force {
 
     public func tick(alpha: CGFloat, particles: inout Set<Node>) {
         for link in links {            
-            link.tick(alpha: alpha, degrees: degrees, distance: distance, particles: &particles)
+            link.tick(alpha: alpha, degrees: degrees, distance: DEFAULT_DISTANCE, particles: &particles)
         }
     }
     
