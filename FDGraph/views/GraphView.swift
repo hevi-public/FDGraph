@@ -23,7 +23,7 @@ class GraphView: UIView {
     
     let edgeLayer: EdgeLayer = EdgeLayer()
     
-    init(nodes: [Node], width: CGFloat, height: CGFloat)
+    init(width: CGFloat, height: CGFloat)
 //    ,
 //         tickCallback: @escaping () -> (),
 //         tapCircleCallback: @escaping (Node) -> ())
@@ -38,11 +38,6 @@ class GraphView: UIView {
         
     
         super.init(frame: frame)
-        
-        
-        
-        self.graph.add(nodes: nodes)
-        self.graph.add(edges: [])
         
         
         self.layer.insertSublayer(edgeLayer, at: 0)
@@ -65,5 +60,16 @@ class GraphView: UIView {
 //        self.tapCircleCallback(node)
 //    }
     
+    
+    
 }
 
+extension GraphView {
+    public func add(nodes: [Node]) {
+        self.graph.add(nodes: nodes)
+    }
+    
+    public func add(edges: [Links]) {
+        self.graph.add(edges: edges)
+    }
+}

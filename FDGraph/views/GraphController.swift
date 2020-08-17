@@ -22,59 +22,16 @@ class GraphController: UIViewController {
         return view
     }()
     
-    private var graphView: GraphView!
+    private lazy var graphView: GraphView = {
+        return GraphView(width: GraphController.GRAPH_CANVAS_SIZE, height: GraphController.GRAPH_CANVAS_SIZE)
+    }()
     
     override func viewDidLoad() {
         print("GraphController viewDidLoad")
-        
-        let radius = CGFloat(10)
-        
-        let nodes = [
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius * 1.1)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius * 1.4)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius * 1.2)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius * 1.3)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius * 1.1)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius * 1.5)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius * 1.6)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius * 1.5)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius))
-        ]
-        
-        
-        
-        self.graphView = GraphView(nodes: nodes, width: GraphController.GRAPH_CANVAS_SIZE, height: GraphController.GRAPH_CANVAS_SIZE)
-//        ,
-//                                   tickCallback: tickCallback,
-//                                   tapCircleCallback: tapCircleCallback)
-//        graph.step()
+
         
         scrollView.display(self.graphView)
         self.view.addSubview(scrollView)
-        
-//        self.graphView.start()
         
         scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
@@ -97,3 +54,12 @@ class GraphController: UIViewController {
 
 }
 
+extension GraphController {
+    public func add(nodes: [Node]) {
+        self.graphView.add(nodes: nodes)
+    }
+    
+    public func add(edges: [Links]) {
+        self.graphView.add(edges: edges)
+    }
+}
