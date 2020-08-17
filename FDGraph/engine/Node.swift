@@ -16,6 +16,8 @@ public class Node: Particle {
     
     var view: UIView
     
+    public var delegate: NodeParticleDelegate?
+    
     init(radius: CGFloat) {
         
         
@@ -26,12 +28,21 @@ public class Node: Particle {
         self.velocity = CGPoint.zero
         self.view = Circle.createCircle(radius: radius)
        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
+        self.view.addGestureRecognizer(tapGesture)
     }
     
     public func tick() {
         view.center = position
     }
     
+}
+
+extension Node {
+    @objc func handleTap(sender: UITapGestureRecognizer) {
+        
+        self.delegate?.handleTap(node: self)
+    }
 }
 
 extension Node: Equatable {
@@ -47,3 +58,5 @@ extension Node: Hashable {
         hasher.combine(view.hashValue)
     }
 }
+
+
