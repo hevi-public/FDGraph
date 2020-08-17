@@ -10,15 +10,13 @@ import UIKit
 
 public class Node: Particle {
   
-    var mass: CGFloat
     public var position: CGPoint
     public var velocity: CGPoint
     public var fixed: Bool = false
     
     var view: UIView
     
-    init(mass: CGFloat, view: UIView) {
-        self.mass = mass
+    init(view: UIView) {
         let randomX = CGFloat.random(in: 0 ..< 1) / 10
         let randomY = CGFloat.random(in: 0 ..< 1) / 10
         
