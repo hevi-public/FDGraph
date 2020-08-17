@@ -14,7 +14,10 @@ class GraphView: UIView {
 //    private var tickCallback: () -> ()
 //    private var tapCircleCallback: (Node) -> ()
     
-    private var graph: GraphEngine?
+    private lazy var graph: GraphEngine = {
+        let graphEngine = GraphEngine(containerView: self)
+        return graphEngine
+    }()
     
     var circles: [Circle] = []
     
@@ -36,10 +39,10 @@ class GraphView: UIView {
     
         super.init(frame: frame)
         
-        self.graph = GraphEngine(containerView: self)
         
-        self.graph?.add(nodes: nodes)
-        self.graph?.add(edges: [])
+        
+        self.graph.add(nodes: nodes)
+        self.graph.add(edges: [])
         
         
         self.layer.insertSublayer(edgeLayer, at: 0)
