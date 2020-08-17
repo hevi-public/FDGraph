@@ -14,29 +14,7 @@ class GraphView: UIView {
 //    private var tickCallback: () -> ()
 //    private var tapCircleCallback: (Node) -> ()
     
-    private weak var displayLink: CADisplayLink?
-    
-    public lazy var simulation: Simulation = {
-        let simulation: Simulation = Simulation()
-        simulation.insert(force: self.manyParticle)
-        simulation.insert(force: self.links)
-        simulation.insert(force: self.viewParticleCenter)
-        simulation.insert(tick: { self.linkLayer.path = self.links.path(from: &$0) })
-        return simulation
-    }()
-    
-    private lazy var linkLayer: CAShapeLayer = {
-        let linkLayer = CAShapeLayer()
-        linkLayer.strokeColor = UIColor.gray.cgColor
-        linkLayer.fillColor = UIColor.clear.cgColor
-        linkLayer.lineWidth = 1
-        self.layer.insertSublayer(linkLayer, at: 0)
-        return linkLayer
-    }()
-    
-    internal let viewParticleCenter: Center!
-    private let manyParticle: ManyParticle = ManyParticle()
-    private let links: Links = Links()
+    private var graph: GraphEngine?
     
     var circles: [Circle] = []
     
@@ -55,28 +33,20 @@ class GraphView: UIView {
 //        self.tickCallback = tickCallback
 //        self.tapCircleCallback = tapCircleCallback
         
-        self.viewParticleCenter = Center(CGPoint(x: frame.width / 2, y: frame.height / 2))
-        
+    
         super.init(frame: frame)
         
-        for i in 0...nodes.count - 1 {
-            self.addSubview(nodes[i].view)
-        }
+        self.graph = GraphEngine(containerView: self)
+        
+        self.graph?.add(nodes: nodes)
+        self.graph?.add(edges: [])
+        
         
         self.layer.insertSublayer(edgeLayer, at: 0)
         
-        links.link(between: nodes[0], and: nodes[1], strength: 0.007)
-        links.link(between: nodes[2], and: nodes[1], strength: 0.007)
-        links.link(between: nodes[2], and: nodes[3], strength: 0.007)
-        links.link(between: nodes[2], and: nodes[4], strength: 0.007)
-        links.link(between: nodes[2], and: nodes[5], strength: 0.007)
-        links.link(between: nodes[2], and: nodes[6], strength: 0.007)
         
-        nodes.forEach { (node) in
-            simulation.particles.update(with: node)
-        }
         
-        simulation.start()
+        
         
     }
     
