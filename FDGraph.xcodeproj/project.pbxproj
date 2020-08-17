@@ -18,7 +18,6 @@
 		D7D2B50224E71E3900EBC1C8 /* FDGraphUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B50124E71E3900EBC1C8 /* FDGraphUITests.swift */; };
 		D7D2B51524E7281B00EBC1C8 /* GraphController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B51024E7281B00EBC1C8 /* GraphController.swift */; };
 		D7D2B51624E7281B00EBC1C8 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B51124E7281B00EBC1C8 /* GraphView.swift */; };
-		D7D2B51724E7281B00EBC1C8 /* EdgeLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B51224E7281B00EBC1C8 /* EdgeLayer.swift */; };
 		D7D2B51824E7281B00EBC1C8 /* Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B51324E7281B00EBC1C8 /* Circle.swift */; };
 		D7D2B51924E7281B00EBC1C8 /* GraphScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B51424E7281B00EBC1C8 /* GraphScrollView.swift */; };
 		D7D2B51C24E7555700EBC1C8 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B51B24E7555700EBC1C8 /* Node.swift */; };
@@ -70,7 +69,6 @@
 		D7D2B50324E71E3900EBC1C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D7D2B51024E7281B00EBC1C8 /* GraphController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphController.swift; sourceTree = "<group>"; };
 		D7D2B51124E7281B00EBC1C8 /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
-		D7D2B51224E7281B00EBC1C8 /* EdgeLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EdgeLayer.swift; sourceTree = "<group>"; };
 		D7D2B51324E7281B00EBC1C8 /* Circle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Circle.swift; sourceTree = "<group>"; };
 		D7D2B51424E7281B00EBC1C8 /* GraphScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphScrollView.swift; sourceTree = "<group>"; };
 		D7D2B51B24E7555700EBC1C8 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
@@ -180,12 +178,11 @@
 		D7D2B50F24E7281B00EBC1C8 /* views */ = {
 			isa = PBXGroup;
 			children = (
-				D7D2B51024E7281B00EBC1C8 /* GraphController.swift */,
-				D7D2B51124E7281B00EBC1C8 /* GraphView.swift */,
-				D7D2B51224E7281B00EBC1C8 /* EdgeLayer.swift */,
-				D7D2B51324E7281B00EBC1C8 /* Circle.swift */,
-				D7D2B51424E7281B00EBC1C8 /* GraphScrollView.swift */,
 				D7D2B53B24EB057100EBC1C8 /* GraphUIView.swift */,
+				D7D2B51024E7281B00EBC1C8 /* GraphController.swift */,
+				D7D2B51424E7281B00EBC1C8 /* GraphScrollView.swift */,
+				D7D2B51124E7281B00EBC1C8 /* GraphView.swift */,
+				D7D2B51324E7281B00EBC1C8 /* Circle.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -364,7 +361,6 @@
 				D7D2B53024E86ED600EBC1C8 /* Links.swift in Sources */,
 				D7D2B53624E8789600EBC1C8 /* Force.swift in Sources */,
 				D7D2B4DF24E71E3300EBC1C8 /* SceneDelegate.swift in Sources */,
-				D7D2B51724E7281B00EBC1C8 /* EdgeLayer.swift in Sources */,
 				D7D2B53424E86ED600EBC1C8 /* ManyParticle.swift in Sources */,
 				D7D2B51624E7281B00EBC1C8 /* GraphView.swift in Sources */,
 				D7D2B52E24E86ED600EBC1C8 /* Simulation.swift in Sources */,
