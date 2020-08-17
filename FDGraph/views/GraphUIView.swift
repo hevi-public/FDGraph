@@ -10,54 +10,20 @@ import SwiftUI
 
 struct GraphUIView: UIViewControllerRepresentable {
     
+    @Binding var nodes: [Node]
+    
     typealias UIViewControllerType = GraphController
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<GraphUIView>) -> GraphController {
         let graphController = GraphController()
         
-        let radius = CGFloat(10)
-        
-        let nodes = [
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius * 1.1)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius * 1.4)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius * 1.2)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius * 1.3)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius * 1.1)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius * 1.5)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius * 1.6)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius * 1.5)),
-            Node(view: Circle.createCircle(radius: radius)),
-            Node(view: Circle.createCircle(radius: radius))
-        ]
-        
-        graphController.add(nodes: nodes)
-        graphController.add(edges: [])
-        
         return graphController
     }
     
     func updateUIViewController(_ uiViewController: GraphController, context: UIViewControllerRepresentableContext<GraphUIView>) {
+        
+        uiViewController.add(nodes: nodes)
+        uiViewController.add(edges: [])
         
     }
 }
