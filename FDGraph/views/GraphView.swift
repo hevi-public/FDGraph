@@ -66,8 +66,6 @@ class GraphView: UIView {
         
         let nodes = graph.nodes
         
-        nodes[0].view.center = CGPoint(x: nodes[0].view.center.x - 20, y: nodes[0].view.center.y - 20)
-        
         for i in 0...nodes.count - 1 {
             self.addSubview(nodes[i].view)
         }
