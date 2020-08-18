@@ -69,5 +69,12 @@ extension GraphController {
     public func focus(node: Node) {
         
         self.scrollView.scrollToView(view: node.view, animated: true)
+        self.select(node: node)
+    }
+    
+    public func select(node: Node) {
+        Circle.removeAllGlow()
+        node.view.addGlow()
     }
 }
+

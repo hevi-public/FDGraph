@@ -21,7 +21,7 @@ public class Node: Particle {
     public var velocity: CGPoint
     public var fixed: Bool = false
     
-    var view: UIView
+    var view: Circle
     
     public var delegate: NodeParticleDelegate?
     
@@ -33,7 +33,7 @@ public class Node: Particle {
         
         self.position = CGPoint(x: randomX, y: randomY)
         self.velocity = CGPoint.zero
-        self.view = Circle.createCircle(radius: radius)
+        self.view = Circle.createCircle(radius: radius, color: UIColor.blue)
        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         self.view.addGestureRecognizer(tapGesture)
