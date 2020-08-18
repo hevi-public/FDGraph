@@ -8,6 +8,11 @@
 
 import UIKit
 
+public protocol NodeParticleDelegate {
+    
+    func handleTap(node: Node)
+}
+
 public class Node: Particle {
   
     public var position: CGPoint

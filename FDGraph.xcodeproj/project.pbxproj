@@ -33,7 +33,6 @@
 		D7D2B53A24EAFB6300EBC1C8 /* GraphEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B53924EAFB6300EBC1C8 /* GraphEngine.swift */; };
 		D7D2B53C24EB057100EBC1C8 /* GraphUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B53B24EB057100EBC1C8 /* GraphUIView.swift */; };
 		D7D2B53E24EB0ECF00EBC1C8 /* GraphDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B53D24EB0ECF00EBC1C8 /* GraphDelegate.swift */; };
-		D7D2B54024EB103E00EBC1C8 /* NodeParticleDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B53F24EB103E00EBC1C8 /* NodeParticleDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,7 +86,6 @@
 		D7D2B53924EAFB6300EBC1C8 /* GraphEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphEngine.swift; sourceTree = "<group>"; };
 		D7D2B53B24EB057100EBC1C8 /* GraphUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphUIView.swift; sourceTree = "<group>"; };
 		D7D2B53D24EB0ECF00EBC1C8 /* GraphDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphDelegate.swift; sourceTree = "<group>"; };
-		D7D2B53F24EB103E00EBC1C8 /* NodeParticleDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeParticleDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,7 +194,6 @@
 				D7D2B50F24E7281B00EBC1C8 /* views */,
 				D7D2B52224E83FAB00EBC1C8 /* physics */,
 				D7D2B51B24E7555700EBC1C8 /* Node.swift */,
-				D7D2B53F24EB103E00EBC1C8 /* NodeParticleDelegate.swift */,
 				D7D2B53924EAFB6300EBC1C8 /* GraphEngine.swift */,
 				D7D2B53D24EB0ECF00EBC1C8 /* GraphDelegate.swift */,
 				D7D2B51D24E75C1D00EBC1C8 /* Edge.swift */,
@@ -366,7 +363,6 @@
 				D7D2B51924E7281B00EBC1C8 /* GraphScrollView.swift in Sources */,
 				D7D2B51524E7281B00EBC1C8 /* GraphController.swift in Sources */,
 				D7D2B53024E86ED600EBC1C8 /* Links.swift in Sources */,
-				D7D2B54024EB103E00EBC1C8 /* NodeParticleDelegate.swift in Sources */,
 				D7D2B53624E8789600EBC1C8 /* Force.swift in Sources */,
 				D7D2B4DF24E71E3300EBC1C8 /* SceneDelegate.swift in Sources */,
 				D7D2B53424E86ED600EBC1C8 /* ManyParticle.swift in Sources */,
