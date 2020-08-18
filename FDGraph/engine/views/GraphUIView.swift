@@ -48,6 +48,8 @@ struct GraphUIView: UIViewControllerRepresentable {
     
     typealias UIViewControllerType = GraphController
     
+    private let graphController = GraphController()
+    
     class Coordinator: NSObject, NodeParticleDelegate {
         
         var parent: GraphUIView
@@ -66,9 +68,9 @@ struct GraphUIView: UIViewControllerRepresentable {
     }
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<GraphUIView>) -> GraphController {
-        let graphController = GraphController()
         
-        return graphController
+        
+        return self.graphController
     }
     
     func updateUIViewController(_ uiViewController: GraphController, context: UIViewControllerRepresentableContext<GraphUIView>) {
