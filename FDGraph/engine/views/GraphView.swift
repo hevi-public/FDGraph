@@ -32,6 +32,10 @@ class GraphView: UIView {
 }
 
 extension GraphView {
+    public func add(node: Node, parent: Node? = nil) {
+        self.graph.add(node: node, parent: parent)
+    }
+    
     public func add(nodes: [Node]) {
         self.graph.add(nodes: nodes)
     }

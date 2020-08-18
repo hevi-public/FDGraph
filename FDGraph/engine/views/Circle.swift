@@ -71,7 +71,7 @@ public class Circle: UIView {
         self.layer.shadowOffset = .zero
         self.layer.shadowColor = UIColor.blue.cgColor
         self.layer.shadowRadius = 120
-        self.layer.shadowOpacity = 1
+        self.layer.shadowOpacity = 0.1
         
         
         let multiplier = 2.0

@@ -58,6 +58,12 @@ class GraphController: UIViewController {
 
 // -MARK: PUBLIC METHODS
 extension GraphController {
+    
+    public func add(node: Node, parent: Node? = nil) {
+        self.graphView.add(node: node, parent: parent)
+        
+    }
+    
     public func add(nodes: [Node]) {
         self.graphView.add(nodes: nodes)
     }

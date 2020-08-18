@@ -41,6 +41,20 @@ public class GraphEngine {
         self.simulation.start()
     }
     
+    public func add(node: Node, parent: Node? = nil) {
+        
+        simulation.particles.update(with: node)
+        self.containerView.addSubview(node.view)
+        
+        if let parent = parent {
+            
+            node.position = CGPoint(x: parent.position.x + 10, y: parent.position.y + 10)
+            links.link(between: parent, and: node, strength: 0.007)
+        }
+        
+        simulation.kick()
+    }
+    
     public func add(nodes: [Node]) {
         nodes.forEach { (node) in
             simulation.particles.update(with: node)

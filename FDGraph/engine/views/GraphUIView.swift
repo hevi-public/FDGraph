@@ -60,8 +60,12 @@ struct GraphUIView: UIViewControllerRepresentable {
         
         func handleTap(node: Node) {
             print("taaaaaap")
-            self.parent.graphController.focus(node: node)
+//            self.parent.graphController.focus(node: node)
+            
+            self.parent.graphController.add(node: Node(radius: GraphUIView.radius), parent: node)
         }
+        
+        
     }
 
     func makeCoordinator() -> Coordinator {
@@ -79,6 +83,8 @@ struct GraphUIView: UIViewControllerRepresentable {
 //        nodes.forEach(node -> {
 //            node.delegate = self
 //        })
+        
+
         
         nodes.forEach { (node) in
             node.delegate = context.coordinator
