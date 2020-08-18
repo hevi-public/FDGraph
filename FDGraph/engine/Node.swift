@@ -8,11 +8,13 @@
 
 import UIKit
 
+// -MARK: DELEGATE
 public protocol NodeParticleDelegate {
     
     func handleTap(node: Node)
 }
 
+// -MARK: NODE
 public class Node: Particle {
   
     public var position: CGPoint
@@ -43,6 +45,7 @@ public class Node: Particle {
     
 }
 
+// -MARK: DELEGATE HANDLER
 extension Node {
     @objc func handleTap(sender: UITapGestureRecognizer) {
         
@@ -50,6 +53,7 @@ extension Node {
     }
 }
 
+// -MARK: EQUATABLE
 extension Node: Equatable {
     
     public static func == (lhs: Node, rhs: Node) -> Bool {
@@ -57,6 +61,7 @@ extension Node: Equatable {
     }
 }
 
+// -MARK: HASHABLE
 extension Node: Hashable {
     
     public func hash(into hasher: inout Hasher) {
