@@ -60,6 +60,7 @@ struct GraphUIView: UIViewControllerRepresentable {
         
         func handleTap(node: Node) {
             print("taaaaaap")
+            self.parent.graphController.focus(node: node)
         }
     }
 

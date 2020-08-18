@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+// -MARK: DECLARATIONS
 class GraphController: UIViewController {
     
     public static let GRAPH_CANVAS_SIZE: CGFloat = 50000
@@ -26,6 +27,7 @@ class GraphController: UIViewController {
         return GraphView(width: GraphController.GRAPH_CANVAS_SIZE, height: GraphController.GRAPH_CANVAS_SIZE)
     }()
     
+    // -MARK: VIEWDIDLOAD
     override func viewDidLoad() {
         print("GraphController viewDidLoad")
 
@@ -54,6 +56,7 @@ class GraphController: UIViewController {
 
 }
 
+// -MARK: PUBLIC METHODS
 extension GraphController {
     public func add(nodes: [Node]) {
         self.graphView.add(nodes: nodes)
@@ -61,5 +64,14 @@ extension GraphController {
     
     public func add(edges: [Links]) {
         self.graphView.add(edges: edges)
+    }
+    
+    public func focus(node: Node) {
+        UIView.animate(withDuration: 0.3, animations: {
+            let newX = node.position.x - self.scrollView.bounds.width / 2
+            let newY = node.position.y - self.scrollView.bounds.height / 2
+            
+            self.scrollView.contentOffset = CGPoint(x: newX, y: newY)
+        })
     }
 }
