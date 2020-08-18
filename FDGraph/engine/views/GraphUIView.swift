@@ -62,7 +62,9 @@ struct GraphUIView: UIViewControllerRepresentable {
             print("taaaaaap")
 //            self.parent.graphController.focus(node: node)
             
-            self.parent.graphController.add(node: Node(radius: GraphUIView.radius), parent: node)
+            let newNode = Node(radius: GraphUIView.radius)
+            newNode.delegate = self
+            self.parent.graphController.add(node: newNode, parent: node)
         }
         
         
