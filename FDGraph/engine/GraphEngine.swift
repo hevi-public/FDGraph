@@ -49,7 +49,7 @@ public class GraphEngine {
         if let parent = parent {
             
             node.position = CGPoint(x: parent.position.x + 10, y: parent.position.y + 10)
-            links.link(between: parent, and: node, strength: 0.007)
+            self.link(between: node, and: parent)
         }
         
         simulation.kick()
@@ -60,6 +60,10 @@ public class GraphEngine {
             simulation.particles.update(with: node)
             self.containerView.addSubview(node.view)
         }
+    }
+    
+    public func link(between a: Node, and b: Node) {
+        links.link(between: a, and: b, strength: 0.007)
     }
     
     public func add(edges: [Links]) {

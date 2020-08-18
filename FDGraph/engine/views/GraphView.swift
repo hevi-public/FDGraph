@@ -40,6 +40,10 @@ extension GraphView {
         self.graph.add(nodes: nodes)
     }
     
+    public func link(between a: Node, and b: Node) {
+        self.graph.link(between: a, and: b)
+    }
+    
     public func add(edges: [Links]) {
         self.graph.add(edges: edges)
     }

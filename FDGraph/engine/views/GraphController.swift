@@ -68,6 +68,10 @@ extension GraphController {
         self.graphView.add(nodes: nodes)
     }
     
+    public func link(between a: Node, and b: Node) {
+        self.graphView.link(between: a, and: b)
+    }
+    
     public func add(edges: [Links]) {
         self.graphView.add(edges: edges)
     }
