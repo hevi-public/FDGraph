@@ -65,7 +65,11 @@ class GraphScrollView: UIScrollView {
     func scrollToView(view:UIView, animated: Bool) {
         if let origin = view.superview {
             let childStartPoint = origin.convert(view.frame.origin, to: self)
-            self.scrollRectToVisible(CGRect(x: childStartPoint.x, y: childStartPoint.y, width: self.frame.width, height: self.frame.height), animated: animated)
+            
+            let newX = childStartPoint.x - self.bounds.width / 2
+            let newY = childStartPoint.y - self.bounds.height / 2
+            
+            self.scrollRectToVisible(CGRect(x: newX, y: newY, width: self.frame.width, height: self.frame.height), animated: animated)
         }
     }
 

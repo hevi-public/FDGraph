@@ -67,11 +67,7 @@ extension GraphController {
     }
     
     public func focus(node: Node) {
-        UIView.animate(withDuration: 0.3, animations: {
-            let newX = node.position.x - self.scrollView.bounds.width / 2
-            let newY = node.position.y - self.scrollView.bounds.height / 2
-            
-            self.scrollView.contentOffset = CGPoint(x: newX, y: newY)
-        })
+        
+        self.scrollView.scrollToView(view: node.view, animated: true)
     }
 }
