@@ -10,11 +10,24 @@ import SwiftUI
 
 struct ContentView: View {
     
-    
+    let graphUIView = GraphUIView()
     
     var body: some View {
         
-        
-        return GraphUIView()
+        ZStack {
+            graphUIView
+            
+            HStack {
+                Spacer()
+                VStack {
+                    Button(action: {
+                        self.graphUIView.deleteSelectedNodes()
+                    }) {
+                        Text("asadf")
+                    }
+                    Spacer()
+                }.padding()
+            }
+        }
     }
 }

@@ -62,9 +62,10 @@ struct GraphUIView: UIViewControllerRepresentable {
             print("taaaaaap")
 //            self.parent.graphController.focus(node: node)
             
-            let newNode = Node(radius: GraphUIView.radius)
-            newNode.delegate = self
-            self.parent.graphController.add(node: newNode, parent: node)
+//            let newNode = Node(radius: GraphUIView.radius)
+//            newNode.delegate = self
+//            self.parent.graphController.add(node: newNode, parent: node)
+            self.parent.graphController.select(node: node)
         }
         
         
@@ -95,5 +96,9 @@ struct GraphUIView: UIViewControllerRepresentable {
         uiViewController.add(nodes: nodes)
         uiViewController.add(edges: [])
         
+    }
+    
+    func deleteSelectedNodes() {
+        self.graphController.deleteSelectedNodes()
     }
 }

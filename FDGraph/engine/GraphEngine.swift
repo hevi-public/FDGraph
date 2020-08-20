@@ -77,5 +77,24 @@ public class GraphEngine {
         links.link(between: nodes[2], and: nodes[6], strength: 0.007)
     }
     
-    
+    public func deleteSelectedNodes() {
+        
+        let selectedCircles = Circle.getSelectedCircles()
+        
+        let particles = Array(simulation.particles)
+        
+        let selectedParticles = particles.filter { node -> Bool in
+            selectedCircles.contains(node.view)
+        }
+        
+        selectedParticles.forEach { particle in
+            self.simulation.remove(particle: particle)
+            UIView.animate(withDuration: 0.3, animations: {
+                particle.view.alpha = 0
+            }) { (completed) in
+                particle.view.removeFromSuperview()
+            }
+        }
+        simulation.kick()
+    }
 }

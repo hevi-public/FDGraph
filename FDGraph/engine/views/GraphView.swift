@@ -47,4 +47,12 @@ extension GraphView {
     public func add(edges: [Links]) {
         self.graph.add(edges: edges)
     }
+    
+    public func deleteSelectedNodes() {
+        
+        self.graph.deleteSelectedNodes()
+        
+        
+    }
+
 }

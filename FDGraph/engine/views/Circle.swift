@@ -75,12 +75,15 @@ public class Circle: UIView {
     }
     
     public static func removeAllGlow() {
-        
         Circle.glowingCircles.forEach {
             $0.layer.shadowOpacity = 0
         }
         Circle.glowingCircles.removeAll()
-        
-        
+    }
+    
+    public static func getSelectedCircles() -> [Circle] {
+        var copy = [Circle]()
+        copy.append(contentsOf: Circle.glowingCircles)
+        return copy
     }
 }

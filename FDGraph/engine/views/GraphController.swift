@@ -87,5 +87,10 @@ extension GraphController {
         Circle.removeAllGlow()
         node.view.addGlow()
     }
+    
+    public func deleteSelectedNodes() {
+        self.graphView.deleteSelectedNodes()
+        
+    }
 }
 
