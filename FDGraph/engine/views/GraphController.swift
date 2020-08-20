@@ -61,6 +61,7 @@ extension GraphController {
     
     public func add(node: Node, parent: Node? = nil) {
         self.graphView.add(node: node, parent: parent)
+        self.select(node: node)
         
     }
     
