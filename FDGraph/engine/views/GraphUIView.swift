@@ -58,14 +58,17 @@ struct GraphUIView: UIViewControllerRepresentable {
             self.parent = parent
         }
         
-        func handleTap(node: Node) {
+        func handleSingleTap(node: Node) {
             print("taaaaaap")
-//            self.parent.graphController.focus(node: node)
-            
+            self.parent.graphController.select(node: node)
+        }
+        
+        func handleDoubleTap(node: Node) {
 //            let newNode = Node(radius: GraphUIView.radius)
 //            newNode.delegate = self
 //            self.parent.graphController.add(node: newNode, parent: node)
-            self.parent.graphController.select(node: node)
+//            self.parent.graphController.focus(node: newNode)
+            self.parent.graphController.focus(node: node)
         }
         
         

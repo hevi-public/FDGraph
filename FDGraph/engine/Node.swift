@@ -11,7 +11,8 @@ import UIKit
 // -MARK: DELEGATE
 public protocol NodeParticleDelegate {
     
-    func handleTap(node: Node)
+    func handleSingleTap(node: Node)
+    func handleDoubleTap(node: Node)
 }
 
 // -MARK: NODE
@@ -35,8 +36,13 @@ public class Node: Particle {
         self.velocity = CGPoint.zero
         self.view = Circle.createCircle(radius: radius, color: UIColor.blue)
        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
-        self.view.addGestureRecognizer(tapGesture)
+        let singleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleSingleTap(sender:)))
+        self.view.addGestureRecognizer(singleTapGesture)
+        
+        let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(sender:)))
+        doubleTapGesture.numberOfTapsRequired = 2
+        self.view.addGestureRecognizer(doubleTapGesture)
+        
     }
     
     public func tick() {
@@ -47,9 +53,14 @@ public class Node: Particle {
 
 // -MARK: DELEGATE HANDLER
 extension Node {
-    @objc func handleTap(sender: UITapGestureRecognizer) {
+    @objc func handleSingleTap(sender: UITapGestureRecognizer) {
         
-        self.delegate?.handleTap(node: self)
+        self.delegate?.handleSingleTap(node: self)
+    }
+    
+    @objc func handleDoubleTap(sender: UITapGestureRecognizer) {
+        
+        self.delegate?.handleDoubleTap(node: self)
     }
 }
 
