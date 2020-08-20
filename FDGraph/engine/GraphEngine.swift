@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+// -MARK: DECLARATIONS / SETUP
 public class GraphEngine {
     
     private unowned var containerView: UIView
@@ -40,7 +41,13 @@ public class GraphEngine {
         self.center = Center(CGPoint(x: self.containerView.frame.width / 2, y: self.containerView.frame.height / 2))
         self.simulation.start()
     }
-    
+}
+
+// -MARK: PUBLIC METHODS
+
+extension GraphEngine {
+        
+    // -MARK: ADD
     public func add(node: Node, parent: Node? = nil) {
         
         simulation.particles.update(with: node)
@@ -62,6 +69,7 @@ public class GraphEngine {
         }
     }
     
+    // -MARK: LINK
     public func link(between a: Node, and b: Node) {
         links.link(between: a, and: b, strength: 0.007)
     }
@@ -77,6 +85,8 @@ public class GraphEngine {
         links.link(between: nodes[2], and: nodes[6], strength: 0.007)
     }
     
+    
+    // -MARK: DELETE
     public func deleteSelectedNodes() {
         
         let selectedCircles = Circle.getSelectedCircles()
