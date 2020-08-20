@@ -50,30 +50,6 @@ struct GraphUIView: UIViewControllerRepresentable {
     
     private let graphController = GraphController()
     
-    class Coordinator: NSObject, NodeParticleDelegate {
-        
-        var parent: GraphUIView
-        
-        init(_ parent: GraphUIView) {
-            self.parent = parent
-        }
-        
-        func handleSingleTap(node: Node) {
-            print("taaaaaap")
-            self.parent.graphController.select(node: node)
-        }
-        
-        func handleDoubleTap(node: Node) {
-//            let newNode = Node(radius: GraphUIView.radius)
-//            newNode.delegate = self
-//            self.parent.graphController.add(node: newNode, parent: node)
-//            self.parent.graphController.focus(node: newNode)
-            self.parent.graphController.focus(node: node)
-        }
-        
-        
-    }
-
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
@@ -100,6 +76,30 @@ struct GraphUIView: UIViewControllerRepresentable {
         uiViewController.add(edges: [])
         
     }
+    
+    class Coordinator: NSObject, NodeParticleDelegate {
+            
+            var parent: GraphUIView
+            
+            init(_ parent: GraphUIView) {
+                self.parent = parent
+            }
+            
+            func handleSingleTap(node: Node) {
+                print("taaaaaap")
+                self.parent.graphController.select(node: node)
+            }
+            
+            func handleDoubleTap(node: Node) {
+    //            let newNode = Node(radius: GraphUIView.radius)
+    //            newNode.delegate = self
+    //            self.parent.graphController.add(node: newNode, parent: node)
+    //            self.parent.graphController.focus(node: newNode)
+                self.parent.graphController.focus(node: node)
+            }
+            
+            
+        }
     
     func deleteSelectedNodes() {
         self.graphController.deleteSelectedNodes()
