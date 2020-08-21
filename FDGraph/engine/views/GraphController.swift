@@ -29,6 +29,12 @@ class GraphController: UIViewController {
         return GraphView(width: GraphController.GRAPH_CANVAS_SIZE, height: GraphController.GRAPH_CANVAS_SIZE)
     }()
     
+    private var graph: GraphEngine {
+        get {
+            return self.graphView.graph
+        }
+    }
+    
     // -MARK: SETUP
     public func setup(graphViewContextMenuDelegate: GraphContextMenuInteractionDelegate) {
         self.graphViewContextMenuDelegate = graphViewContextMenuDelegate
@@ -70,21 +76,21 @@ class GraphController: UIViewController {
 extension GraphController {
     
     public func add(node: Node, parent: Node? = nil) {
-        self.graphView.add(node: node, parent: parent)
+        self.graph.add(node: node, parent: parent)
         self.select(node: node)
         
     }
     
     public func add(nodes: [Node]) {
-        self.graphView.add(nodes: nodes)
+        self.graph.add(nodes: nodes)
     }
     
     public func link(between a: Node, and b: Node) {
-        self.graphView.link(between: a, and: b)
+        self.graph.link(between: a, and: b)
     }
     
     public func add(edges: [Links]) {
-        self.graphView.add(edges: edges)
+        self.graph.add(edges: edges)
     }
     
     public func focus(node: Node) {
@@ -99,18 +105,18 @@ extension GraphController {
     }
     
     public func delete(node: Node) {
-        self.graphView.delete(node: node)
+        self.graph.delete(node: node)
     }
     
     public func deleteSelectedNodes() {
-        self.graphView.deleteSelectedNodes()
+        self.graph.deleteSelectedNodes()
     }
 }
 
 extension GraphController {
     
     public func objectAtPoint(location: CGPoint) -> Node? {
-        self.graphView.objectAtPoint(location: location)
+        self.graph.objectAtPoint(location: location)
     }
 }
 

@@ -11,7 +11,7 @@ import UIKit
 
 class GraphView: UIView {
     
-    private lazy var graph: GraphEngine = {
+    lazy var graph: GraphEngine = {
         let graphEngine = GraphEngine(containerView: self)
         return graphEngine
     }()
@@ -29,37 +29,4 @@ class GraphView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-}
-
-extension GraphView {
-    public func add(node: Node, parent: Node? = nil) {
-        self.graph.add(node: node, parent: parent)
-    }
-    
-    public func add(nodes: [Node]) {
-        self.graph.add(nodes: nodes)
-    }
-    
-    public func link(between a: Node, and b: Node) {
-        self.graph.link(between: a, and: b)
-    }
-    
-    public func add(edges: [Links]) {
-        self.graph.add(edges: edges)
-    }
-    
-    public func delete(node: Node) {
-        self.graph.delete(node: node)
-    }
-    
-    public func deleteSelectedNodes() {
-        self.graph.deleteSelectedNodes()
-    }
-}
-
-extension GraphView {
-    
-    public func objectAtPoint(location: CGPoint) -> Node? {
-        return graph.objectAtPoint(location: location)
-    }
 }
