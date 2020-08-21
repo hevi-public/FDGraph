@@ -13,17 +13,12 @@ public class Circle: UIView {
     
     private static var glowingCircles = [Circle]()
     
-    let cirucumference: CGFloat
-    var radius: CGFloat {
-        get {
-            cirucumference / 2
-        }
-    }
+    let radius: CGFloat
     
     private var color: UIColor!
     
     public override init(frame: CGRect) {
-        self.cirucumference = frame.width
+        self.radius = frame.width / 2
         
         super.init(frame: frame)
         
