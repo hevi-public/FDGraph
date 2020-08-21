@@ -81,7 +81,6 @@ struct GraphUIView: UIViewControllerRepresentable {
         }
         
         func handleSingleTap(node: Node) {
-            print("taaaaaap")
             self.parent.graphController.select(node: node)
         }
         
