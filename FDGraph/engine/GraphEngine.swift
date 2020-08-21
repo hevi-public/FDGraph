@@ -108,3 +108,13 @@ extension GraphEngine {
         simulation.kick()
     }
 }
+
+extension GraphEngine {
+    
+    
+    public func objectAtPoint(location: CGPoint) -> Node? {
+        return self.simulation.particles.first { (viewParticle) -> Bool in
+            return viewParticle.view.frame.contains(location)
+        }
+    }
+}

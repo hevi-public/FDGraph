@@ -104,3 +104,10 @@ extension GraphController {
     }
 }
 
+extension GraphController {
+    
+    public func objectAtPoint(location: CGPoint) -> Node? {
+        self.graphView.objectAtPoint(location: location)
+    }
+}
+

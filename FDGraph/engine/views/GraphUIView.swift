@@ -56,6 +56,7 @@ struct GraphUIView: UIViewControllerRepresentable {
     }
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<GraphUIView>) -> GraphController {
+        self.graphContextMenuInteractionDelegate.setup(graphController: self.graphController)
         self.graphController.setup(graphViewContextMenuDelegate: graphContextMenuInteractionDelegate)
         return self.graphController
     }
@@ -100,18 +101,40 @@ struct GraphUIView: UIViewControllerRepresentable {
 
 
 class GraphContextMenuInteractionDelegate: NSObject, UIContextMenuInteractionDelegate {
+    
+    private unowned var graphController: GraphController!
+    
+    func setup(graphController: GraphController) {
+        self.graphController = graphController
+    }
+    
     func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
         
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { suggestedActions in
 
-            return self.makeContextMenu()
+            if let clickedNode = self.graphController.objectAtPoint(location: location) {
+                return self.makeContextMenuForNode()
+            } else {
+                return self.makeContextMenuForCanvas()
+            }
         })
     }
     
-    func makeContextMenu() -> UIMenu {
+    func makeContextMenuForCanvas() -> UIMenu {
 
         // Create a UIAction for sharing
-        let share = UIAction(title: "Share Pupper", image: UIImage(systemName: "square.and.arrow.up")) { action in
+        let share = UIAction(title: "makeContextMenuForCanvas", image: UIImage(systemName: "square.and.arrow.up")) { action in
+            // Show system share sheet
+        }
+
+        // Create and return a UIMenu with the share action
+        return UIMenu(title: "Main Menu", children: [share])
+    }
+    
+    func makeContextMenuForNode() -> UIMenu {
+
+        // Create a UIAction for sharing
+        let share = UIAction(title: "makeContextMenuForNode", image: UIImage(systemName: "square.and.arrow.up")) { action in
             // Show system share sheet
         }
 

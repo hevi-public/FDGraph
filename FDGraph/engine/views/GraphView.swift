@@ -56,3 +56,10 @@ extension GraphView {
     }
 
 }
+
+extension GraphView {
+    
+    public func objectAtPoint(location: CGPoint) -> Node? {
+        return graph.objectAtPoint(location: location)
+    }
+}
