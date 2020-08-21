@@ -87,6 +87,19 @@ extension GraphEngine {
     
     
     // -MARK: DELETE
+    public func delete(node: Node, shouldKick: Bool = true) {
+        self.simulation.remove(particle: node)
+        UIView.animate(withDuration: 0.3, animations: {
+            node.view.alpha = 0
+        }) { (completed) in
+            node.view.removeFromSuperview()
+        }
+        
+        if shouldKick {
+            simulation.kick()
+        }
+    }
+    
     public func deleteSelectedNodes() {
         
         let selectedCircles = Circle.getSelectedCircles()
@@ -97,13 +110,8 @@ extension GraphEngine {
             selectedCircles.contains(node.view)
         }
         
-        selectedParticles.forEach { particle in
-            self.simulation.remove(particle: particle)
-            UIView.animate(withDuration: 0.3, animations: {
-                particle.view.alpha = 0
-            }) { (completed) in
-                particle.view.removeFromSuperview()
-            }
+        selectedParticles.forEach { node in
+            delete(node: node, shouldKick: false)
         }
         simulation.kick()
     }

@@ -72,6 +72,7 @@ struct GraphUIView: UIViewControllerRepresentable {
         
     }
     
+    // -MARK: COORDINATOR
     class Coordinator: NSObject, NodeParticleDelegate {
         var parent: GraphUIView
         
@@ -93,13 +94,17 @@ struct GraphUIView: UIViewControllerRepresentable {
         }
     }
     
+    func deletedNode(node: Node) {
+        self.graphController.delete(node: node)
+    }
+    
     func deleteSelectedNodes() {
         self.graphController.deleteSelectedNodes()
     }
 }
 
 
-
+// -MARK: CONTEXT MENU
 class GraphContextMenuInteractionDelegate: NSObject, UIContextMenuInteractionDelegate {
     
     private unowned var graphController: GraphController!
@@ -113,32 +118,30 @@ class GraphContextMenuInteractionDelegate: NSObject, UIContextMenuInteractionDel
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { suggestedActions in
 
             if let clickedNode = self.graphController.objectAtPoint(location: location) {
-                return self.makeContextMenuForNode()
+                return self.makeContextMenuForNode(node: clickedNode, graphController: self.graphController)
             } else {
                 return self.makeContextMenuForCanvas()
             }
         })
     }
     
+    // -MARK: CONTEXT FOR CANVAS
     func makeContextMenuForCanvas() -> UIMenu {
 
-        // Create a UIAction for sharing
         let share = UIAction(title: "makeContextMenuForCanvas", image: UIImage(systemName: "square.and.arrow.up")) { action in
-            // Show system share sheet
+
         }
 
-        // Create and return a UIMenu with the share action
         return UIMenu(title: "Main Menu", children: [share])
     }
     
-    func makeContextMenuForNode() -> UIMenu {
+    // -MARK: CONTEXT FOR NODE
+    func makeContextMenuForNode(node: Node, graphController: GraphController) -> UIMenu {
 
-        // Create a UIAction for sharing
-        let share = UIAction(title: "makeContextMenuForNode", image: UIImage(systemName: "square.and.arrow.up")) { action in
-            // Show system share sheet
+        let deleteNode = UIAction(title: "Delete", image: UIImage(systemName: "square.and.arrow.up")) { action in
+            graphController.delete(node: node)
         }
 
-        // Create and return a UIMenu with the share action
-        return UIMenu(title: "Main Menu", children: [share])
+        return UIMenu(title: "Main Menu", children: [deleteNode])
     }
 }

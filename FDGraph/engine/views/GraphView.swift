@@ -48,13 +48,13 @@ extension GraphView {
         self.graph.add(edges: edges)
     }
     
-    public func deleteSelectedNodes() {
-        
-        self.graph.deleteSelectedNodes()
-        
-        
+    public func delete(node: Node) {
+        self.graph.delete(node: node)
     }
-
+    
+    public func deleteSelectedNodes() {
+        self.graph.deleteSelectedNodes()
+    }
 }
 
 extension GraphView {
