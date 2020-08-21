@@ -11,6 +11,8 @@ import QuartzCore
 
 public class Simulation {
     
+    public var tickCallback: (() -> ())?
+    
     private let alphaTarget: CGFloat = 0
     private let alphaMin: CGFloat = 0.1
     private let alphaDecay: CGFloat = 1 - pow(0.001, 1 / 500)
@@ -95,6 +97,8 @@ public class Simulation {
         for tick in ticks {
             tick(&particles)
         }
+        
+        tickCallback?()
         
 //        NotificationCenter.default.post(name: .graphTick, object: nil, userInfo: nil)
     }

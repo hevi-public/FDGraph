@@ -14,6 +14,8 @@ public class GraphEngine {
     
     private unowned var containerView: UIView
     
+    public var followedNode: Node?
+    
     public lazy var simulation: Simulation = {
         let simulation: Simulation = Simulation()
         simulation.insert(force: self.manyParticle)

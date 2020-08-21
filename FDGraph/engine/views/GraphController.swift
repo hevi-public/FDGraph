@@ -99,6 +99,15 @@ extension GraphController {
         self.select(node: node)
     }
     
+    public func follow(node: Node?) {
+        self.graph.followedNode = node
+        if let node = node {
+            self.graph.simulation.tickCallback = {
+                self.scrollView.scrollToView(view: node.view, animated: false)
+            }
+        }
+    }
+    
     public func select(node: Node) {
         Circle.removeAllGlow()
         node.view.addGlow()

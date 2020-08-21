@@ -58,6 +58,9 @@ struct GraphUIView: UIViewControllerRepresentable {
     func makeUIViewController(context: UIViewControllerRepresentableContext<GraphUIView>) -> GraphController {
         self.graphContextMenuInteractionDelegate.setup(graphController: self.graphController)
         self.graphController.setup(graphViewContextMenuDelegate: graphContextMenuInteractionDelegate)
+        
+        self.graphController.follow(node: nodes[2])
+        
         return self.graphController
     }
     
