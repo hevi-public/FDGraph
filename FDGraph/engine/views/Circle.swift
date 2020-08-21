@@ -37,7 +37,7 @@ public class Circle: UIView {
     
     static func createCircle(radius: CGFloat, color: UIColor) -> Circle {
         
-        let frame = CGRect(origin: CGPoint(x: 0, y: 0),
+        let frame = CGRect(origin: CGPoint(x: -radius / 2, y: -radius / 2),
                            size: CGSize(width: radius * 2, height: radius * 2))
         
         let v = Circle(frame: frame)
@@ -46,7 +46,7 @@ public class Circle: UIView {
         let layer = CAShapeLayer()
         layer.frame = frame
         
-        layer.path = UIBezierPath(ovalIn: CGRect(x: -radius / 2, y: -radius / 2, width: radius * 2, height: radius * 2)).cgPath
+        layer.path = UIBezierPath(ovalIn: CGRect(x: 0, y: 0, width: radius * 2, height: radius * 2)).cgPath
         layer.fillColor = color.cgColor
         
         layer.strokeColor = UIColor.gray.cgColor
@@ -63,7 +63,7 @@ public class Circle: UIView {
     public func addGlow() {
         
         let shadowRadius = radius * 3
-        let rect = CGRect(x: 0, y: 0, width: shadowRadius, height: shadowRadius)
+        let rect = CGRect(x: -radius / 2, y: -radius / 2, width: shadowRadius, height: shadowRadius)
         
         self.layer.shadowPath = UIBezierPath(ovalIn: rect).cgPath
         self.layer.shadowOffset = CGSize(width: -(radius / 2), height: -(radius / 2))
