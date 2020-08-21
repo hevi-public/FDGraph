@@ -14,6 +14,8 @@ class GraphController: UIViewController {
     
     public static let GRAPH_CANVAS_SIZE: CGFloat = 50000
     
+    private var graphViewContextMenuDelegate: GraphContextMenuInteractionDelegate!
+    
     private lazy var scrollView: GraphScrollView = {
         let view = GraphScrollView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -26,6 +28,11 @@ class GraphController: UIViewController {
     private lazy var graphView: GraphView = {
         return GraphView(width: GraphController.GRAPH_CANVAS_SIZE, height: GraphController.GRAPH_CANVAS_SIZE)
     }()
+    
+    // -MARK: SETUP
+    public func setup(graphViewContextMenuDelegate: GraphContextMenuInteractionDelegate) {
+        self.graphViewContextMenuDelegate = graphViewContextMenuDelegate
+    }
     
     // -MARK: VIEWDIDLOAD
     override func viewDidLoad() {
@@ -46,6 +53,9 @@ class GraphController: UIViewController {
         
         self.view.isMultipleTouchEnabled = true
         self.graphView.isMultipleTouchEnabled = true
+        
+        let graphViewContextMenuInteraction = UIContextMenuInteraction(delegate: graphViewContextMenuDelegate)
+        graphView.addInteraction(graphViewContextMenuInteraction)
         
 
     }

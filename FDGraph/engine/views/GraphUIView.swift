@@ -49,24 +49,18 @@ struct GraphUIView: UIViewControllerRepresentable {
     typealias UIViewControllerType = GraphController
     
     private let graphController = GraphController()
+    private let graphContextMenuInteractionDelegate = GraphContextMenuInteractionDelegate()
     
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<GraphUIView>) -> GraphController {
-        
-        
+        self.graphController.setup(graphViewContextMenuDelegate: graphContextMenuInteractionDelegate)
         return self.graphController
     }
     
     func updateUIViewController(_ uiViewController: GraphController, context: UIViewControllerRepresentableContext<GraphUIView>) {
-//
-//        nodes.forEach(node -> {
-//            node.delegate = self
-//        })
-        
-
         
         nodes.forEach { (node) in
             node.delegate = context.coordinator
@@ -78,30 +72,50 @@ struct GraphUIView: UIViewControllerRepresentable {
     }
     
     class Coordinator: NSObject, NodeParticleDelegate {
-            
-            var parent: GraphUIView
-            
-            init(_ parent: GraphUIView) {
-                self.parent = parent
-            }
-            
-            func handleSingleTap(node: Node) {
-                print("taaaaaap")
-                self.parent.graphController.select(node: node)
-            }
-            
-            func handleDoubleTap(node: Node) {
-    //            let newNode = Node(radius: GraphUIView.radius)
-    //            newNode.delegate = self
-    //            self.parent.graphController.add(node: newNode, parent: node)
-    //            self.parent.graphController.focus(node: newNode)
-                self.parent.graphController.focus(node: node)
-            }
-            
-            
+        var parent: GraphUIView
+        
+        init(_ parent: GraphUIView) {
+            self.parent = parent
         }
+        
+        func handleSingleTap(node: Node) {
+            print("taaaaaap")
+            self.parent.graphController.select(node: node)
+        }
+        
+        func handleDoubleTap(node: Node) {
+//            let newNode = Node(radius: GraphUIView.radius)
+//            newNode.delegate = self
+//            self.parent.graphController.add(node: newNode, parent: node)
+//            self.parent.graphController.focus(node: newNode)
+            self.parent.graphController.focus(node: node)
+        }
+    }
     
     func deleteSelectedNodes() {
         self.graphController.deleteSelectedNodes()
+    }
+}
+
+
+
+class GraphContextMenuInteractionDelegate: NSObject, UIContextMenuInteractionDelegate {
+    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+        
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { suggestedActions in
+
+            return self.makeContextMenu()
+        })
+    }
+    
+    func makeContextMenu() -> UIMenu {
+
+        // Create a UIAction for sharing
+        let share = UIAction(title: "Share Pupper", image: UIImage(systemName: "square.and.arrow.up")) { action in
+            // Show system share sheet
+        }
+
+        // Create and return a UIMenu with the share action
+        return UIMenu(title: "Main Menu", children: [share])
     }
 }
