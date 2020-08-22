@@ -74,6 +74,7 @@ extension GraphEngine {
     // -MARK: LINK
     public func link(between a: Node, and b: Node) {
         links.link(between: a, and: b, strength: 0.007)
+        simulation.kick()
     }
     
     public func add(edges: [Links]) {

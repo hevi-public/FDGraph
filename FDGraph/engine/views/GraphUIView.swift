@@ -58,8 +58,7 @@ struct GraphUIView: UIViewControllerRepresentable {
     func makeUIViewController(context: UIViewControllerRepresentableContext<GraphUIView>) -> GraphController {
         self.graphContextMenuInteractionDelegate.setup(graphController: self.graphController)
         self.graphController.setup(graphViewContextMenuDelegate: graphContextMenuInteractionDelegate)
-        
-        self.graphController.follow(node: nodes[2])
+
         
         return self.graphController
     }
@@ -140,10 +139,20 @@ class GraphContextMenuInteractionDelegate: NSObject, UIContextMenuInteractionDel
     // -MARK: CONTEXT FOR NODE
     func makeContextMenuForNode(node: Node, graphController: GraphController) -> UIMenu {
 
+        var children = [UIAction]()
+        
+        if let selectedNode = graphController.selectedNode() {
+            let linkNode = UIAction(title: "Link", image: UIImage(systemName: "square.and.arrow.up")) { action in
+                graphController.link(between: selectedNode, and: node)
+            }
+            children.append(linkNode)
+        }
+
         let deleteNode = UIAction(title: "Delete", image: UIImage(systemName: "square.and.arrow.up")) { action in
             graphController.delete(node: node)
         }
-
-        return UIMenu(title: "Main Menu", children: [deleteNode])
+        children.append(deleteNode)
+        
+        return UIMenu(title: "Main Menu", children: children)
     }
 }

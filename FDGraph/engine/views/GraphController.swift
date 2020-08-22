@@ -108,6 +108,18 @@ extension GraphController {
         }
     }
     
+    public func selectedNode() -> Node? {
+        let selectedCircles = Circle.getSelectedCircles()
+        if !selectedCircles.isEmpty {
+            let nodes = Array(self.graph.simulation.particles)
+            return nodes.filter { node -> Bool in
+                node.view == selectedCircles[0]
+            }.first
+        }
+        return nil
+        
+    }
+    
     public func select(node: Node) {
         Circle.removeAllGlow()
         node.view.addGlow()
