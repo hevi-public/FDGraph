@@ -58,7 +58,7 @@ struct GraphUIView: UIViewControllerRepresentable {
     func makeUIViewController(context: UIViewControllerRepresentableContext<GraphUIView>) -> GraphController {
         self.graphContextMenuInteractionDelegate.setup(graphController: self.graphController)
         self.graphController.setup(graphViewContextMenuDelegate: graphContextMenuInteractionDelegate)
-
+        
         
         return self.graphController
     }
@@ -87,10 +87,10 @@ struct GraphUIView: UIViewControllerRepresentable {
         }
         
         func handleDoubleTap(node: Node) {
-//            let newNode = Node(radius: GraphUIView.radius)
-//            newNode.delegate = self
-//            self.parent.graphController.add(node: newNode, parent: node)
-//            self.parent.graphController.focus(node: newNode)
+            //            let newNode = Node(radius: GraphUIView.radius)
+            //            newNode.delegate = self
+            //            self.parent.graphController.add(node: newNode, parent: node)
+            //            self.parent.graphController.focus(node: newNode)
             self.parent.graphController.focus(node: node)
         }
     }
@@ -116,29 +116,31 @@ class GraphContextMenuInteractionDelegate: NSObject, UIContextMenuInteractionDel
     
     func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
         
-        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { suggestedActions in
-
-            if let clickedNode = self.graphController.objectAtPoint(location: location) {
+        if let clickedNode = self.graphController.objectAtPoint(location: location) {
+            return UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { suggestedActions in
                 return self.makeContextMenuForNode(node: clickedNode, graphController: self.graphController)
-            } else {
+            })
+        } else {
+            return UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { suggestedActions in
                 return self.makeContextMenuForCanvas()
-            }
-        })
+            })
+            
+        }
     }
     
     // -MARK: CONTEXT FOR CANVAS
     func makeContextMenuForCanvas() -> UIMenu {
-
+        
         let share = UIAction(title: "makeContextMenuForCanvas", image: UIImage(systemName: "square.and.arrow.up")) { action in
-
+            
         }
-
+        
         return UIMenu(title: "Main Menu", children: [share])
     }
     
     // -MARK: CONTEXT FOR NODE
     func makeContextMenuForNode(node: Node, graphController: GraphController) -> UIMenu {
-
+        
         var children = [UIAction]()
         
         if let selectedNode = graphController.selectedNode() {
@@ -147,7 +149,7 @@ class GraphContextMenuInteractionDelegate: NSObject, UIContextMenuInteractionDel
             }
             children.append(linkNode)
         }
-
+        
         let deleteNode = UIAction(title: "Delete", image: UIImage(systemName: "square.and.arrow.up")) { action in
             graphController.delete(node: node)
         }
