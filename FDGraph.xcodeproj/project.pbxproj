@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D78CEAED24F82CB9006C5E70 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78CEAEC24F82CB9006C5E70 /* BaseView.swift */; };
 		D7D2B4DD24E71E3300EBC1C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B4DC24E71E3300EBC1C8 /* AppDelegate.swift */; };
 		D7D2B4DF24E71E3300EBC1C8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B4DE24E71E3300EBC1C8 /* SceneDelegate.swift */; };
 		D7D2B4E224E71E3300EBC1C8 /* FDGraph.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B4E024E71E3300EBC1C8 /* FDGraph.xcdatamodeld */; };
@@ -52,6 +53,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D78CEAEC24F82CB9006C5E70 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		D7D2B4D924E71E3300EBC1C8 /* FDGraph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FDGraph.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7D2B4DC24E71E3300EBC1C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D7D2B4DE24E71E3300EBC1C8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -111,6 +113,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D78CEAEB24F82CA6006C5E70 /* node */ = {
+			isa = PBXGroup;
+			children = (
+				D7D2B51324E7281B00EBC1C8 /* Circle.swift */,
+				D78CEAEC24F82CB9006C5E70 /* BaseView.swift */,
+			);
+			path = node;
+			sourceTree = "<group>";
+		};
 		D7D2B4D024E71E3300EBC1C8 = {
 			isa = PBXGroup;
 			children = (
@@ -177,11 +188,11 @@
 		D7D2B50F24E7281B00EBC1C8 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				D78CEAEB24F82CA6006C5E70 /* node */,
 				D7D2B53B24EB057100EBC1C8 /* GraphUIView.swift */,
 				D7D2B51024E7281B00EBC1C8 /* GraphController.swift */,
 				D7D2B51424E7281B00EBC1C8 /* GraphScrollView.swift */,
 				D7D2B51124E7281B00EBC1C8 /* GraphView.swift */,
-				D7D2B51324E7281B00EBC1C8 /* Circle.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -362,6 +373,7 @@
 				D7D2B53624E8789600EBC1C8 /* Force.swift in Sources */,
 				D7D2B4DF24E71E3300EBC1C8 /* SceneDelegate.swift in Sources */,
 				D7D2B53424E86ED600EBC1C8 /* ManyParticle.swift in Sources */,
+				D78CEAED24F82CB9006C5E70 /* BaseView.swift in Sources */,
 				D7D2B51624E7281B00EBC1C8 /* GraphView.swift in Sources */,
 				D7D2B52E24E86ED600EBC1C8 /* Simulation.swift in Sources */,
 			);

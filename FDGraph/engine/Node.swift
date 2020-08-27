@@ -34,7 +34,7 @@ public class Node: Particle {
         
         self.position = CGPoint(x: randomX, y: randomY)
         self.velocity = CGPoint.zero
-        self.view = Circle.createCircle(radius: radius, color: UIColor.blue)
+        self.view = Circle(radius: radius, color: UIColor.blue)
        
         let singleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleSingleTap(sender:)))
         self.view.addGestureRecognizer(singleTapGesture)

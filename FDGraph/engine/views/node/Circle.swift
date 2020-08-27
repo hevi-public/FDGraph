@@ -17,6 +17,22 @@ public class Circle: UIView {
     
     private var color: UIColor!
     
+    public convenience init(radius: CGFloat, color: UIColor) {
+        
+        let frame = CGRect(origin: CGPoint(x: -radius / 2, y: -radius / 2),
+                           size: CGSize(width: radius * 2, height: radius * 2))
+        
+        self.init(frame: frame)
+        
+        self.color = color
+        
+        let circleLayer = self.drawCircleOnLayer()
+
+        self.layer.addSublayer(circleLayer)
+
+        self.isUserInteractionEnabled = true
+    }
+    
     public override init(frame: CGRect) {
         self.radius = frame.width / 2
         
@@ -29,31 +45,7 @@ public class Circle: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    static func createCircle(radius: CGFloat, color: UIColor) -> Circle {
-        
-        let frame = CGRect(origin: CGPoint(x: -radius / 2, y: -radius / 2),
-                           size: CGSize(width: radius * 2, height: radius * 2))
-        
-        let v = Circle(frame: frame)
-        v.color = color
-        
-        let layer = CAShapeLayer()
-        layer.frame = frame
-        
-        layer.path = UIBezierPath(ovalIn: CGRect(x: 0, y: 0, width: radius * 2, height: radius * 2)).cgPath
-        layer.fillColor = color.cgColor
-        
-        layer.strokeColor = UIColor.gray.cgColor
-        layer.lineWidth = 0
 
-        v.layer.addSublayer(layer)
-
-        v.isUserInteractionEnabled = true
-        
-        return v
-    }
-    
     // -MARK: ADD GLOW
     public func addGlow() {
         
@@ -80,5 +72,19 @@ public class Circle: UIView {
         var copy = [Circle]()
         copy.append(contentsOf: Circle.glowingCircles)
         return copy
+    }
+    
+    // MARK: - PRIVATE FUNC
+    private func drawCircleOnLayer() -> CAShapeLayer {
+        let circleLayer = CAShapeLayer()
+        circleLayer.frame = frame
+        
+        circleLayer.path = UIBezierPath(ovalIn: CGRect(x: 0, y: 0, width: radius * 2, height: radius * 2)).cgPath
+        circleLayer.fillColor = color.cgColor
+        
+        circleLayer.strokeColor = UIColor.gray.cgColor
+        circleLayer.lineWidth = 0
+        
+        return circleLayer
     }
 }
