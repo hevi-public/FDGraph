@@ -109,13 +109,15 @@ extension GraphEngine {
         
         let particles = Array(simulation.particles)
         
-        let selectedParticles = particles.filter { node -> Bool in
-            selectedCircles.contains(node.view)
-        }
+        // TODO
         
-        selectedParticles.forEach { node in
-            delete(node: node, shouldKick: false)
-        }
+//        let selectedParticles = particles.filter { node -> Bool in
+//            selectedCircles.contains(node.view)
+//        }
+//
+//        selectedParticles.forEach { node in
+//            delete(node: node, shouldKick: false)
+//        }
         simulation.kick()
     }
 }

@@ -122,7 +122,7 @@ extension GraphController {
     
     public func select(node: Node) {
         Circle.removeAllGlow()
-        node.view.addGlow()
+//        node.view.addGlow()
     }
     
     public func delete(node: Node) {
