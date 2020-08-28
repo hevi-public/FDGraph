@@ -19,6 +19,7 @@ class BaseView: UIView {
         self.addSubview(self.circle)
         
         self.backgroundColor = UIColor.cyan
+        self.alpha = 0.2
     }
     
     override init(frame: CGRect) {
