@@ -19,14 +19,15 @@ public class GraphUITextView: UITextView, UITextViewDelegate {
     }
     */
     
-    public func setup(text: String, fontSize: CGFloat, radius: CGFloat, baseHeight: Int, textFieldWidth: Int, textFieldHeight: Int) {
+    public func setup(text: String, fontSize: CGFloat, baseHeight: Int, textFieldWidth: Int, textFieldHeight: Int) {
         
         self.layer.cornerRadius = 5
         self.layer.masksToBounds = true
         self.font = UIFont.systemFont(ofSize: fontSize)
         self.delegate = self
     
-        self.frame = CGRect(x: 0, y: baseHeight / 2 + Int(radius), width: textFieldWidth, height: textFieldHeight)
+//        self.frame = CGRect(x: 0, y: baseHeight / 2 + Int(radius), width: textFieldWidth, height: textFieldHeight)
+        self.frame = CGRect(x: 0, y: baseHeight / 2, width: textFieldWidth, height: textFieldHeight)
         self.textColor = UIColor.lightGray
         self.backgroundColor = nil
         self.text = text

@@ -26,7 +26,7 @@ public class Node: Particle {
     
     public var delegate: NodeParticleDelegate?
     
-    init(radius: CGFloat) {
+    init(radiusMultiplier: CGFloat) {
         
         
         let randomX = CGFloat.random(in: 0 ..< 1) / 10
@@ -35,7 +35,7 @@ public class Node: Particle {
         self.position = CGPoint(x: randomX, y: randomY)
         self.velocity = CGPoint.zero
 
-        self.view = GraphTextNode(text: "asdf", fontSize: 12.0, radius: radius, baseHeight: 50, textFieldWidth: 100, textFieldHeight: 200, circleColor: UIColor.blue, frame: CGRect(x: 0, y: 0, width: 200, height: 400))
+        self.view = GraphTextNode(text: "asdf", fontSize: 12.0, radiusMultiplier: radiusMultiplier, baseHeight: 50, textFieldWidth: 100, textFieldHeight: 200, circleColor: UIColor.blue, frame: CGRect(x: 0, y: 0, width: 200, height: 400))
        
         let singleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleSingleTap(sender:)))
         self.view.addGestureRecognizer(singleTapGesture)

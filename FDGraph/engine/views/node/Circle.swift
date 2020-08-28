@@ -13,14 +13,18 @@ public class Circle: UIView {
     
     private static var glowingCircles = [Circle]()
     
-    let radius: CGFloat
+    static let radius: CGFloat = 10
     
     private var color: UIColor!
     
-    public convenience init(radius: CGFloat, color: UIColor) {
+    public convenience init(radiusMultiplier: CGFloat, color: UIColor) {
         
-        let frame = CGRect(origin: CGPoint(x: -radius / 2, y: -radius / 2),
-                           size: CGSize(width: radius * 2, height: radius * 2))
+        let multipliedRadius = Circle.radius * radiusMultiplier
+        
+        let frame = CGRect(x: -multipliedRadius / 2,
+                           y: -multipliedRadius / 2,
+                           width: multipliedRadius * 2,
+                           height: multipliedRadius * 2)
         
         self.init(frame: frame)
         
@@ -34,7 +38,6 @@ public class Circle: UIView {
     }
     
     public override init(frame: CGRect) {
-        self.radius = frame.width / 2
         
         super.init(frame: frame)
         
@@ -49,11 +52,11 @@ public class Circle: UIView {
     // -MARK: ADD GLOW
     public func addGlow() {
         
-        let shadowRadius = radius * 3
-        let rect = CGRect(x: -radius / 2, y: -radius / 2, width: shadowRadius, height: shadowRadius)
+        let shadowRadius = Circle.radius * 3
+        let rect = CGRect(x: -Circle.radius / 2, y: -Circle.radius / 2, width: shadowRadius, height: shadowRadius)
         
         self.layer.shadowPath = UIBezierPath(ovalIn: rect).cgPath
-        self.layer.shadowOffset = CGSize(width: -(radius / 2), height: -(radius / 2))
+        self.layer.shadowOffset = CGSize(width: -(Circle.radius / 2), height: -(Circle.radius / 2))
         self.layer.shadowColor = UIColor.lightGray.cgColor
         self.layer.shadowRadius = CGFloat(shadowRadius)
         self.layer.shadowOpacity = 1
@@ -79,7 +82,7 @@ public class Circle: UIView {
         let circleLayer = CAShapeLayer()
         circleLayer.frame = frame
         
-        circleLayer.path = UIBezierPath(ovalIn: CGRect(x: 0, y: 0, width: radius * 2, height: radius * 2)).cgPath
+        circleLayer.path = UIBezierPath(ovalIn: CGRect(x: 0, y: 0, width: Circle.radius * 2, height: Circle.radius * 2)).cgPath
         circleLayer.fillColor = color.cgColor
         
         circleLayer.strokeColor = UIColor.gray.cgColor
