@@ -9,15 +9,13 @@
 import Foundation
 import UIKit
 
-class GraphTextNode: BaseView {
+class GraphTextNode: UIView {
     
     private let graphUITextView: GraphUITextView
     
-    convenience init(text: String, fontSize: CGFloat, radiusMultiplier: CGFloat, baseHeight: Int, textFieldWidth: Int, textFieldHeight: Int, circleColor: UIColor, frame: CGRect) {
+    convenience init(text: String, fontSize: CGFloat, baseHeight: Int, textFieldWidth: Int, textFieldHeight: Int, circleColor: UIColor, frame: CGRect) {
 
-        self.init(circle: Circle(radiusMultiplier: radiusMultiplier, color: UIColor.blue),
-                  width: frame.width,
-                  height: frame.height)
+        self.init(frame: frame)
         
         self.graphUITextView.setup(text: text,
                                    fontSize: fontSize,

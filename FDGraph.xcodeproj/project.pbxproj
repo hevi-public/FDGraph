@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D78CEAF124F840E6006C5E70 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78CEAF024F840E6006C5E70 /* BaseView.swift */; };
 		D78CEAF324F8417E006C5E70 /* GraphUITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78CEAF224F8417E006C5E70 /* GraphUITextView.swift */; };
 		D78CEAF524F841CB006C5E70 /* GraphTextNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78CEAF424F841CB006C5E70 /* GraphTextNode.swift */; };
 		D7D2B4DD24E71E3300EBC1C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B4DC24E71E3300EBC1C8 /* AppDelegate.swift */; };
@@ -55,7 +54,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D78CEAF024F840E6006C5E70 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		D78CEAF224F8417E006C5E70 /* GraphUITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphUITextView.swift; sourceTree = "<group>"; };
 		D78CEAF424F841CB006C5E70 /* GraphTextNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTextNode.swift; sourceTree = "<group>"; };
 		D7D2B4D924E71E3300EBC1C8 /* FDGraph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FDGraph.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -122,7 +120,6 @@
 			children = (
 				D78CEAF624F841E6006C5E70 /* component */,
 				D7D2B51324E7281B00EBC1C8 /* Circle.swift */,
-				D78CEAF024F840E6006C5E70 /* BaseView.swift */,
 				D78CEAF424F841CB006C5E70 /* GraphTextNode.swift */,
 			);
 			path = node;
@@ -389,7 +386,6 @@
 				D7D2B53624E8789600EBC1C8 /* Force.swift in Sources */,
 				D7D2B4DF24E71E3300EBC1C8 /* SceneDelegate.swift in Sources */,
 				D7D2B53424E86ED600EBC1C8 /* ManyParticle.swift in Sources */,
-				D78CEAF124F840E6006C5E70 /* BaseView.swift in Sources */,
 				D7D2B51624E7281B00EBC1C8 /* GraphView.swift in Sources */,
 				D7D2B52E24E86ED600EBC1C8 /* Simulation.swift in Sources */,
 			);

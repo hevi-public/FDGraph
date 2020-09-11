@@ -27,9 +27,9 @@ public class GraphUITextView: UITextView, UITextViewDelegate {
         self.delegate = self
     
 //        self.frame = CGRect(x: 0, y: baseHeight / 2 + Int(radius), width: textFieldWidth, height: textFieldHeight)
-        self.frame = CGRect(x: 0, y: baseHeight / 2, width: textFieldWidth, height: textFieldHeight)
+        self.frame = CGRect(x: -textFieldWidth / 2, y: 0, width: textFieldWidth, height: textFieldHeight)
         self.textColor = UIColor.lightGray
-        self.backgroundColor = nil
+        self.backgroundColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 0.2008775685)
         self.text = text
         self.textAlignment = .center
         self.isEditable = false

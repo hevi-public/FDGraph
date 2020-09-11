@@ -22,7 +22,7 @@ public class Node: Particle {
     public var velocity: CGPoint
     public var fixed: Bool = false
     
-    var view: BaseView
+    var view: Circle
     
     public var delegate: NodeParticleDelegate?
     
@@ -35,8 +35,8 @@ public class Node: Particle {
         self.position = CGPoint(x: randomX, y: randomY)
         self.velocity = CGPoint.zero
 
-        self.view = GraphTextNode(text: "asdf", fontSize: 12.0, radiusMultiplier: radiusMultiplier, baseHeight: 50, textFieldWidth: 100, textFieldHeight: 200, circleColor: UIColor.blue, frame: CGRect(x: 0, y: 0, width: 200, height: 400))
-       
+        self.view = Circle(radiusMultiplier: radiusMultiplier, color: UIColor.blue)
+        
         let singleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleSingleTap(sender:)))
         self.view.addGestureRecognizer(singleTapGesture)
         

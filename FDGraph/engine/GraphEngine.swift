@@ -55,6 +55,19 @@ extension GraphEngine {
         simulation.particles.update(with: node)
         self.containerView.addSubview(node.view)
         
+        node.view.view = GraphTextNode(text: "asdf", fontSize: 12.0, baseHeight: 50, textFieldWidth: 100, textFieldHeight: 200, circleColor: UIColor.blue, frame: CGRect(x: 0, y: 0, width: 200, height: 400))
+        
+        if let viewView = node.view.view {
+            self.containerView.addSubview(viewView)
+            viewView.translatesAutoresizingMaskIntoConstraints = false
+            
+            NSLayoutConstraint.activate([
+                viewView.topAnchor.constraint(equalTo: node.view.bottomAnchor, constant: 10),
+                viewView.centerXAnchor.constraint(equalTo: node.view.centerXAnchor)
+            ])
+        }
+        
+        
         if let parent = parent {
             
             node.position = CGPoint(x: parent.position.x + 10, y: parent.position.y + 10)
@@ -68,6 +81,18 @@ extension GraphEngine {
         nodes.forEach { (node) in
             simulation.particles.update(with: node)
             self.containerView.addSubview(node.view)
+            
+            node.view.view = GraphTextNode(text: "asdf", fontSize: 12.0, baseHeight: 50, textFieldWidth: 100, textFieldHeight: 200, circleColor: UIColor.blue, frame: CGRect(x: 0, y: 0, width: 200, height: 400))
+            
+            if let viewView = node.view.view {
+                self.containerView.addSubview(viewView)
+                viewView.translatesAutoresizingMaskIntoConstraints = false
+                
+                NSLayoutConstraint.activate([
+                    viewView.topAnchor.constraint(equalTo: node.view.bottomAnchor, constant: 10),
+                    viewView.centerXAnchor.constraint(equalTo: node.view.centerXAnchor)
+                ])
+            }
         }
     }
     

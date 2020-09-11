@@ -11,10 +11,10 @@ import UIKit
 
 public class Circle: UIView {
     
+    public var view: UIView?
+    
     private static var glowingCircles = [Circle]()
-    
     static let radius: CGFloat = 10
-    
     private var color: UIColor!
     
     public convenience init(radiusMultiplier: CGFloat, color: UIColor) {
