@@ -22,7 +22,7 @@ public class Node: Particle {
     public var velocity: CGPoint
     public var fixed: Bool = false
     
-    var view: Circle
+    var circle: Circle
     
     public var delegate: NodeParticleDelegate?
     
@@ -35,19 +35,19 @@ public class Node: Particle {
         self.position = CGPoint(x: randomX, y: randomY)
         self.velocity = CGPoint.zero
 
-        self.view = Circle(radiusMultiplier: radiusMultiplier, color: UIColor.blue)
+        self.circle = Circle(radiusMultiplier: radiusMultiplier, color: UIColor.blue)
         
         let singleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleSingleTap(sender:)))
-        self.view.addGestureRecognizer(singleTapGesture)
+        self.circle.addGestureRecognizer(singleTapGesture)
         
         let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(sender:)))
         doubleTapGesture.numberOfTapsRequired = 2
-        self.view.addGestureRecognizer(doubleTapGesture)
+        self.circle.addGestureRecognizer(doubleTapGesture)
         
     }
     
     public func tick() {
-        view.center = position
+        circle.center = position
     }
     
 }
@@ -69,7 +69,7 @@ extension Node {
 extension Node: Equatable {
     
     public static func == (lhs: Node, rhs: Node) -> Bool {
-        return lhs.view == rhs.view
+        return lhs.circle == rhs.circle
     }
 }
 
@@ -77,7 +77,7 @@ extension Node: Equatable {
 extension Node: Hashable {
     
     public func hash(into hasher: inout Hasher) {
-        hasher.combine(view.hashValue)
+        hasher.combine(circle.hashValue)
     }
 }
 

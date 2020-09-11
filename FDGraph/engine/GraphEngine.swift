@@ -53,17 +53,17 @@ extension GraphEngine {
     public func add(node: Node, parent: Node? = nil) {
         
         simulation.particles.update(with: node)
-        self.containerView.addSubview(node.view)
+        self.containerView.addSubview(node.circle)
         
-        node.view.view = GraphTextNode(text: "asdf", fontSize: 12.0, baseHeight: 50, textFieldWidth: 100, textFieldHeight: 200, circleColor: UIColor.blue, frame: CGRect(x: 0, y: 0, width: 200, height: 400))
+        node.circle.view = GraphTextNode(text: "asdf", fontSize: 12.0, baseHeight: 50, textFieldWidth: 100, textFieldHeight: 200, circleColor: UIColor.blue, frame: CGRect(x: 0, y: 0, width: 200, height: 400))
         
-        if let viewView = node.view.view {
+        if let viewView = node.circle.view {
             self.containerView.addSubview(viewView)
             viewView.translatesAutoresizingMaskIntoConstraints = false
             
             NSLayoutConstraint.activate([
-                viewView.topAnchor.constraint(equalTo: node.view.bottomAnchor, constant: 10),
-                viewView.centerXAnchor.constraint(equalTo: node.view.centerXAnchor)
+                viewView.topAnchor.constraint(equalTo: node.circle.bottomAnchor, constant: 10),
+                viewView.centerXAnchor.constraint(equalTo: node.circle.centerXAnchor)
             ])
         }
         
@@ -80,17 +80,17 @@ extension GraphEngine {
     public func add(nodes: [Node]) {
         nodes.forEach { (node) in
             simulation.particles.update(with: node)
-            self.containerView.addSubview(node.view)
+            self.containerView.addSubview(node.circle)
             
-            node.view.view = GraphTextNode(text: "asdf", fontSize: 12.0, baseHeight: 50, textFieldWidth: 100, textFieldHeight: 200, circleColor: UIColor.blue, frame: CGRect(x: 0, y: 0, width: 200, height: 400))
+            node.circle.view = GraphTextNode(text: "asdf", fontSize: 12.0, baseHeight: 50, textFieldWidth: 100, textFieldHeight: 200, circleColor: UIColor.blue, frame: CGRect(x: 0, y: 0, width: 200, height: 400))
             
-            if let viewView = node.view.view {
+            if let viewView = node.circle.view {
                 self.containerView.addSubview(viewView)
                 viewView.translatesAutoresizingMaskIntoConstraints = false
                 
                 NSLayoutConstraint.activate([
-                    viewView.topAnchor.constraint(equalTo: node.view.bottomAnchor, constant: 10),
-                    viewView.centerXAnchor.constraint(equalTo: node.view.centerXAnchor)
+                    viewView.topAnchor.constraint(equalTo: node.circle.bottomAnchor, constant: 10),
+                    viewView.centerXAnchor.constraint(equalTo: node.circle.centerXAnchor)
                 ])
             }
         }
@@ -118,9 +118,9 @@ extension GraphEngine {
     public func delete(node: Node, shouldKick: Bool = true) {
         self.simulation.remove(particle: node)
         UIView.animate(withDuration: 0.3, animations: {
-            node.view.alpha = 0
+            node.circle.alpha = 0
         }) { (completed) in
-            node.view.removeFromSuperview()
+            node.circle.removeFromSuperview()
         }
         
         if shouldKick {
@@ -152,7 +152,7 @@ extension GraphEngine {
     
     public func objectAtPoint(location: CGPoint) -> Node? {
         return self.simulation.particles.first { (viewParticle) -> Bool in
-            return viewParticle.view.frame.contains(location)
+            return viewParticle.circle.frame.contains(location)
         }
     }
 }
