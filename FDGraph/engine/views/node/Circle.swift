@@ -11,7 +11,7 @@ import UIKit
 
 public class Circle: UIView {
     
-    public var view: UIView?
+    public var contentView: UIView?
     
     private static var glowingCircles = [Circle]()
     static let radius: CGFloat = 10

@@ -55,15 +55,15 @@ extension GraphEngine {
         simulation.particles.update(with: node)
         self.containerView.addSubview(node.circle)
         
-        node.circle.view = GraphTextNode(text: "asdf", fontSize: 12.0, baseHeight: 50, textFieldWidth: 100, textFieldHeight: 200, circleColor: UIColor.blue, frame: CGRect(x: 0, y: 0, width: 200, height: 400))
+        node.circle.contentView = GraphTextNode(text: "asdf", fontSize: 12.0, baseHeight: 50, textFieldWidth: 100, textFieldHeight: 200, circleColor: UIColor.blue, frame: CGRect(x: 0, y: 0, width: 200, height: 400))
         
-        if let viewView = node.circle.view {
-            self.containerView.addSubview(viewView)
-            viewView.translatesAutoresizingMaskIntoConstraints = false
+        if let contentView = node.circle.contentView {
+            self.containerView.addSubview(contentView)
+            contentView.translatesAutoresizingMaskIntoConstraints = false
             
             NSLayoutConstraint.activate([
-                viewView.topAnchor.constraint(equalTo: node.circle.bottomAnchor, constant: 10),
-                viewView.centerXAnchor.constraint(equalTo: node.circle.centerXAnchor)
+                contentView.topAnchor.constraint(equalTo: node.circle.bottomAnchor, constant: 10),
+                contentView.centerXAnchor.constraint(equalTo: node.circle.centerXAnchor)
             ])
         }
         
@@ -82,15 +82,15 @@ extension GraphEngine {
             simulation.particles.update(with: node)
             self.containerView.addSubview(node.circle)
             
-            node.circle.view = GraphTextNode(text: "asdf", fontSize: 12.0, baseHeight: 50, textFieldWidth: 100, textFieldHeight: 200, circleColor: UIColor.blue, frame: CGRect(x: 0, y: 0, width: 200, height: 400))
+            node.circle.contentView = GraphTextNode(text: "asdf", fontSize: 12.0, baseHeight: 50, textFieldWidth: 100, textFieldHeight: 200, circleColor: UIColor.blue, frame: CGRect(x: 0, y: 0, width: 200, height: 400))
             
-            if let viewView = node.circle.view {
-                self.containerView.addSubview(viewView)
-                viewView.translatesAutoresizingMaskIntoConstraints = false
+            if let contentView = node.circle.contentView {
+                self.containerView.addSubview(contentView)
+                contentView.translatesAutoresizingMaskIntoConstraints = false
                 
                 NSLayoutConstraint.activate([
-                    viewView.topAnchor.constraint(equalTo: node.circle.bottomAnchor, constant: 10),
-                    viewView.centerXAnchor.constraint(equalTo: node.circle.centerXAnchor)
+                    contentView.topAnchor.constraint(equalTo: node.circle.bottomAnchor, constant: 10),
+                    contentView.centerXAnchor.constraint(equalTo: node.circle.centerXAnchor)
                 ])
             }
         }
