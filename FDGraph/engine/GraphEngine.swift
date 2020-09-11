@@ -79,20 +79,7 @@ extension GraphEngine {
     
     public func add(nodes: [Node]) {
         nodes.forEach { (node) in
-            simulation.particles.update(with: node)
-            self.containerView.addSubview(node.circle)
-            
-            node.circle.contentView = GraphTextNode(text: "asdf", fontSize: 12.0, baseHeight: 50, textFieldWidth: 100, textFieldHeight: 200, circleColor: UIColor.blue, frame: CGRect(x: 0, y: 0, width: 200, height: 400))
-            
-            if let contentView = node.circle.contentView {
-                self.containerView.addSubview(contentView)
-                contentView.translatesAutoresizingMaskIntoConstraints = false
-                
-                NSLayoutConstraint.activate([
-                    contentView.topAnchor.constraint(equalTo: node.circle.bottomAnchor, constant: 10),
-                    contentView.centerXAnchor.constraint(equalTo: node.circle.centerXAnchor)
-                ])
-            }
+            self.add(node: node)
         }
     }
     
