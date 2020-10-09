@@ -25,8 +25,8 @@ class GraphTextNode: UIView {
         
         self.addSubview(self.graphUITextView)
         
-        super.sizeToFit()
-        self.sizeToFit()
+//        super.sizeToFit()
+//        self.sizeToFit()
     }
     
     override init(frame: CGRect) {

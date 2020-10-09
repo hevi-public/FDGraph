@@ -21,8 +21,8 @@ public class Circle: UIView {
         
         let multipliedRadius = Circle.radius * radiusMultiplier
         
-        let frame = CGRect(x: -multipliedRadius / 2,
-                           y: -multipliedRadius / 2,
+        let frame = CGRect(x: -multipliedRadius,
+                           y: -multipliedRadius,
                            width: multipliedRadius * 2,
                            height: multipliedRadius * 2)
         
@@ -30,7 +30,7 @@ public class Circle: UIView {
         
         self.color = color
         
-        let circleLayer = self.drawCircleOnLayer()
+        let circleLayer = self.drawCircleOnLayer(multipliedRadius: multipliedRadius)
 
         self.layer.addSublayer(circleLayer)
 
@@ -78,11 +78,11 @@ public class Circle: UIView {
     }
     
     // MARK: - PRIVATE FUNC
-    private func drawCircleOnLayer() -> CAShapeLayer {
+    private func drawCircleOnLayer(multipliedRadius: CGFloat) -> CAShapeLayer {
         let circleLayer = CAShapeLayer()
         circleLayer.frame = frame
         
-        circleLayer.path = UIBezierPath(ovalIn: CGRect(x: 0, y: 0, width: Circle.radius * 2, height: Circle.radius * 2)).cgPath
+        circleLayer.path = UIBezierPath(ovalIn: CGRect(x: 0, y: 0, width: multipliedRadius * 2, height: multipliedRadius * 2)).cgPath
         circleLayer.fillColor = color.cgColor
         
         circleLayer.strokeColor = UIColor.gray.cgColor
