@@ -26,7 +26,7 @@ public class Node: Particle {
     
     public var delegate: NodeParticleDelegate?
     
-    init(radiusMultiplier: CGFloat) {
+    init(radiusMultiplier: CGFloat, contentType: ContentType) {
         
         
         let randomX = CGFloat.random(in: 0 ..< 1) / 10
@@ -34,8 +34,8 @@ public class Node: Particle {
         
         self.position = CGPoint(x: randomX, y: randomY)
         self.velocity = CGPoint.zero
-
-        self.circle = Circle(radiusMultiplier: radiusMultiplier, color: UIColor.blue)
+        
+        self.circle = Circle(radiusMultiplier: radiusMultiplier, color: UIColor.blue, contentType: contentType)
         
         let singleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleSingleTap(sender:)))
         self.circle.addGestureRecognizer(singleTapGesture)

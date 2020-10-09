@@ -9,20 +9,24 @@
 import Foundation
 import UIKit
 
+public enum ContentType {
+    case text
+}
+
 public class Circle: UIView {
     
-    public var contentView: UIView?
+    public var contentView: UIView
     
     private static var glowingCircles = [Circle]()
     static let radius: CGFloat = 10
     private var color: UIColor!
     
-    public convenience init(radiusMultiplier: CGFloat, color: UIColor) {
+    public convenience init(radiusMultiplier: CGFloat, color: UIColor, contentType: ContentType) {
         
         let multipliedRadius = Circle.radius * radiusMultiplier
         
-        let frame = CGRect(x: -multipliedRadius,
-                           y: -multipliedRadius,
+        let frame = CGRect(x: 0,
+                           y: 0,
                            width: multipliedRadius * 2,
                            height: multipliedRadius * 2)
         
@@ -35,9 +39,23 @@ public class Circle: UIView {
         self.layer.addSublayer(circleLayer)
 
         self.isUserInteractionEnabled = true
+        
+        switch contentType {
+        case .text:
+            self.contentView = GraphTextNode(text: "asdf", fontSize: 12.0, baseHeight: 50, textFieldWidth: 100, textFieldHeight: 200, circleColor: UIColor.blue, frame: CGRect(x: 0, y: 0, width: 200, height: 400))
+        }
+        
+        self.addSubview(self.contentView)
+        self.contentView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            self.contentView.topAnchor.constraint(equalTo: self.bottomAnchor, constant: 10),
+            self.contentView.centerXAnchor.constraint(equalTo: self.centerXAnchor)
+        ])
     }
     
     public override init(frame: CGRect) {
+        self.contentView = UIView()
         
         super.init(frame: frame)
         
