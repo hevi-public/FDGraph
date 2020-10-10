@@ -19,6 +19,7 @@ public class Circle: UIView {
     
     private static var glowingCircles = [Circle]()
     static let radius: CGFloat = 10
+    private var multipliedRadius: CGFloat
     private var color: UIColor!
     
     public convenience init(radiusMultiplier: CGFloat, color: UIColor, contentType: ContentType) {
@@ -31,6 +32,8 @@ public class Circle: UIView {
                            height: multipliedRadius * 2)
         
         self.init(frame: frame)
+        
+        self.multipliedRadius = multipliedRadius
         
         self.color = color
         
@@ -57,6 +60,8 @@ public class Circle: UIView {
     public override init(frame: CGRect) {
         self.contentView = UIView()
         
+        self.multipliedRadius = Circle.radius
+        
         super.init(frame: frame)
         
         self.frame = frame
@@ -70,11 +75,11 @@ public class Circle: UIView {
     // -MARK: ADD GLOW
     public func addGlow() {
         
-        let shadowRadius = Circle.radius * 3
-        let rect = CGRect(x: -Circle.radius / 2, y: -Circle.radius / 2, width: shadowRadius, height: shadowRadius)
+        let shadowRadius = self.multipliedRadius * 3
+        let rect = CGRect(x: 0, y: 0, width: shadowRadius, height: shadowRadius)
         
         self.layer.shadowPath = UIBezierPath(ovalIn: rect).cgPath
-        self.layer.shadowOffset = CGSize(width: -(Circle.radius / 2), height: -(Circle.radius / 2))
+        self.layer.shadowOffset = CGSize(width: -(self.multipliedRadius / 2), height: -(self.multipliedRadius / 2))
         self.layer.shadowColor = UIColor.lightGray.cgColor
         self.layer.shadowRadius = CGFloat(shadowRadius)
         self.layer.shadowOpacity = 1
