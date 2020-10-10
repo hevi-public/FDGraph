@@ -22,6 +22,7 @@ class GraphView: UIView {
     
         super.init(frame: frame)
         
+        self.backgroundColor = #colorLiteral(red: 0.1333333333, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
         
     }
     
