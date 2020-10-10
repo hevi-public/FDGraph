@@ -115,6 +115,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D725AEFE25325C390021F640 /* domain */ = {
+			isa = PBXGroup;
+			children = (
+				D7D2B51B24E7555700EBC1C8 /* Node.swift */,
+				D7D2B51D24E75C1D00EBC1C8 /* Edge.swift */,
+			);
+			path = domain;
+			sourceTree = "<group>";
+		};
 		D78CEAEB24F82CA6006C5E70 /* node */ = {
 			isa = PBXGroup;
 			children = (
@@ -211,11 +220,10 @@
 		D7D2B51A24E7553B00EBC1C8 /* engine */ = {
 			isa = PBXGroup;
 			children = (
+				D725AEFE25325C390021F640 /* domain */,
 				D7D2B50F24E7281B00EBC1C8 /* views */,
 				D7D2B52224E83FAB00EBC1C8 /* physics */,
-				D7D2B51B24E7555700EBC1C8 /* Node.swift */,
 				D7D2B53924EAFB6300EBC1C8 /* GraphEngine.swift */,
-				D7D2B51D24E75C1D00EBC1C8 /* Edge.swift */,
 			);
 			path = engine;
 			sourceTree = "<group>";
