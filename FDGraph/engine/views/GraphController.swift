@@ -95,7 +95,7 @@ extension GraphController {
     
     public func focus(node: Node) {
         
-        self.scrollView.scrollToView(view: node.circle, animated: true)
+        self.scrollView.scrollToView(view: node.circleContainer, animated: true)
         self.select(node: node)
     }
     
@@ -103,7 +103,7 @@ extension GraphController {
         self.graph.followedNode = node
         if let node = node {
             self.graph.simulation.tickCallback = {
-                self.scrollView.scrollToView(view: node.circle, animated: false)
+                self.scrollView.scrollToView(view: node.circleContainer, animated: false)
             }
         }
     }
@@ -113,7 +113,7 @@ extension GraphController {
         if !selectedCircles.isEmpty {
             let nodes = Array(self.graph.simulation.particles)
             return nodes.filter { node -> Bool in
-                node.circle == selectedCircles[0]
+                node.circleContainer.circle == selectedCircles[0]
             }.first
         }
         return nil
@@ -122,7 +122,7 @@ extension GraphController {
     
     public func select(node: Node) {
         Circle.removeAllGlow()
-        node.circle.addGlow()
+        node.circleContainer.circle.addGlow()
     }
     
     public func delete(node: Node) {

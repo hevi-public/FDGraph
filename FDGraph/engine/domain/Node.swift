@@ -22,7 +22,7 @@ public class Node: Particle {
     public var velocity: CGPoint
     public var fixed: Bool = false
     
-    var circle: Circle
+    var circleContainer: CircleContainer
     
     public var delegate: NodeParticleDelegate?
     
@@ -35,19 +35,23 @@ public class Node: Particle {
         self.position = CGPoint(x: randomX, y: randomY)
         self.velocity = CGPoint.zero
         
-        self.circle = Circle(radiusMultiplier: radiusMultiplier, color: UIColor.blue, contentType: contentType)
+        self.circleContainer = CircleContainer(radiusMultiplier: radiusMultiplier, color: UIColor.blue, contentType: contentType)
         
         let singleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleSingleTap(sender:)))
-        self.circle.addGestureRecognizer(singleTapGesture)
+        self.circleContainer.addGestureRecognizer(singleTapGesture)
         
         let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(sender:)))
         doubleTapGesture.numberOfTapsRequired = 2
-        self.circle.addGestureRecognizer(doubleTapGesture)
+        self.circleContainer.addGestureRecognizer(doubleTapGesture)
         
     }
     
     public func tick() {
-        circle.center = position
+        let x = position.x
+        let y = position.y + (circleContainer.frame.height - circleContainer.circle.frame.height) / 2
+        
+        circleContainer.center = CGPoint(x: x, y: y)
+            
     }
     
 }
@@ -69,7 +73,7 @@ extension Node {
 extension Node: Equatable {
     
     public static func == (lhs: Node, rhs: Node) -> Bool {
-        return lhs.circle == rhs.circle
+        return lhs.circleContainer == rhs.circleContainer
     }
 }
 
@@ -77,7 +81,7 @@ extension Node: Equatable {
 extension Node: Hashable {
     
     public func hash(into hasher: inout Hasher) {
-        hasher.combine(circle.hashValue)
+        hasher.combine(circleContainer.hashValue)
     }
 }
 

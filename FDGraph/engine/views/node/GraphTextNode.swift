@@ -13,8 +13,10 @@ class GraphTextNode: UIView {
     
     private let graphUITextView: GraphUITextView
     
-    convenience init(text: String, fontSize: CGFloat, baseHeight: Int, textFieldWidth: Int, textFieldHeight: Int, circleColor: UIColor, frame: CGRect) {
+    convenience init(text: String, fontSize: CGFloat, baseHeight: Int, textFieldWidth: Int, textFieldHeight: Int, circleColor: UIColor) {
 
+        let frame = CGRect(x: 0, y: 0, width: textFieldWidth, height: textFieldHeight)
+        
         self.init(frame: frame)
         
         self.graphUITextView.setup(text: text,

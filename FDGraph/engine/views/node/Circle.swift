@@ -15,8 +15,6 @@ public enum ContentType {
 
 public class Circle: UIView {
     
-    public var contentView: UIView
-    
     private static var glowingCircles = [Circle]()
     static let radius: CGFloat = 10
     private var multipliedRadius: CGFloat
@@ -43,22 +41,10 @@ public class Circle: UIView {
 
         self.isUserInteractionEnabled = true
         
-        switch contentType {
-        case .text:
-            self.contentView = GraphTextNode(text: "asdf", fontSize: 12.0, baseHeight: 50, textFieldWidth: 100, textFieldHeight: 200, circleColor: UIColor.blue, frame: CGRect(x: 0, y: 0, width: 200, height: 400))
-        }
         
-        self.addSubview(self.contentView)
-        self.contentView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            self.contentView.topAnchor.constraint(equalTo: self.bottomAnchor, constant: 10),
-            self.contentView.centerXAnchor.constraint(equalTo: self.centerXAnchor)
-        ])
     }
     
     public override init(frame: CGRect) {
-        self.contentView = UIView()
         
         self.multipliedRadius = Circle.radius
         

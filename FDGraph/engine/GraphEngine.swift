@@ -53,7 +53,7 @@ extension GraphEngine {
     public func add(node: Node, parent: Node? = nil, contentType: ContentType) {
         
         simulation.particles.update(with: node)
-        self.containerView.addSubview(node.circle)
+        self.containerView.addSubview(node.circleContainer)
     
         if let parent = parent {
             
@@ -92,9 +92,9 @@ extension GraphEngine {
     public func delete(node: Node, shouldKick: Bool = true) {
         self.simulation.remove(particle: node)
         UIView.animate(withDuration: 0.3, animations: {
-            node.circle.alpha = 0
+            node.circleContainer.alpha = 0
         }) { (completed) in
-            node.circle.removeFromSuperview()
+            node.circleContainer.removeFromSuperview()
         }
         
         if shouldKick {
@@ -126,7 +126,7 @@ extension GraphEngine {
     
     public func objectAtPoint(location: CGPoint) -> Node? {
         return self.simulation.particles.first { (viewParticle) -> Bool in
-            return viewParticle.circle.frame.contains(location)
+            return viewParticle.circleContainer.circle.frame.contains(location)
         }
     }
 }
