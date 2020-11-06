@@ -89,7 +89,7 @@ struct GraphUIView: UIViewControllerRepresentable {
             //            newNode.delegate = self
             //            self.parent.graphController.add(node: newNode, parent: node)
             //            self.parent.graphController.focus(node: newNode)
-            self.parent.graphController.focus(node: node)
+            self.parent.graphController.edit(node: node)
         }
     }
     

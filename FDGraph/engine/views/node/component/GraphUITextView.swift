@@ -32,8 +32,8 @@ public class GraphUITextView: UITextView, UITextViewDelegate {
         self.backgroundColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 0.2008775685)
         self.text = text
         self.textAlignment = .center
-        self.isEditable = false
-        self.isSelectable = false
+        self.isEditable = true
+        self.isSelectable = true
         
         
         
@@ -56,7 +56,8 @@ public class GraphUITextView: UITextView, UITextViewDelegate {
     }
 
     @objc func doneButtonAction() {
-        fatalError("Not implemented")
+        self.endEditing(true)
+//        self.resignFirstResponder()
     }
     
     @objc func cancelButtonAction() {

@@ -11,7 +11,7 @@ import UIKit
 
 class GraphTextNode: UIView {
     
-    private let graphUITextView: GraphUITextView
+    let textView: GraphUITextView
     
     convenience init(text: String, fontSize: CGFloat, baseHeight: Int, textFieldWidth: Int, textFieldHeight: Int, circleColor: UIColor) {
 
@@ -19,25 +19,25 @@ class GraphTextNode: UIView {
         
         self.init(frame: frame)
         
-        self.graphUITextView.setup(text: text,
+        self.textView.setup(text: text,
                                    fontSize: fontSize,
                                    baseHeight: baseHeight,
                                    textFieldWidth: textFieldWidth,
                                    textFieldHeight: textFieldHeight)
         
-        self.addSubview(self.graphUITextView)
+        self.addSubview(self.textView)
         
 //        super.sizeToFit()
 //        self.sizeToFit()
     }
     
     override init(frame: CGRect) {
-        self.graphUITextView = GraphUITextView()
+        self.textView = GraphUITextView()
         super.init(frame: frame)
     }
     
     required init?(coder aDecoder: NSCoder) {
-        self.graphUITextView = GraphUITextView()
+        self.textView = GraphUITextView()
         super.init(coder: aDecoder)
     }
 }

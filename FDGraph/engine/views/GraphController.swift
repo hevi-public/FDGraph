@@ -99,6 +99,17 @@ extension GraphController {
         self.select(node: node)
     }
     
+    public func edit(node: Node) {
+        switch node.circleContainer.contentType {
+        case .text:
+            let textView = node.circleContainer.content as! GraphTextNode
+            textView.textView.becomeFirstResponder()
+        case .none:
+            break
+        }
+        
+    }
+    
     public func follow(node: Node?) {
         self.graph.followedNode = node
         if let node = node {

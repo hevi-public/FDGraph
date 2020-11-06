@@ -13,6 +13,7 @@ class CircleContainer: UIView {
     
     var circle: Circle!
     var content: UIView!
+    var contentType: ContentType!
     
     private static let distanceBetweenCircleAndContent: CGFloat = 10
     
@@ -39,6 +40,8 @@ class CircleContainer: UIView {
         self.init(frame: frame)
         
 //        self.backgroundColor = #colorLiteral(red: 0.06274510175, green: 0, blue: 0.1921568662, alpha: 0.2028039384)
+        
+        self.contentType = contentType
         
         self.circle = circleView
         self.addSubview(circle)
