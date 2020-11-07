@@ -105,6 +105,14 @@ class GraphScrollView: UIScrollView {
         setContentOffset(leftOffset, animated: true)
     }
     
+    func zoomIn() {
+        zoomScale = zoomScale * 1.2
+    }
+    
+    func zoomOut() {
+        zoomScale = zoomScale * 0.8
+    }
+    
 }
 
 extension GraphScrollView: UIScrollViewDelegate {

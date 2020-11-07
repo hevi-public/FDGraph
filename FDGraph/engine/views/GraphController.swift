@@ -88,6 +88,12 @@ class GraphController: UIViewController {
             } else if key.charactersIgnoringModifiers == UIKeyCommand.inputRightArrow || key.characters == "l" {
                 scrollView.scrollRight()
                 didHandleEvent = true
+            } else if key.characters == "u" {
+                scrollView.zoomIn()
+                didHandleEvent = true
+            } else if key.characters == "o" {
+                scrollView.zoomOut()
+                didHandleEvent = true
             }
         }
         
