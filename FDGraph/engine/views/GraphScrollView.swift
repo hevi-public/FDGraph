@@ -106,11 +106,16 @@ class GraphScrollView: UIScrollView {
     }
     
     func zoomIn() {
-        zoomScale = zoomScale * 1.2
+        UIView.animate(withDuration: 0.2) {
+            self.zoomScale = self.zoomScale * 1.2
+        }
+        
     }
     
     func zoomOut() {
-        zoomScale = zoomScale * 0.8
+        UIView.animate(withDuration: 0.2) {
+            self.zoomScale = self.zoomScale * 0.8
+        }
     }
     
 }
