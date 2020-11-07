@@ -35,11 +35,11 @@ class GraphScrollView: UIScrollView {
         self.contentOffset = CGPoint(x: GraphController.GRAPH_CANVAS_SIZE / 2, y: GraphController.GRAPH_CANVAS_SIZE / 2)
         
         self.setMaxMinZoomScaleForCurrentBounds()
-//        self.centerImage()
+        //        self.centerImage()
         
-//        if let circle = graphView?.circles[0] {
-//            self.scrollToView(view: circle, animated: false)
-//        }
+        //        if let circle = graphView?.circles[0] {
+        //            self.scrollToView(view: circle, animated: false)
+        //        }
         
     }
     
@@ -72,18 +72,39 @@ class GraphScrollView: UIScrollView {
             self.scrollRectToVisible(CGRect(x: newX, y: newY, width: self.frame.width, height: self.frame.height), animated: animated)
         }
     }
-
+    
     func scrollToTop(animated: Bool) {
         let topOffset = CGPoint(x: 0, y: -contentInset.top)
         setContentOffset(topOffset, animated: animated)
     }
-
+    
     func scrollToBottom() {
         let bottomOffset = CGPoint(x: 0, y: contentSize.height - bounds.size.height + contentInset.bottom)
         if(bottomOffset.y > 0) {
             setContentOffset(bottomOffset, animated: true)
         }
     }
+    
+    func scrollLeft() {
+        let leftOffset = CGPoint(x: contentOffset.x - 400, y: contentOffset.y)
+        setContentOffset(leftOffset, animated: true)
+    }
+    
+    func scrollRight() {
+        let leftOffset = CGPoint(x: contentOffset.x + 400, y: contentOffset.y)
+        setContentOffset(leftOffset, animated: true)
+    }
+    
+    func scrollUp() {
+        let leftOffset = CGPoint(x: contentOffset.x, y: contentOffset.y - 400)
+        setContentOffset(leftOffset, animated: true)
+    }
+    
+    func scrollDown() {
+        let leftOffset = CGPoint(x: contentOffset.x, y: contentOffset.y + 400)
+        setContentOffset(leftOffset, animated: true)
+    }
+    
 }
 
 extension GraphScrollView: UIScrollViewDelegate {
@@ -103,18 +124,20 @@ extension GraphScrollView: UIScrollViewDelegate {
         let yScale = boundsSize.height / imageSize.height
         let minScale = min(xScale, yScale)
         
-//        var maxScale: CGFloat = 5.0
-//        if minScale < 0.1 {
-//            maxScale = 0.3
-//        }
-//        if minScale >= 0.1 && minScale < 0.5 {
-//            maxScale = 0.7
-//        }
-//        if minScale >= 0.5 {
-//            maxScale = max(1.0, minScale)
-//        }
-//
+        //        var maxScale: CGFloat = 5.0
+        //        if minScale < 0.1 {
+        //            maxScale = 0.3
+        //        }
+        //        if minScale >= 0.1 && minScale < 0.5 {
+        //            maxScale = 0.7
+        //        }
+        //        if minScale >= 0.5 {
+        //            maxScale = max(1.0, minScale)
+        //        }
+        //
         self.maximumZoomScale = 6
         self.minimumZoomScale = minScale
     }
+    
+    
 }

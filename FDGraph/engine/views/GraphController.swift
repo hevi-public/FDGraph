@@ -70,6 +70,33 @@ class GraphController: UIViewController {
         super.viewWillLayoutSubviews()
     }
 
+    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        var didHandleEvent = false
+        for press in presses {
+            guard let key = press.key else { continue }
+            
+            //            if self.isFirstResponder {
+            if key.charactersIgnoringModifiers == UIKeyCommand.inputUpArrow || key.characters == "k" {
+                scrollView.scrollUp()
+                didHandleEvent = true
+            } else if key.charactersIgnoringModifiers == UIKeyCommand.inputDownArrow || key.characters == "j" {
+                scrollView.scrollDown()
+                didHandleEvent = true
+            } else if key.charactersIgnoringModifiers == UIKeyCommand.inputLeftArrow || key.characters == "h" {
+                scrollView.scrollLeft()
+                didHandleEvent = true
+            } else if key.charactersIgnoringModifiers == UIKeyCommand.inputRightArrow || key.characters == "l" {
+                scrollView.scrollRight()
+                didHandleEvent = true
+            }
+        }
+        
+        if didHandleEvent == false {
+            // Didn't handle this key press, so pass the event to the next responder.
+            super.pressesBegan(presses, with: event)
+        }
+        
+    }
 }
 
 // -MARK: PUBLIC METHODS
