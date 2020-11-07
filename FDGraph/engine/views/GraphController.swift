@@ -76,13 +76,13 @@ class GraphController: UIViewController {
             guard let key = press.key else { continue }
             
             //            if self.isFirstResponder {
-            if key.charactersIgnoringModifiers == UIKeyCommand.inputUpArrow || key.characters == "k" {
+            if key.charactersIgnoringModifiers == UIKeyCommand.inputUpArrow || key.characters == "i" {
                 scrollView.scrollUp()
                 didHandleEvent = true
-            } else if key.charactersIgnoringModifiers == UIKeyCommand.inputDownArrow || key.characters == "j" {
+            } else if key.charactersIgnoringModifiers == UIKeyCommand.inputDownArrow || key.characters == "k" {
                 scrollView.scrollDown()
                 didHandleEvent = true
-            } else if key.charactersIgnoringModifiers == UIKeyCommand.inputLeftArrow || key.characters == "h" {
+            } else if key.charactersIgnoringModifiers == UIKeyCommand.inputLeftArrow || key.characters == "j" {
                 scrollView.scrollLeft()
                 didHandleEvent = true
             } else if key.charactersIgnoringModifiers == UIKeyCommand.inputRightArrow || key.characters == "l" {
