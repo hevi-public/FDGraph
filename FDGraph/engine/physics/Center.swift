@@ -16,7 +16,7 @@ public final class Center: Force {
         center = c
     }
     
-    public func tick(alpha: CGFloat, particles: inout Set<Node>) {
+    public func tick(alpha: CGFloat, particles: inout Set<NodeParticle>) {
         let delta = center - (particles.reduce(.zero, { $0 + $1.position }) / CGFloat(particles.count))
         for particle in particles {
             guard !particle.fixed else { continue }

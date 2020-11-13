@@ -11,12 +11,12 @@ import UIKit
 // -MARK: DELEGATE
 public protocol NodeParticleDelegate {
     
-    func handleSingleTap(node: Node)
-    func handleDoubleTap(node: Node)
+    func handleSingleTap(node: NodeParticle)
+    func handleDoubleTap(node: NodeParticle)
 }
 
 // -MARK: NODE
-public class Node: Particle {
+public class NodeParticle: Particle {
   
     public var position: CGPoint
     public var velocity: CGPoint
@@ -57,7 +57,7 @@ public class Node: Particle {
 }
 
 // -MARK: DELEGATE HANDLER
-extension Node {
+extension NodeParticle {
     @objc func handleSingleTap(sender: UITapGestureRecognizer) {
         
         self.delegate?.handleSingleTap(node: self)
@@ -70,15 +70,15 @@ extension Node {
 }
 
 // -MARK: EQUATABLE
-extension Node: Equatable {
+extension NodeParticle: Equatable {
     
-    public static func == (lhs: Node, rhs: Node) -> Bool {
+    public static func == (lhs: NodeParticle, rhs: NodeParticle) -> Bool {
         return lhs.circleContainer == rhs.circleContainer
     }
 }
 
 // -MARK: HASHABLE
-extension Node: Hashable {
+extension NodeParticle: Hashable {
     
     public func hash(into hasher: inout Hasher) {
         hasher.combine(circleContainer.hashValue)

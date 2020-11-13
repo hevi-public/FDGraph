@@ -18,9 +18,9 @@ public class Simulation {
     private let alphaDecay: CGFloat = 1 - pow(0.001, 1 / 500)
     private let velocityDecay: CGFloat = 0.9
     
-    var particles: Set<Node> = []
-    private var forces: [(CGFloat, inout Set<Node>) -> Void] = []
-    private var ticks: [(inout Set<Node>) -> Void] = []
+    var particles: Set<NodeParticle> = []
+    private var forces: [(CGFloat, inout Set<NodeParticle>) -> Void] = []
+    private var ticks: [(inout Set<NodeParticle>) -> Void] = []
     
     private weak var displayLink: CADisplayLink?
     
@@ -43,15 +43,15 @@ public class Simulation {
         forces.append(force.tick)
     }
     
-    public func insert(tick: @escaping (inout Set<Node>) -> Void) {
+    public func insert(tick: @escaping (inout Set<NodeParticle>) -> Void) {
         ticks.append(tick)
     }
     
-    public func insert(particle: Node) {
+    public func insert(particle: NodeParticle) {
         particles.insert(particle)
     }
     
-    public func remove(particle: Node) {
+    public func remove(particle: NodeParticle) {
         particles.remove(particle)
     }
     

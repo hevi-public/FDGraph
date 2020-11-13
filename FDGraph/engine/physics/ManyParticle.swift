@@ -22,7 +22,7 @@ public final class ManyParticle: Force {
         
     }
     
-    public func tick(alpha: CGFloat, particles: inout Set<Node>) {
+    public func tick(alpha: CGFloat, particles: inout Set<NodeParticle>) {
         let tree = QuadTree(particles: particles, initial: { (strength, $0.position) }, accumulator: { (children) -> Charge in
             var value = children.reduce((0, .zero), { (accumulated, child) -> Charge in
                 guard let value = child?.value else { return accumulated }

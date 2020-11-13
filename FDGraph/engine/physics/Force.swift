@@ -11,5 +11,5 @@ import CoreGraphics
 
 public protocol Force {
 
-    func tick(alpha: CGFloat, particles: inout Set<Node>)
+    func tick(alpha: CGFloat, particles: inout Set<NodeParticle>)
 }

@@ -108,17 +108,17 @@ class GraphController: UIViewController {
 // -MARK: PUBLIC METHODS
 extension GraphController {
     
-    public func add(node: Node, parent: Node? = nil, contentType: ContentType) {
+    public func add(node: NodeParticle, parent: NodeParticle? = nil, contentType: ContentType) {
         self.graph.add(node: node, parent: parent, contentType: contentType)
         self.select(node: node)
         
     }
     
-    public func add(nodes: [Node]) {
+    public func add(nodes: [NodeParticle]) {
         self.graph.add(nodes: nodes)
     }
     
-    public func link(between a: Node, and b: Node) {
+    public func link(between a: NodeParticle, and b: NodeParticle) {
         self.graph.link(between: a, and: b)
     }
     
@@ -126,13 +126,13 @@ extension GraphController {
         self.graph.add(edges: edges)
     }
     
-    public func focus(node: Node) {
+    public func focus(node: NodeParticle) {
         
         self.scrollView.scrollToView(view: node.circleContainer, animated: true)
         self.select(node: node)
     }
     
-    public func edit(node: Node) {
+    public func edit(node: NodeParticle) {
         switch node.circleContainer.contentType {
         case .text:
             let textView = node.circleContainer.content as! GraphTextNode
@@ -143,7 +143,7 @@ extension GraphController {
         
     }
     
-    public func follow(node: Node?) {
+    public func follow(node: NodeParticle?) {
         self.graph.followedNode = node
         if let node = node {
             self.graph.simulation.tickCallback = {
@@ -152,7 +152,7 @@ extension GraphController {
         }
     }
     
-    public func selectedNode() -> Node? {
+    public func selectedNode() -> NodeParticle? {
         let selectedCircles = Circle.getSelectedCircles()
         if !selectedCircles.isEmpty {
             let nodes = Array(self.graph.simulation.particles)
@@ -164,12 +164,12 @@ extension GraphController {
         
     }
     
-    public func select(node: Node) {
+    public func select(node: NodeParticle) {
         Circle.removeAllGlow()
         node.circleContainer.circle.addGlow()
     }
     
-    public func delete(node: Node) {
+    public func delete(node: NodeParticle) {
         self.graph.delete(node: node)
     }
     
@@ -180,7 +180,7 @@ extension GraphController {
 
 extension GraphController {
     
-    public func objectAtPoint(location: CGPoint) -> Node? {
+    public func objectAtPoint(location: CGPoint) -> NodeParticle? {
         self.graph.objectAtPoint(location: location)
     }
 }

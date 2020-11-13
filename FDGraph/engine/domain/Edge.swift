@@ -12,13 +12,13 @@ import CoreGraphics
 
 
 struct Edge: Hashable {
-    let from: Node
-    let to: Node
+    let from: NodeParticle
+    let to: NodeParticle
     let strength: CGFloat?
     let distance: CGFloat?
     let weight: CGFloat
     
-    init(between from: Node, and to: Node, weight: CGFloat = 1, strength: CGFloat? = nil, distance: CGFloat? = nil) {
+    init(between from: NodeParticle, and to: NodeParticle, weight: CGFloat = 1, strength: CGFloat? = nil, distance: CGFloat? = nil) {
         self.from = from
         self.to = to
         self.strength = strength
@@ -31,7 +31,7 @@ struct Edge: Hashable {
         hasher.combine(to.hashValue)
     }
     
-    public func tick(alpha: CGFloat, degrees: Dictionary<Node, UInt>, distance: CGFloat, particles: inout Set<Node>) {
+    public func tick(alpha: CGFloat, degrees: Dictionary<NodeParticle, UInt>, distance: CGFloat, particles: inout Set<NodeParticle>) {
 //        guard let fromIndex = particles.firstIndex(of: from),
 //            let toIndex = particles.firstIndex(of: to) else { return }
 //

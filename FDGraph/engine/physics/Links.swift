@@ -13,14 +13,14 @@ public final class Links: Force {
     private var DEFAULT_DISTANCE: CGFloat = 40
         
     private var links: Set<Link> = []
-    private var degrees: Dictionary<Node, UInt> = [:]
+    private var degrees: Dictionary<NodeParticle, UInt> = [:]
     private var linkBetweens = [LinkBetween]()
     
     public init() {
         
     }
     
-    public func link(between a: Node, and b: Node, strength: CGFloat? = nil, distance: CGFloat? = nil) {
+    public func link(between a: NodeParticle, and b: NodeParticle, strength: CGFloat? = nil, distance: CGFloat? = nil) {
         let link = links.update(with: Link(between: a, and: b, strength: strength, distance: distance))
         if link == nil {
             degrees[a] = (degrees[a] ?? 0) + 1
@@ -30,7 +30,7 @@ public final class Links: Force {
         }
     }
 
-    public func unlink(between a: Node, and b: Node) {
+    public func unlink(between a: NodeParticle, and b: NodeParticle) {
         
         let linkBetween = linkBetweens.first { (linkBetween) -> Bool in
             linkBetween.a == a && linkBetween.b == b
@@ -43,13 +43,13 @@ public final class Links: Force {
         }
     }
 
-    public func tick(alpha: CGFloat, particles: inout Set<Node>) {
+    public func tick(alpha: CGFloat, particles: inout Set<NodeParticle>) {
         for link in links {            
             link.tick(alpha: alpha, degrees: degrees, distance: DEFAULT_DISTANCE, particles: &particles)
         }
     }
     
-    public func path(from particles: inout Set<Node>) -> CGPath {
+    public func path(from particles: inout Set<NodeParticle>) -> CGPath {
         let path = CGMutablePath()
         for link in links {
             guard let fromIndex = particles.firstIndex(of: link.a),
@@ -62,12 +62,12 @@ public final class Links: Force {
 }
 
 fileprivate struct Link: Hashable {
-    let a: Node
-    let b: Node
+    let a: NodeParticle
+    let b: NodeParticle
     let strength: CGFloat?
     let distance: CGFloat?
     
-    init(between a: Node, and b: Node, strength: CGFloat? = nil, distance: CGFloat? = nil) {
+    init(between a: NodeParticle, and b: NodeParticle, strength: CGFloat? = nil, distance: CGFloat? = nil) {
         self.a = a
         self.b = b
         self.strength = strength
@@ -79,7 +79,7 @@ fileprivate struct Link: Hashable {
         hasher.combine(b.hashValue)
     }
     
-    public func tick(alpha: CGFloat, degrees: Dictionary<Node, UInt>, distance: CGFloat, particles: inout Set<Node>) {
+    public func tick(alpha: CGFloat, degrees: Dictionary<NodeParticle, UInt>, distance: CGFloat, particles: inout Set<NodeParticle>) {
         guard let fromIndex = particles.firstIndex(of: a),
             let toIndex = particles.firstIndex(of: b) else { return }
         
@@ -107,11 +107,11 @@ fileprivate struct Link: Hashable {
 
 fileprivate class LinkBetween {
     
-    public let a: Node
-    public let b: Node
+    public let a: NodeParticle
+    public let b: NodeParticle
     public let link: Link
     
-    init(a: Node, b: Node, link: Link) {
+    init(a: NodeParticle, b: NodeParticle, link: Link) {
         self.a = a
         self.b = b
         self.link = link

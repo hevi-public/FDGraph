@@ -14,7 +14,7 @@ public class GraphEngine {
     
     private unowned var containerView: UIView
     
-    public var followedNode: Node?
+    public var followedNode: NodeParticle?
     
     public lazy var simulation: Simulation = {
         let simulation: Simulation = Simulation()
@@ -50,7 +50,7 @@ public class GraphEngine {
 extension GraphEngine {
         
     // -MARK: ADD
-    public func add(node: Node, parent: Node? = nil, contentType: ContentType) {
+    public func add(node: NodeParticle, parent: NodeParticle? = nil, contentType: ContentType) {
         
         simulation.particles.update(with: node)
         self.containerView.addSubview(node.circleContainer)
@@ -64,14 +64,14 @@ extension GraphEngine {
         simulation.kick()
     }
     
-    public func add(nodes: [Node]) {
+    public func add(nodes: [NodeParticle]) {
         nodes.forEach { (node) in
             self.add(node: node, contentType: .text)
         }
     }
     
     // -MARK: LINK
-    public func link(between a: Node, and b: Node) {
+    public func link(between a: NodeParticle, and b: NodeParticle) {
         links.link(between: a, and: b, strength: 0.007)
         simulation.kick()
     }
@@ -89,7 +89,7 @@ extension GraphEngine {
     
     
     // -MARK: DELETE
-    public func delete(node: Node, shouldKick: Bool = true) {
+    public func delete(node: NodeParticle, shouldKick: Bool = true) {
         self.simulation.remove(particle: node)
         UIView.animate(withDuration: 0.3, animations: {
             node.circleContainer.alpha = 0
@@ -124,7 +124,7 @@ extension GraphEngine {
 extension GraphEngine {
     
     
-    public func objectAtPoint(location: CGPoint) -> Node? {
+    public func objectAtPoint(location: CGPoint) -> NodeParticle? {
         return self.simulation.particles.first { (viewParticle) -> Bool in
             return viewParticle.circleContainer.circle.frame.contains(location)
         }

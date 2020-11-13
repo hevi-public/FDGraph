@@ -10,38 +10,38 @@ import SwiftUI
 
 struct GraphUIView: UIViewControllerRepresentable {
     
-    @State var nodes: [Node] = [
-        Node(radiusMultiplier: 1.0, contentType: .text),
-        Node(radiusMultiplier: 1.2, contentType: .text),
-        Node(radiusMultiplier: 1.2, contentType: .text),
-        Node(radiusMultiplier: 1.0, contentType: .text),
-        Node(radiusMultiplier: 1.4, contentType: .text),
-        Node(radiusMultiplier: 1.0, contentType: .text),
-        Node(radiusMultiplier: 1.0, contentType: .text),
-        Node(radiusMultiplier: 1.5, contentType: .text),
-        Node(radiusMultiplier: 1.4, contentType: .text),
-        Node(radiusMultiplier: 1.0, contentType: .text),
-        Node(radiusMultiplier: 1.0, contentType: .text),
-        Node(radiusMultiplier: 1.0, contentType: .text),
-        Node(radiusMultiplier: 1.6, contentType: .text),
-        Node(radiusMultiplier: 1.0, contentType: .text),
-        Node(radiusMultiplier: 1.2, contentType: .text),
-        Node(radiusMultiplier: 1.0, contentType: .text),
-        Node(radiusMultiplier: 1.7, contentType: .text),
-        Node(radiusMultiplier: 1.3, contentType: .text),
-        Node(radiusMultiplier: 1.0, contentType: .text),
-        Node(radiusMultiplier: 1.0, contentType: .text),
-        Node(radiusMultiplier: 1.8, contentType: .text),
-        Node(radiusMultiplier: 1.0, contentType: .text),
-        Node(radiusMultiplier: 1.0, contentType: .text),
-        Node(radiusMultiplier: 1.0, contentType: .text),
-        Node(radiusMultiplier: 1.5, contentType: .text),
-        Node(radiusMultiplier: 1.0, contentType: .text),
-        Node(radiusMultiplier: 1.6, contentType: .text),
-        Node(radiusMultiplier: 1.0, contentType: .text),
-        Node(radiusMultiplier: 1.5, contentType: .text),
-        Node(radiusMultiplier: 1.0, contentType: .text),
-        Node(radiusMultiplier: 1.0, contentType: .text)
+    @State var nodes: [NodeParticle] = [
+        NodeParticle(radiusMultiplier: 1.0, contentType: .text),
+        NodeParticle(radiusMultiplier: 1.2, contentType: .text),
+        NodeParticle(radiusMultiplier: 1.2, contentType: .text),
+        NodeParticle(radiusMultiplier: 1.0, contentType: .text),
+        NodeParticle(radiusMultiplier: 1.4, contentType: .text),
+        NodeParticle(radiusMultiplier: 1.0, contentType: .text),
+        NodeParticle(radiusMultiplier: 1.0, contentType: .text),
+        NodeParticle(radiusMultiplier: 1.5, contentType: .text),
+        NodeParticle(radiusMultiplier: 1.4, contentType: .text),
+        NodeParticle(radiusMultiplier: 1.0, contentType: .text),
+        NodeParticle(radiusMultiplier: 1.0, contentType: .text),
+        NodeParticle(radiusMultiplier: 1.0, contentType: .text),
+        NodeParticle(radiusMultiplier: 1.6, contentType: .text),
+        NodeParticle(radiusMultiplier: 1.0, contentType: .text),
+        NodeParticle(radiusMultiplier: 1.2, contentType: .text),
+        NodeParticle(radiusMultiplier: 1.0, contentType: .text),
+        NodeParticle(radiusMultiplier: 1.7, contentType: .text),
+        NodeParticle(radiusMultiplier: 1.3, contentType: .text),
+        NodeParticle(radiusMultiplier: 1.0, contentType: .text),
+        NodeParticle(radiusMultiplier: 1.0, contentType: .text),
+        NodeParticle(radiusMultiplier: 1.8, contentType: .text),
+        NodeParticle(radiusMultiplier: 1.0, contentType: .text),
+        NodeParticle(radiusMultiplier: 1.0, contentType: .text),
+        NodeParticle(radiusMultiplier: 1.0, contentType: .text),
+        NodeParticle(radiusMultiplier: 1.5, contentType: .text),
+        NodeParticle(radiusMultiplier: 1.0, contentType: .text),
+        NodeParticle(radiusMultiplier: 1.6, contentType: .text),
+        NodeParticle(radiusMultiplier: 1.0, contentType: .text),
+        NodeParticle(radiusMultiplier: 1.5, contentType: .text),
+        NodeParticle(radiusMultiplier: 1.0, contentType: .text),
+        NodeParticle(radiusMultiplier: 1.0, contentType: .text)
     ]
     
     typealias UIViewControllerType = GraphController
@@ -80,11 +80,11 @@ struct GraphUIView: UIViewControllerRepresentable {
             self.parent = parent
         }
         
-        func handleSingleTap(node: Node) {
+        func handleSingleTap(node: NodeParticle) {
             self.parent.graphController.select(node: node)
         }
         
-        func handleDoubleTap(node: Node) {
+        func handleDoubleTap(node: NodeParticle) {
             //            let newNode = Node(radius: GraphUIView.radius)
             //            newNode.delegate = self
             //            self.parent.graphController.add(node: newNode, parent: node)
@@ -93,7 +93,7 @@ struct GraphUIView: UIViewControllerRepresentable {
         }
     }
     
-    func deletedNode(node: Node) {
+    func deletedNode(node: NodeParticle) {
         self.graphController.delete(node: node)
     }
     
@@ -137,7 +137,7 @@ class GraphContextMenuInteractionDelegate: NSObject, UIContextMenuInteractionDel
     }
     
     // -MARK: CONTEXT FOR NODE
-    func makeContextMenuForNode(node: Node, graphController: GraphController) -> UIMenu {
+    func makeContextMenuForNode(node: NodeParticle, graphController: GraphController) -> UIMenu {
         
         var children = [UIAction]()
         
