@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D78CEAF324F8417E006C5E70 /* GraphUITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78CEAF224F8417E006C5E70 /* GraphUITextView.swift */; };
 		D78CEAF524F841CB006C5E70 /* GraphTextNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78CEAF424F841CB006C5E70 /* GraphTextNode.swift */; };
+		D792D0BA255F0B8B00AB6727 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = D792D0B9255F0B8B00AB6727 /* Node.swift */; };
 		D7D2B4DD24E71E3300EBC1C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B4DC24E71E3300EBC1C8 /* AppDelegate.swift */; };
 		D7D2B4DF24E71E3300EBC1C8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B4DE24E71E3300EBC1C8 /* SceneDelegate.swift */; };
 		D7D2B4E224E71E3300EBC1C8 /* FDGraph.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B4E024E71E3300EBC1C8 /* FDGraph.xcdatamodeld */; };
@@ -22,7 +23,7 @@
 		D7D2B51624E7281B00EBC1C8 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B51124E7281B00EBC1C8 /* GraphView.swift */; };
 		D7D2B51824E7281B00EBC1C8 /* Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B51324E7281B00EBC1C8 /* Circle.swift */; };
 		D7D2B51924E7281B00EBC1C8 /* GraphScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B51424E7281B00EBC1C8 /* GraphScrollView.swift */; };
-		D7D2B51C24E7555700EBC1C8 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B51B24E7555700EBC1C8 /* Node.swift */; };
+		D7D2B51C24E7555700EBC1C8 /* NodeParticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B51B24E7555700EBC1C8 /* NodeParticle.swift */; };
 		D7D2B51E24E75C1D00EBC1C8 /* Edge.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B51D24E75C1D00EBC1C8 /* Edge.swift */; };
 		D7D2B52E24E86ED600EBC1C8 /* Simulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B52724E86ED600EBC1C8 /* Simulation.swift */; };
 		D7D2B53024E86ED600EBC1C8 /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D2B52924E86ED600EBC1C8 /* Links.swift */; };
@@ -57,6 +58,7 @@
 /* Begin PBXFileReference section */
 		D78CEAF224F8417E006C5E70 /* GraphUITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphUITextView.swift; sourceTree = "<group>"; };
 		D78CEAF424F841CB006C5E70 /* GraphTextNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTextNode.swift; sourceTree = "<group>"; };
+		D792D0B9255F0B8B00AB6727 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		D7D2B4D924E71E3300EBC1C8 /* FDGraph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FDGraph.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7D2B4DC24E71E3300EBC1C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D7D2B4DE24E71E3300EBC1C8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -76,7 +78,7 @@
 		D7D2B51124E7281B00EBC1C8 /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		D7D2B51324E7281B00EBC1C8 /* Circle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Circle.swift; sourceTree = "<group>"; };
 		D7D2B51424E7281B00EBC1C8 /* GraphScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphScrollView.swift; sourceTree = "<group>"; };
-		D7D2B51B24E7555700EBC1C8 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
+		D7D2B51B24E7555700EBC1C8 /* NodeParticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeParticle.swift; sourceTree = "<group>"; };
 		D7D2B51D24E75C1D00EBC1C8 /* Edge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Edge.swift; sourceTree = "<group>"; };
 		D7D2B52124E82DC100EBC1C8 /* FDGraph.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FDGraph.entitlements; sourceTree = "<group>"; };
 		D7D2B52724E86ED600EBC1C8 /* Simulation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Simulation.swift; sourceTree = "<group>"; };
@@ -120,8 +122,9 @@
 		D725AEFE25325C390021F640 /* domain */ = {
 			isa = PBXGroup;
 			children = (
-				D7D2B51B24E7555700EBC1C8 /* Node.swift */,
+				D7D2B51B24E7555700EBC1C8 /* NodeParticle.swift */,
 				D7D2B51D24E75C1D00EBC1C8 /* Edge.swift */,
+				D792D0B9255F0B8B00AB6727 /* Node.swift */,
 			);
 			path = domain;
 			sourceTree = "<group>";
@@ -380,7 +383,8 @@
 				D7D2B53824E878B800EBC1C8 /* Particle.swift in Sources */,
 				D7D2B51E24E75C1D00EBC1C8 /* Edge.swift in Sources */,
 				D7D2B4E224E71E3300EBC1C8 /* FDGraph.xcdatamodeld in Sources */,
-				D7D2B51C24E7555700EBC1C8 /* Node.swift in Sources */,
+				D792D0BA255F0B8B00AB6727 /* Node.swift in Sources */,
+				D7D2B51C24E7555700EBC1C8 /* NodeParticle.swift in Sources */,
 				D78CEAF324F8417E006C5E70 /* GraphUITextView.swift in Sources */,
 				D7D2B53A24EAFB6300EBC1C8 /* GraphEngine.swift in Sources */,
 				D7D2B51824E7281B00EBC1C8 /* Circle.swift in Sources */,
