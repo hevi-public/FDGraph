@@ -16,6 +16,8 @@ struct ContentView: View {
         
         ZStack {
             graphUIView
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .edgesIgnoringSafeArea(.all)
             
             HStack {
                 Spacer()
