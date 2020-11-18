@@ -75,19 +75,7 @@ extension GraphEngine {
         links.link(between: a, and: b, strength: 0.007)
         simulation.kick()
     }
-//
-//    public func add(edges: [Links]) {
-//        let nodes = Array(simulation.particles)
-//
-//        links.link(between: nodes[0], and: nodes[1], strength: 0.007)
-//        links.link(between: nodes[2], and: nodes[1], strength: 0.007)
-//        links.link(between: nodes[2], and: nodes[3], strength: 0.007)
-//        links.link(between: nodes[2], and: nodes[4], strength: 0.007)
-//        links.link(between: nodes[2], and: nodes[5], strength: 0.007)
-//        links.link(between: nodes[2], and: nodes[6], strength: 0.007)
-//    }
-//
-    
+
     // -MARK: DELETE
     public func delete(node: NodeParticle, shouldKick: Bool = true) {
         self.simulation.remove(particle: node)
