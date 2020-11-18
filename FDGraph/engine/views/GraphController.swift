@@ -127,10 +127,6 @@ extension GraphController {
         }
     }
     
-    public func link(between a: NodeParticle, and b: NodeParticle) {
-        self.graph.link(between: a, and: b)
-    }
-    
     public func link(between from: Node, and to: Node) {
         self.graph.link(between: from.nodeParticle, and: to.nodeParticle)
     }
