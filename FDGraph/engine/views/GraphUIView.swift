@@ -86,8 +86,22 @@ struct GraphUIView: UIViewControllerRepresentable {
             node.delegate = context.coordinator
         }
         
+        nodes[1].parent = nodes[0]
+        nodes[2].parent = nodes[0]
+        nodes[3].parent = nodes[0]
+        nodes[4].parent = nodes[0]
+        nodes[5].parent = nodes[0]
+        
+        nodes[0].parent = nodes[6]
+        
+        nodes[1].parent = nodes[7]
+        nodes[7].parent = nodes[7]
+        nodes[8].parent = nodes[7]
+        nodes[9].parent = nodes[7]
+        nodes[10].parent = nodes[7]
+        nodes[11].parent = nodes[7]
+        
         uiViewController.add(nodes: nodes)
-        uiViewController.add(edges: [])
         
     }
     

@@ -119,14 +119,20 @@ extension GraphController {
             node.nodeParticle
         }
         self.graph.add(nodes: nodeParticles)
+        
+        nodes.filter { (node) -> Bool in
+            node.parent != nil
+        }.forEach { (node) in
+            link(between: node.parent!, and: node)
+        }
     }
     
     public func link(between a: NodeParticle, and b: NodeParticle) {
         self.graph.link(between: a, and: b)
     }
     
-    public func add(edges: [Links]) {
-        self.graph.add(edges: edges)
+    public func link(between from: Node, and to: Node) {
+        self.graph.link(between: from.nodeParticle, and: to.nodeParticle)
     }
     
     public func focus(node: NodeParticle) {

@@ -22,7 +22,16 @@ public class Node {
     public var nodeParticle: NodeParticle!
     
     let id: Int?
-    var parent: Node?
+    private var _parent: Node?
+    var parent: Node? {
+        get {
+            return _parent
+        }
+        set {
+            self._parent = newValue
+            _parent?.children.append(self)
+        }
+    }
     let text: String
     let type: NodeType
     var children: [Node]
@@ -49,7 +58,7 @@ public class Node {
     
     init(id: Int?, parent: Node? = nil, children: [Node] = [], text: String, expanded: Bool = false, done: Bool = false, type: NodeType = .text) {
         self.id = id
-        self.parent = parent
+        self._parent = parent
         self.children = children
         self.text = text
         self.expanded = expanded
