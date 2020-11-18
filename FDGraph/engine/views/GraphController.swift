@@ -108,9 +108,9 @@ class GraphController: UIViewController {
 // -MARK: PUBLIC METHODS
 extension GraphController {
     
-    public func add(node: NodeParticle, parent: NodeParticle? = nil, contentType: ContentType) {
-        self.graph.add(node: node, parent: parent, contentType: contentType)
-        self.select(node: node)
+    public func add(node: Node, parent: Node? = nil, contentType: ContentType) {
+        self.graph.add(node: node.nodeParticle, parent: parent?.nodeParticle, contentType: contentType)
+        self.select(node: node.nodeParticle)
         
     }
     
