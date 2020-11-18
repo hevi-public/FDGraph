@@ -56,6 +56,7 @@ public class Node {
         self.done = done
         self.type = type
         self.nodeParticle = NodeParticle(radiusMultiplier: 1.0, contentType: .text, node: self)
+        nodeParticle.delegate = self
     }
 }
 
@@ -91,4 +92,16 @@ extension Node: Hashable {
 enum NodeType {
     case text
     case input
+}
+
+extension Node: NodeParticleDelegate {
+    public func handleSingleTap(node: NodeParticle) {
+        self.delegate?.handleSingleTap(node: node)
+    }
+    
+    public func handleDoubleTap(node: NodeParticle) {
+        self.delegate?.handleDoubleTap(node: node)
+    }
+    
+    
 }
