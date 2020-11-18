@@ -10,38 +10,57 @@ import SwiftUI
 
 struct GraphUIView: UIViewControllerRepresentable {
     
-    @State var nodes: [NodeParticle] = [
-        NodeParticle(radiusMultiplier: 1.0, contentType: .text),
-        NodeParticle(radiusMultiplier: 1.2, contentType: .text),
-        NodeParticle(radiusMultiplier: 1.2, contentType: .text),
-        NodeParticle(radiusMultiplier: 1.0, contentType: .text),
-        NodeParticle(radiusMultiplier: 1.4, contentType: .text),
-        NodeParticle(radiusMultiplier: 1.0, contentType: .text),
-        NodeParticle(radiusMultiplier: 1.0, contentType: .text),
-        NodeParticle(radiusMultiplier: 1.5, contentType: .text),
-        NodeParticle(radiusMultiplier: 1.4, contentType: .text),
-        NodeParticle(radiusMultiplier: 1.0, contentType: .text),
-        NodeParticle(radiusMultiplier: 1.0, contentType: .text),
-        NodeParticle(radiusMultiplier: 1.0, contentType: .text),
-        NodeParticle(radiusMultiplier: 1.6, contentType: .text),
-        NodeParticle(radiusMultiplier: 1.0, contentType: .text),
-        NodeParticle(radiusMultiplier: 1.2, contentType: .text),
-        NodeParticle(radiusMultiplier: 1.0, contentType: .text),
-        NodeParticle(radiusMultiplier: 1.7, contentType: .text),
-        NodeParticle(radiusMultiplier: 1.3, contentType: .text),
-        NodeParticle(radiusMultiplier: 1.0, contentType: .text),
-        NodeParticle(radiusMultiplier: 1.0, contentType: .text),
-        NodeParticle(radiusMultiplier: 1.8, contentType: .text),
-        NodeParticle(radiusMultiplier: 1.0, contentType: .text),
-        NodeParticle(radiusMultiplier: 1.0, contentType: .text),
-        NodeParticle(radiusMultiplier: 1.0, contentType: .text),
-        NodeParticle(radiusMultiplier: 1.5, contentType: .text),
-        NodeParticle(radiusMultiplier: 1.0, contentType: .text),
-        NodeParticle(radiusMultiplier: 1.6, contentType: .text),
-        NodeParticle(radiusMultiplier: 1.0, contentType: .text),
-        NodeParticle(radiusMultiplier: 1.5, contentType: .text),
-        NodeParticle(radiusMultiplier: 1.0, contentType: .text),
-        NodeParticle(radiusMultiplier: 1.0, contentType: .text)
+    @State var nodes: [Node] = [
+        Node(id: 1, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 2, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 3, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 4, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 5, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 6, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 7, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 8, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 9, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 10, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 11, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 12, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 13, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 14, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 15, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 16, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 17, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 18, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 19, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 20, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 21, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 22, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 23, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 24, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 25, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 26, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 27, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 28, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 29, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 30, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 31, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 32, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 33, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 34, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 35, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 36, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 37, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 38, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 39, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 40, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 41, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 42, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 43, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 44, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 45, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 46, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 47, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 48, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 49, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
+        Node(id: 50, parent: nil, children: [], text: "Node 1", expanded: false, done: false, type: .text),
     ]
     
     typealias UIViewControllerType = GraphController
@@ -73,7 +92,7 @@ struct GraphUIView: UIViewControllerRepresentable {
     }
     
     // -MARK: COORDINATOR
-    class Coordinator: NSObject, NodeParticleDelegate {
+    class Coordinator: NSObject, NodeDelegate {
         var parent: GraphUIView
         
         init(_ parent: GraphUIView) {

@@ -9,7 +9,25 @@
 import Foundation
 import UIKit
 
+public protocol NodeDelegate {
+    
+    func handleSingleTap(node: NodeParticle)
+    func handleDoubleTap(node: NodeParticle)
+}
+
 class Node {
+    
+    public var delegate: NodeDelegate?
+    
+    private var _nodeParticle: NodeParticle?
+    public var nodeParticle: NodeParticle {
+        get {
+            if _nodeParticle == nil {
+                _nodeParticle = NodeParticle(radiusMultiplier: 1.0, contentType: .text)
+            }
+            return _nodeParticle!
+        }
+    }
     
     let id: Int?
     var parent: Node?

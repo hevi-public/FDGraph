@@ -114,8 +114,11 @@ extension GraphController {
         
     }
     
-    public func add(nodes: [NodeParticle]) {
-        self.graph.add(nodes: nodes)
+    public func add(nodes: [Node]) {
+        let nodeParticles = nodes.map { (node) -> NodeParticle in
+            node.nodeParticle
+        }
+        self.graph.add(nodes: nodeParticles)
     }
     
     public func link(between a: NodeParticle, and b: NodeParticle) {
