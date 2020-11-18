@@ -161,13 +161,14 @@ extension GraphController {
         }
     }
     
-    public func selectedNode() -> NodeParticle? {
+    public func selectedNode() -> Node? {
         let selectedCircles = Circle.getSelectedCircles()
         if !selectedCircles.isEmpty {
             let nodes = Array(self.graph.simulation.particles)
-            return nodes.filter { node -> Bool in
+            let firstParticle = nodes.filter { node -> Bool in
                 node.circleContainer.circle == selectedCircles[0]
             }.first
+            return firstParticle?.node
         }
         return nil
         
@@ -178,8 +179,8 @@ extension GraphController {
         node.circleContainer.circle.addGlow()
     }
     
-    public func delete(node: NodeParticle) {
-        self.graph.delete(node: node)
+    public func delete(node: Node) {
+        self.graph.delete(node: node.nodeParticle)
     }
     
     public func deleteSelectedNodes() {
@@ -189,8 +190,9 @@ extension GraphController {
 
 extension GraphController {
     
-    public func objectAtPoint(location: CGPoint) -> NodeParticle? {
-        self.graph.objectAtPoint(location: location)
+    public func objectAtPoint(location: CGPoint) -> Node? {
+        let nodeParticle = self.graph.objectAtPoint(location: location)
+        return nodeParticle?.node
     }
 }
 

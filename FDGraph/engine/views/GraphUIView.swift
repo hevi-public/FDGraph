@@ -126,7 +126,7 @@ struct GraphUIView: UIViewControllerRepresentable {
         }
     }
     
-    func deletedNode(node: NodeParticle) {
+    func deletedNode(node: Node) {
         self.graphController.delete(node: node)
     }
     
@@ -170,7 +170,7 @@ class GraphContextMenuInteractionDelegate: NSObject, UIContextMenuInteractionDel
     }
     
     // -MARK: CONTEXT FOR NODE
-    func makeContextMenuForNode(node: NodeParticle, graphController: GraphController) -> UIMenu {
+    func makeContextMenuForNode(node: Node, graphController: GraphController) -> UIMenu {
         
         var children = [UIAction]()
         
