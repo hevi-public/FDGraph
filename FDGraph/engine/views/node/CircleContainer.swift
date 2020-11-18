@@ -17,7 +17,7 @@ class CircleContainer: UIView {
     
     private static let distanceBetweenCircleAndContent: CGFloat = 10
     
-    public convenience init(radiusMultiplier: CGFloat, color: UIColor, contentType: ContentType) {
+    public convenience init(text: String, radiusMultiplier: CGFloat, color: UIColor, contentType: ContentType) {
         
         let circleView = Circle(radiusMultiplier: radiusMultiplier, color: color, contentType: contentType)
         
@@ -25,7 +25,7 @@ class CircleContainer: UIView {
         
         switch contentType {
         case .text:
-            contentView = GraphTextNode(text: "asdf", fontSize: 12.0, baseHeight: 50, textFieldWidth: 100, textFieldHeight: 200, circleColor: UIColor.blue)
+            contentView = GraphTextNode(text: text, fontSize: 12.0, baseHeight: 50, textFieldWidth: 100, textFieldHeight: 200, circleColor: UIColor.blue)
         }
         
         

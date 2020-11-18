@@ -19,16 +19,7 @@ public class Node {
     
     public var delegate: NodeDelegate?
     
-    private var _nodeParticle: NodeParticle!
-    public var nodeParticle: NodeParticle {
-        get {
-            if _nodeParticle == nil {
-                _nodeParticle = NodeParticle(radiusMultiplier: 1.0, contentType: .text)
-                _nodeParticle.node = self
-            }
-            return _nodeParticle
-        }
-    }
+    public var nodeParticle: NodeParticle!
     
     let id: Int?
     var parent: Node?
@@ -64,6 +55,7 @@ public class Node {
         self.expanded = expanded
         self.done = done
         self.type = type
+        self.nodeParticle = NodeParticle(radiusMultiplier: 1.0, contentType: .text, node: self)
     }
 }
 

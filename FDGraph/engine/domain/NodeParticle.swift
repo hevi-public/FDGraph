@@ -18,7 +18,7 @@ public protocol NodeParticleDelegate {
 // -MARK: NODE
 public class NodeParticle: Particle {
   
-    public unowned var node: Node!
+    public unowned var node: Node
     
     public var position: CGPoint
     public var velocity: CGPoint
@@ -28,8 +28,9 @@ public class NodeParticle: Particle {
     
     public var delegate: NodeParticleDelegate?
     
-    init(radiusMultiplier: CGFloat, contentType: ContentType) {
+    init(radiusMultiplier: CGFloat, contentType: ContentType, node: Node) {
         
+        self.node = node
         
         let randomX = CGFloat.random(in: 0 ..< 1) / 10
         let randomY = CGFloat.random(in: 0 ..< 1) / 10
@@ -37,7 +38,7 @@ public class NodeParticle: Particle {
         self.position = CGPoint(x: randomX, y: randomY)
         self.velocity = CGPoint.zero
         
-        self.circleContainer = CircleContainer(radiusMultiplier: radiusMultiplier, color: UIColor.blue, contentType: contentType)
+        self.circleContainer = CircleContainer(text: node.text, radiusMultiplier: radiusMultiplier, color: UIColor.blue, contentType: contentType)
         
         let singleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleSingleTap(sender:)))
         self.circleContainer.addGestureRecognizer(singleTapGesture)
