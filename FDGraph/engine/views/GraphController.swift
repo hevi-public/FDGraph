@@ -110,7 +110,7 @@ extension GraphController {
     
     public func add(node: Node, parent: Node? = nil, contentType: ContentType) {
         self.graph.add(node: node.nodeParticle, parent: parent?.nodeParticle, contentType: contentType)
-        self.select(node: node.nodeParticle)
+        self.select(node: node)
         
     }
     
@@ -135,16 +135,17 @@ extension GraphController {
         self.graph.link(between: from.nodeParticle, and: to.nodeParticle)
     }
     
-    public func focus(node: NodeParticle) {
+    public func focus(node: Node) {
         
-        self.scrollView.scrollToView(view: node.circleContainer, animated: true)
+        self.scrollView.scrollToView(view: node.nodeParticle.circleContainer, animated: true)
         self.select(node: node)
     }
     
-    public func edit(node: NodeParticle) {
-        switch node.circleContainer.contentType {
+    public func edit(node: Node) {
+        let particle = node.nodeParticle
+        switch particle?.circleContainer.contentType {
         case .text:
-            let textView = node.circleContainer.content as! GraphTextNode
+            let textView = particle?.circleContainer.content as! GraphTextNode
             textView.textView.becomeFirstResponder()
         case .none:
             break
@@ -174,9 +175,9 @@ extension GraphController {
         
     }
     
-    public func select(node: NodeParticle) {
+    public func select(node: Node) {
         Circle.removeAllGlow()
-        node.circleContainer.circle.addGlow()
+        node.nodeParticle.circleContainer.circle.addGlow()
     }
     
     public func delete(node: Node) {

@@ -11,8 +11,8 @@ import UIKit
 
 public protocol NodeDelegate {
     
-    func handleSingleTap(node: NodeParticle)
-    func handleDoubleTap(node: NodeParticle)
+    func handleSingleTap(node: Node)
+    func handleDoubleTap(node: Node)
 }
 
 public class Node {
@@ -104,12 +104,12 @@ enum NodeType {
 }
 
 extension Node: NodeParticleDelegate {
-    public func handleSingleTap(node: NodeParticle) {
-        self.delegate?.handleSingleTap(node: node)
+    public func handleSingleTap(particle: NodeParticle) {
+        self.delegate?.handleSingleTap(node: particle.node)
     }
     
-    public func handleDoubleTap(node: NodeParticle) {
-        self.delegate?.handleDoubleTap(node: node)
+    public func handleDoubleTap(particle: NodeParticle) {
+        self.delegate?.handleDoubleTap(node: particle.node)
     }
     
     

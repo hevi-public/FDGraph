@@ -11,8 +11,8 @@ import UIKit
 // -MARK: DELEGATE
 public protocol NodeParticleDelegate {
     
-    func handleSingleTap(node: NodeParticle)
-    func handleDoubleTap(node: NodeParticle)
+    func handleSingleTap(particle: NodeParticle)
+    func handleDoubleTap(particle: NodeParticle)
 }
 
 // -MARK: NODE
@@ -63,12 +63,12 @@ public class NodeParticle: Particle {
 extension NodeParticle {
     @objc func handleSingleTap(sender: UITapGestureRecognizer) {
         
-        self.delegate?.handleSingleTap(node: self)
+        self.delegate?.handleSingleTap(particle: self)
     }
     
     @objc func handleDoubleTap(sender: UITapGestureRecognizer) {
         
-        self.delegate?.handleDoubleTap(node: self)
+        self.delegate?.handleDoubleTap(particle: self)
     }
 }
 
