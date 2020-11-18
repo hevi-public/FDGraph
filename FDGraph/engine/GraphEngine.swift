@@ -126,7 +126,7 @@ extension GraphEngine {
     
     public func objectAtPoint(location: CGPoint) -> NodeParticle? {
         return self.simulation.particles.first { (viewParticle) -> Bool in
-            return viewParticle.circleContainer.circle.frame.contains(location)
+            return viewParticle.circleContainer.frame.contains(location)
         }
     }
 }
