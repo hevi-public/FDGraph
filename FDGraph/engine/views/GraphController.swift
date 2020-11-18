@@ -153,11 +153,11 @@ extension GraphController {
         
     }
     
-    public func follow(node: NodeParticle?) {
-        self.graph.followedNode = node
+    public func follow(node: Node?) {
+        self.graph.followedNode = node?.nodeParticle
         if let node = node {
             self.graph.simulation.tickCallback = {
-                self.scrollView.scrollToView(view: node.circleContainer, animated: false)
+                self.scrollView.scrollToView(view: node.nodeParticle.circleContainer, animated: false)
             }
         }
     }
