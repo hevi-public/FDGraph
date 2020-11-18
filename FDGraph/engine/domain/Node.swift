@@ -15,17 +15,18 @@ public protocol NodeDelegate {
     func handleDoubleTap(node: NodeParticle)
 }
 
-class Node {
+public class Node {
     
     public var delegate: NodeDelegate?
     
-    private var _nodeParticle: NodeParticle?
+    private var _nodeParticle: NodeParticle!
     public var nodeParticle: NodeParticle {
         get {
             if _nodeParticle == nil {
                 _nodeParticle = NodeParticle(radiusMultiplier: 1.0, contentType: .text)
+                _nodeParticle.node = self
             }
-            return _nodeParticle!
+            return _nodeParticle
         }
     }
     
@@ -67,7 +68,7 @@ class Node {
 }
 
 extension Node: Equatable {
-    static func == (lhs: Node, rhs: Node) -> Bool {
+    public static func == (lhs: Node, rhs: Node) -> Bool {
         return lhs.id == rhs.id &&
             lhs.parent == rhs.parent &&
             lhs.text == rhs.text &&
@@ -82,7 +83,7 @@ extension Node: Equatable {
 
 extension Node: Hashable {
     
-    func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
         hasher.combine(id)
         hasher.combine(parent)
         hasher.combine(text)

@@ -18,6 +18,8 @@ public protocol NodeParticleDelegate {
 // -MARK: NODE
 public class NodeParticle: Particle {
   
+    public unowned var node: Node!
+    
     public var position: CGPoint
     public var velocity: CGPoint
     public var fixed: Bool = false
