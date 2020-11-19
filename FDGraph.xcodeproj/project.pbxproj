@@ -148,6 +148,15 @@
 			path = component;
 			sourceTree = "<group>";
 		};
+		D792D0D62565FA6800AB6727 /* protocol */ = {
+			isa = PBXGroup;
+			children = (
+				D7D2B53524E8789600EBC1C8 /* Force.swift */,
+				D7D2B53724E878B800EBC1C8 /* Particle.swift */,
+			);
+			path = protocol;
+			sourceTree = "<group>";
+		};
 		D7D2B4D024E71E3300EBC1C8 = {
 			isa = PBXGroup;
 			children = (
@@ -237,14 +246,13 @@
 		D7D2B52224E83FAB00EBC1C8 /* physics */ = {
 			isa = PBXGroup;
 			children = (
+				D792D0D62565FA6800AB6727 /* protocol */,
 				D7D2B52A24E86ED600EBC1C8 /* Center.swift */,
 				D7D2B52924E86ED600EBC1C8 /* Links.swift */,
 				D7D2B52D24E86ED600EBC1C8 /* ManyParticle.swift */,
 				D7D2B52B24E86ED600EBC1C8 /* QuadTree.swift */,
 				D7D2B52724E86ED600EBC1C8 /* Simulation.swift */,
 				D7D2B52C24E86ED600EBC1C8 /* Utilities.swift */,
-				D7D2B53524E8789600EBC1C8 /* Force.swift */,
-				D7D2B53724E878B800EBC1C8 /* Particle.swift */,
 			);
 			path = physics;
 			sourceTree = "<group>";
