@@ -22,12 +22,13 @@ struct ContentView: View {
             HStack {
                 Spacer()
                 VStack {
+                    Spacer()
                     Button(action: {
                         self.graphUIView.deleteSelectedNodes()
                     }) {
                         Text("Delete selected nodes")
+                            .padding()
                     }
-                    Spacer()
                 }.padding()
             }
         }
