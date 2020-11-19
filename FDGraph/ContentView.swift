@@ -25,7 +25,7 @@ struct ContentView: View {
                     Button(action: {
                         self.graphUIView.deleteSelectedNodes()
                     }) {
-                        Text("asadf")
+                        Text("Delete selected nodes")
                     }
                     Spacer()
                 }.padding()
