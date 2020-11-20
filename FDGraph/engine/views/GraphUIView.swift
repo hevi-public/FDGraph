@@ -101,6 +101,22 @@ struct GraphUIView: UIViewControllerRepresentable {
         nodes[10].parent = nodes[7]
         nodes[11].parent = nodes[7]
         
+        nodes[12].parent = nodes[8]
+        nodes[13].parent = nodes[8]
+        nodes[14].parent = nodes[8]
+        nodes[15].parent = nodes[8]
+        nodes[16].parent = nodes[8]
+        nodes[17].parent = nodes[8]
+        nodes[18].parent = nodes[8]
+        nodes[19].parent = nodes[8]
+        
+        nodes[14].parent = nodes[9]
+        nodes[15].parent = nodes[9]
+        nodes[16].parent = nodes[9]
+        nodes[17].parent = nodes[9]
+        
+        
+        
         uiViewController.add(nodes: nodes)
         
     }
