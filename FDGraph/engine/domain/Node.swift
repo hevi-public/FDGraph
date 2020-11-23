@@ -22,14 +22,14 @@ public class Node {
     public var nodeParticle: NodeParticle!
     
     let id: Int?
-    private var _parent: Node?
+    private var _parent: Node? = nil
     var parent: Node? {
         get {
             return _parent
         }
         set {
             self._parent = newValue
-            _parent?.children.append(self)
+            _parent?.addChild(node: self)
             _parent?.updateValue()
         }
     }
@@ -78,7 +78,6 @@ public class Node {
     
     init(id: Int?, parent: Node? = nil, children: [Node] = [], text: String, expanded: Bool = false, done: Bool = false, type: NodeType = .text) {
         self.id = id
-        self._parent = parent
         self.children = children
         self.text = text
         self.expanded = expanded
@@ -86,6 +85,8 @@ public class Node {
         self.type = type
         self.nodeParticle = NodeParticle(radiusMultiplier: 1.0, contentType: .text, node: self)
         nodeParticle.delegate = self
+        
+        self.parent = parent
     }
     
     func updateValue() {
@@ -93,6 +94,11 @@ public class Node {
             nodeParticle.updateCircleSize()
         }
         parent?.updateValue()
+    }
+    
+    func addChild(node: Node) {
+        self.children.append(node)
+        _parent?.updateValue()
     }
 }
 
