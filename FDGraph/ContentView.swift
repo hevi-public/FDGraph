@@ -24,9 +24,9 @@ struct ContentView: View {
                 VStack {
                     Spacer()
                     Button(action: {
-                        self.graphUIView.deleteSelectedNodes()
+                        self.graphUIView.addChildToSelectedNode()
                     }) {
-                        Text("Delete selected nodes")
+                        Text("Add child to selected node")
                             .padding()
                     }
                 }.padding()

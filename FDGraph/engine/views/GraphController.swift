@@ -108,9 +108,17 @@ class GraphController: UIViewController {
 // -MARK: PUBLIC METHODS
 extension GraphController {
     
+    
+    
+    public func addNew(id: Int, contentType: ContentType) -> Node {
+        let newNode = Node(id: id, parent: self.graph.selectedNode, text: "")
+        self.graph.add(node: newNode.nodeParticle, parent: newNode.parent?.nodeParticle, contentType: contentType)
+        return newNode
+    }
+    
     public func add(node: Node, parent: Node? = nil, contentType: ContentType) {
         self.graph.add(node: node.nodeParticle, parent: parent?.nodeParticle, contentType: contentType)
-        self.select(node: node)
+//        self.select(node: node)
         
     }
     
@@ -172,8 +180,7 @@ extension GraphController {
     }
     
     public func select(node: Node) {
-        Circle.removeAllGlow()
-        node.nodeParticle.circleContainer.circle.addGlow()
+        self.graph.select(node: node)
     }
     
     public func delete(node: Node) {

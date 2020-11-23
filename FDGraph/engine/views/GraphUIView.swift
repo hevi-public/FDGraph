@@ -68,6 +68,8 @@ struct GraphUIView: UIViewControllerRepresentable {
     private let graphController = GraphController()
     private let graphContextMenuInteractionDelegate = GraphContextMenuInteractionDelegate()
     
+    
+    
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
@@ -139,6 +141,21 @@ struct GraphUIView: UIViewControllerRepresentable {
             //            self.parent.graphController.focus(node: newNode)
             self.parent.graphController.edit(node: node)
         }
+    }
+    
+    func addChildToSelectedNode() {
+        
+        let nodeWithMaxId = self._nodes.wrappedValue.filter({ node -> Bool in
+            node.id != nil
+        }).max { (a, b) -> Bool in
+            a.id! < b.id!
+        }
+        
+        let newNode = self.graphController.addNew(id: (nodeWithMaxId?.id ?? 0) + 1, contentType: .text)
+        
+        self.nodes.append(newNode)
+        
+        print(nodes.count)
     }
     
     func deletedNode(node: Node) {
