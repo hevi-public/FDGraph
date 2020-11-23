@@ -114,8 +114,10 @@ extension GraphController {
     
     public func addNew(id: Int, contentType: ContentType) -> Node {
         let newNode = Node(id: id, parent: self.graph.selectedNode, text: "")
-        newNode.delegate = nodeDelegate
-        self.graph.add(node: newNode.nodeParticle, parent: newNode.parent?.nodeParticle, contentType: contentType)
+        DispatchQueue.main.async {
+            newNode.delegate = self.nodeDelegate
+            self.graph.add(node: newNode.nodeParticle, parent: newNode.parent?.nodeParticle, contentType: contentType)
+        }
         return newNode
     }
     
