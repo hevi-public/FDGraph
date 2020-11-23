@@ -9,36 +9,30 @@
 import Foundation
 import UIKit
 
-public enum ContentType {
-    case text
-}
-
 public class Circle: UIView {
     
     private static var glowingCircles = [Circle]()
     static let radius: CGFloat = 10
-    private var multipliedRadius: CGFloat
+    var radiusMultiplier: CGFloat
     private var color: UIColor!
     
-    public convenience init(radiusMultiplier: CGFloat, color: UIColor, contentType: ContentType) {
-        
-        let multipliedRadius = Circle.radius * radiusMultiplier
+    private var circleLayer: CAShapeLayer!
+    
+    public convenience init(radiusMultiplier: CGFloat, color: UIColor) {
         
         let frame = CGRect(x: 0,
                            y: 0,
-                           width: multipliedRadius * 2,
-                           height: multipliedRadius * 2)
+                           width: Circle.radius * 2,
+                           height: Circle.radius * 2)
         
         self.init(frame: frame)
         
-        self.multipliedRadius = multipliedRadius
-        
         self.color = color
         
-        let circleLayer = self.drawCircleOnLayer(multipliedRadius: multipliedRadius)
-
-        self.layer.addSublayer(circleLayer)
-
+        self.circleLayer = self.drawCircleOnLayer(size: CGSize(width: 2, height: 2))
+        
+        self.layer.addSublayer(self.circleLayer)
+        
         self.isUserInteractionEnabled = true
         
         
@@ -46,7 +40,7 @@ public class Circle: UIView {
     
     public override init(frame: CGRect) {
         
-        self.multipliedRadius = Circle.radius
+        self.radiusMultiplier = 1
         
         super.init(frame: frame)
         
@@ -57,15 +51,16 @@ public class Circle: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     // -MARK: ADD GLOW
     public func addGlow() {
         
-        let shadowRadius = self.multipliedRadius * 3
+        let multipliedRadius = Circle.radius * self.radiusMultiplier
+        let shadowRadius = multipliedRadius * 3
         let rect = CGRect(x: 0, y: 0, width: shadowRadius, height: shadowRadius)
         
         self.layer.shadowPath = UIBezierPath(ovalIn: rect).cgPath
-        self.layer.shadowOffset = CGSize(width: -(self.multipliedRadius / 2), height: -(self.multipliedRadius / 2))
+        self.layer.shadowOffset = CGSize(width: -(multipliedRadius / 2), height: -(multipliedRadius / 2))
         self.layer.shadowColor = UIColor.lightGray.cgColor
         self.layer.shadowRadius = CGFloat(shadowRadius)
         self.layer.shadowOpacity = 1
@@ -87,16 +82,33 @@ public class Circle: UIView {
     }
     
     // MARK: - PRIVATE FUNC
-    private func drawCircleOnLayer(multipliedRadius: CGFloat) -> CAShapeLayer {
+    private func drawCircleOnLayer(size: CGSize) -> CAShapeLayer {
         let circleLayer = CAShapeLayer()
         circleLayer.frame = frame
         
-        circleLayer.path = UIBezierPath(ovalIn: CGRect(x: 0, y: 0, width: multipliedRadius * 2, height: multipliedRadius * 2)).cgPath
+        circleLayer.path = UIBezierPath(ovalIn: CGRect(x: 0, y: 0, width: size.width, height: size.height)).cgPath
         circleLayer.fillColor = color.cgColor
         
         circleLayer.strokeColor = UIColor.gray.cgColor
         circleLayer.lineWidth = 0
         
         return circleLayer
+    }
+    
+    public override func sizeThatFits(_ size: CGSize) -> CGSize {
+        return CGSize(width: Circle.radius * 2 * radiusMultiplier,
+                      height: Circle.radius * 2 * radiusMultiplier)
+    }
+
+    
+    public override func layoutSublayers(of layer: CALayer) {
+        super.layoutSublayers(of: layer)
+        
+        self.layer.sublayers?.removeAll()
+        
+        circleLayer = drawCircleOnLayer(size: CGSize(width: Circle.radius * 2 * radiusMultiplier, height: Circle.radius * 2 * radiusMultiplier))
+        circleLayer.frame = self.bounds
+        layer.addSublayer(circleLayer)
+
     }
 }

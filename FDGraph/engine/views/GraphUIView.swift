@@ -95,7 +95,6 @@ struct GraphUIView: UIViewControllerRepresentable {
         nodes[0].parent = nodes[6]
         
         nodes[1].parent = nodes[7]
-        nodes[7].parent = nodes[7]
         nodes[8].parent = nodes[7]
         nodes[9].parent = nodes[7]
         nodes[10].parent = nodes[7]

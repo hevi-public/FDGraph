@@ -9,6 +9,10 @@
 import Foundation
 import UIKit
 
+public enum ContentType {
+    case text
+}
+
 class CircleContainer: UIView {
     
     var circle: Circle!
@@ -19,7 +23,8 @@ class CircleContainer: UIView {
     
     public convenience init(text: String, radiusMultiplier: CGFloat, color: UIColor, contentType: ContentType) {
         
-        let circleView = Circle(radiusMultiplier: radiusMultiplier, color: color, contentType: contentType)
+        let circleView = Circle(radiusMultiplier: radiusMultiplier, color: color)
+        circleView.sizeToFit()
         
         var contentView = UIView()
         
@@ -49,15 +54,9 @@ class CircleContainer: UIView {
         self.content = contentView
         self.addSubview(self.content)
         self.content.translatesAutoresizingMaskIntoConstraints = false
-        
-        self.circle.center = CGPoint(x: (contentView.frame.width) / 2,
-                                     y: circleView.frame.height / 2)
 
-//        self.content.center = CGPoint(x: contentView.frame.width / 2,
-//                              y: 0)
         
         NSLayoutConstraint.activate([
-//            self.circle.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             
             self.content.topAnchor.constraint(equalTo: self.circle.bottomAnchor, constant: CircleContainer.distanceBetweenCircleAndContent),
             self.content.centerXAnchor.constraint(equalTo: self.circle.centerXAnchor)
@@ -74,5 +73,21 @@ class CircleContainer: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func updateCircleSize(nodeValue: CGFloat) {
+
+        circle.radiusMultiplier = 1 + nodeValue / 30
+        circle.sizeToFit()
+    }
+    
+//    public override func sizeThatFits(_ size: CGSize) -> CGSize {
+//        circle.sizeToFit()
+//        return size
+//    }
+    
+    public override func layoutSubviews() {
+        circle.center = CGPoint(x: (self.frame.width) / 2,
+                                y: circle.frame.height / 2)
     }
 }

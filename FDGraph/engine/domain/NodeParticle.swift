@@ -57,6 +57,10 @@ public class NodeParticle: Particle {
             
     }
     
+    func updateCircleSize() {
+        self.circleContainer.updateCircleSize(nodeValue: CGFloat(node.value))
+    }
+    
 }
 
 // -MARK: DELEGATE HANDLER

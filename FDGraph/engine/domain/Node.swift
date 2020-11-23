@@ -30,6 +30,7 @@ public class Node {
         set {
             self._parent = newValue
             _parent?.children.append(self)
+            _parent?.updateValue()
         }
     }
     let text: String
@@ -56,6 +57,25 @@ public class Node {
         }
     }
     
+    var value: Double {
+//        let linkedToCount = ((linkedTo?.count ?? 0) == 0) ? 0 : (linkedTo?.count ?? 0)
+//        let linkedByCount = ((linkedBy?.count ?? 0) == 0) ? 0 : (linkedBy?.count ?? 0)
+        
+        var returnValue = 1.0
+//            + Double(linkedToCount) + Double(linkedByCount)
+        
+        for child in children {
+            returnValue += child.value
+        }
+        
+        
+//        let connectionSum = linkedToCount + linkedByCount + childrenCount
+//        let weightedConnections = (connectionSum + linkedByCount)
+//        let result = (Double(weightedConnections) + (Double(group)) * Double(weightedConnections) / 8) / 20
+//        return result
+        return returnValue
+    }
+    
     init(id: Int?, parent: Node? = nil, children: [Node] = [], text: String, expanded: Bool = false, done: Bool = false, type: NodeType = .text) {
         self.id = id
         self._parent = parent
@@ -66,6 +86,13 @@ public class Node {
         self.type = type
         self.nodeParticle = NodeParticle(radiusMultiplier: 1.0, contentType: .text, node: self)
         nodeParticle.delegate = self
+    }
+    
+    func updateValue() {
+        if value != 0 {
+            nodeParticle.updateCircleSize()
+        }
+        parent?.updateValue()
     }
 }
 
