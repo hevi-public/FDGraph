@@ -15,6 +15,7 @@ class GraphController: UIViewController {
     public static let GRAPH_CANVAS_SIZE: CGFloat = 50000
     
     private var graphViewContextMenuDelegate: GraphContextMenuInteractionDelegate!
+    private var nodeDelegate: NodeDelegate!
     
     private lazy var scrollView: GraphScrollView = {
         let view = GraphScrollView()
@@ -36,8 +37,9 @@ class GraphController: UIViewController {
     }
     
     // -MARK: SETUP
-    public func setup(graphViewContextMenuDelegate: GraphContextMenuInteractionDelegate) {
+    public func setup(graphViewContextMenuDelegate: GraphContextMenuInteractionDelegate, nodeDelegate: NodeDelegate) {
         self.graphViewContextMenuDelegate = graphViewContextMenuDelegate
+        self.nodeDelegate = nodeDelegate
     }
     
     // -MARK: VIEWDIDLOAD
@@ -112,6 +114,7 @@ extension GraphController {
     
     public func addNew(id: Int, contentType: ContentType) -> Node {
         let newNode = Node(id: id, parent: self.graph.selectedNode, text: "")
+        newNode.delegate = nodeDelegate
         self.graph.add(node: newNode.nodeParticle, parent: newNode.parent?.nodeParticle, contentType: contentType)
         return newNode
     }
