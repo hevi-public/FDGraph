@@ -80,16 +80,16 @@ class GraphController: UIViewController {
             guard let key = press.key else { continue }
             
             //            if self.isFirstResponder {
-            if key.charactersIgnoringModifiers == UIKeyCommand.inputUpArrow || key.characters == "i" {
+            if (key.modifierFlags == .command && key.characters == "i") || key.charactersIgnoringModifiers == UIKeyCommand.inputUpArrow {
                 scrollView.scrollUp()
                 didHandleEvent = true
-            } else if key.charactersIgnoringModifiers == UIKeyCommand.inputDownArrow || key.characters == "k" {
+            } else if (key.modifierFlags == .command && key.characters == "k") || key.charactersIgnoringModifiers == UIKeyCommand.inputDownArrow {
                 scrollView.scrollDown()
                 didHandleEvent = true
-            } else if key.charactersIgnoringModifiers == UIKeyCommand.inputLeftArrow || key.characters == "j" {
+            } else if (key.modifierFlags == .command && key.characters == "j") || key.charactersIgnoringModifiers == UIKeyCommand.inputLeftArrow{
                 scrollView.scrollLeft()
                 didHandleEvent = true
-            } else if key.charactersIgnoringModifiers == UIKeyCommand.inputRightArrow || key.characters == "l" {
+            } else if (key.modifierFlags == .command && key.characters == "l") || key.charactersIgnoringModifiers == UIKeyCommand.inputRightArrow {
                 scrollView.scrollRight()
                 didHandleEvent = true
             } else if key.characters == "u" {
