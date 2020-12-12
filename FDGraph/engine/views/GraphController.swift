@@ -60,7 +60,7 @@ class GraphController: UIViewController {
         scrollView.setup()
 
         
-        
+
         self.view.isMultipleTouchEnabled = true
         self.graphView.isMultipleTouchEnabled = true
         
@@ -83,12 +83,18 @@ class GraphController: UIViewController {
             
             didHandleEvent = handleGraphMoving(key: key)
             
-            if key.characters == "u" {
-                scrollView.zoomIn()
-                didHandleEvent = true
-            } else if key.characters == "o" {
-                scrollView.zoomOut()
-                didHandleEvent = true
+            if !didHandleEvent {
+                didHandleEvent = handleNodeSelection(key: key)
+            }
+            
+            if !didHandleEvent {
+                if key.characters == "u" {
+                    scrollView.zoomIn()
+                    didHandleEvent = true
+                } else if key.characters == "o" {
+                    scrollView.zoomOut()
+                    didHandleEvent = true
+                }
             }
         }
         
@@ -111,6 +117,23 @@ class GraphController: UIViewController {
             return true
         } else if (key.modifierFlags == .command && key.characters == "l") || key.charactersIgnoringModifiers == UIKeyCommand.inputRightArrow {
             scrollView.scrollRight()
+            return true
+        }
+        return false
+    }
+    
+    private func handleNodeSelection(key: UIKey) -> Bool {
+        if (key.modifierFlags != .command && key.characters == "i") || key.charactersIgnoringModifiers == UIKeyCommand.inputUpArrow {
+            self.selectChild()
+            return true
+        } else if (key.modifierFlags != .command && key.characters == "k") || key.charactersIgnoringModifiers == UIKeyCommand.inputDownArrow {
+            self.selectParent()
+            return true
+        } else if (key.modifierFlags != .command && key.characters == "j") || key.charactersIgnoringModifiers == UIKeyCommand.inputLeftArrow{
+            self.selectPreviousSibling()
+            return true
+        } else if (key.modifierFlags != .command && key.characters == "l") || key.charactersIgnoringModifiers == UIKeyCommand.inputRightArrow {
+            self.selectNextSibling()
             return true
         }
         return false
@@ -179,6 +202,22 @@ extension GraphController {
                 self.scrollView.scrollToView(view: node.nodeParticle.circleContainer, animated: false)
             }
         }
+    }
+    
+    private func selectNextSibling() {
+        print("selectNextSibling")
+    }
+    
+    private func selectPreviousSibling() {
+        print("selectPreviousSibling")
+    }
+    
+    private func selectParent() {
+        print("selectParent")
+    }
+    
+    private func selectChild() {
+        print("selectChild")
     }
     
     public func select(node: Node) {
