@@ -98,24 +98,6 @@ extension GraphEngine {
             simulation.kick()
         }
     }
-    
-    public func deleteSelectedNodes() {
-        
-//        let selectedCircles = Circle.getSelectedCircles()
-        
-        let particles = Array(simulation.particles)
-        
-        // TODO
-        
-//        let selectedParticles = particles.filter { node -> Bool in
-//            selectedCircles.contains(node.view)
-//        }
-//
-//        selectedParticles.forEach { node in
-//            delete(node: node, shouldKick: false)
-//        }
-        simulation.kick()
-    }
 }
 
 extension GraphEngine {

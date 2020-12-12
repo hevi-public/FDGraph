@@ -166,9 +166,6 @@ struct GraphUIView: UIViewControllerRepresentable {
         self.graphController.delete(node: node)
     }
     
-    func deleteSelectedNodes() {
-        self.graphController.deleteSelectedNodes()
-    }
 }
 
 

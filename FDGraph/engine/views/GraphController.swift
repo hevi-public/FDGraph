@@ -183,12 +183,15 @@ extension GraphController {
     }
     
     public func delete(node: Node) {
+        // delete from repository
+        
         self.graph.delete(node: node.nodeParticle)
+        
+        if self.selectedNode == node {
+            self.selectedNode = nil
+        }
     }
     
-    public func deleteSelectedNodes() {
-        self.graph.deleteSelectedNodes()
-    }
 }
 
 extension GraphController {
