@@ -124,16 +124,16 @@ class GraphController: UIViewController {
     
     private func handleNodeSelection(key: UIKey) -> Bool {
         if (key.modifierFlags != .command && key.characters == "i") || key.charactersIgnoringModifiers == UIKeyCommand.inputUpArrow {
-            self.selectChild()
+            self.selectNextSibling()
             return true
         } else if (key.modifierFlags != .command && key.characters == "k") || key.charactersIgnoringModifiers == UIKeyCommand.inputDownArrow {
-            self.selectParent()
-            return true
-        } else if (key.modifierFlags != .command && key.characters == "j") || key.charactersIgnoringModifiers == UIKeyCommand.inputLeftArrow{
             self.selectPreviousSibling()
             return true
+        } else if (key.modifierFlags != .command && key.characters == "j") || key.charactersIgnoringModifiers == UIKeyCommand.inputLeftArrow{
+            self.selectParent()
+            return true
         } else if (key.modifierFlags != .command && key.characters == "l") || key.charactersIgnoringModifiers == UIKeyCommand.inputRightArrow {
-            self.selectNextSibling()
+            self.selectChild()
             return true
         }
         return false
