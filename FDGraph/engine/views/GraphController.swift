@@ -178,9 +178,7 @@ extension GraphController {
     }
     
     public func focus(node: Node) {
-        
         self.scrollView.scrollToView(view: node.nodeParticle.circleContainer, animated: true)
-        self.select(node: node)
     }
     
     public func edit(node: Node) {
@@ -257,6 +255,7 @@ extension GraphController {
         selectedNode = node
         self.graph.select(nodeParticle: selectedNode!.nodeParticle)
         selectedNode!.parent?.lastSelectedChild = selectedNode!
+        focus(node: selectedNode!)
     }
     
     public func delete(node: Node) {
