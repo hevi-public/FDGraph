@@ -245,7 +245,9 @@ extension GraphController {
         guard selectedNode.children.count > 0 else { return }
         print("selectChild")
         
-        select(node: selectedNode.children[0])
+        let selectedChild = selectedNode.lastSelectedChild ?? selectedNode.children[0]
+        
+        select(node: selectedChild)
     }
     
     public func select(node: Node) {
@@ -254,6 +256,7 @@ extension GraphController {
         }
         selectedNode = node
         self.graph.select(nodeParticle: selectedNode!.nodeParticle)
+        selectedNode!.parent?.lastSelectedChild = selectedNode!
     }
     
     public func delete(node: Node) {
