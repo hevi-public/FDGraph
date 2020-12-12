@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D78445EC25855C5E000229A8 /* CGPoint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78445EB25855C5E000229A8 /* CGPoint+Extension.swift */; };
 		D78CEAF324F8417E006C5E70 /* GraphUITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78CEAF224F8417E006C5E70 /* GraphUITextView.swift */; };
 		D78CEAF524F841CB006C5E70 /* GraphTextNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78CEAF424F841CB006C5E70 /* GraphTextNode.swift */; };
 		D792D0BA255F0B8B00AB6727 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = D792D0B9255F0B8B00AB6727 /* Node.swift */; };
@@ -56,6 +57,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D78445EB25855C5E000229A8 /* CGPoint+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extension.swift"; sourceTree = "<group>"; };
 		D78CEAF224F8417E006C5E70 /* GraphUITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphUITextView.swift; sourceTree = "<group>"; };
 		D78CEAF424F841CB006C5E70 /* GraphTextNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTextNode.swift; sourceTree = "<group>"; };
 		D792D0B9255F0B8B00AB6727 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
@@ -127,6 +129,14 @@
 				D792D0B9255F0B8B00AB6727 /* Node.swift */,
 			);
 			path = domain;
+			sourceTree = "<group>";
+		};
+		D78445EA25855C42000229A8 /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D78445EB25855C5E000229A8 /* CGPoint+Extension.swift */,
+			);
+			path = extensions;
 			sourceTree = "<group>";
 		};
 		D78CEAEB24F82CA6006C5E70 /* node */ = {
@@ -235,6 +245,7 @@
 		D7D2B51A24E7553B00EBC1C8 /* engine */ = {
 			isa = PBXGroup;
 			children = (
+				D78445EA25855C42000229A8 /* extensions */,
 				D725AEFE25325C390021F640 /* domain */,
 				D7D2B50F24E7281B00EBC1C8 /* views */,
 				D7D2B52224E83FAB00EBC1C8 /* physics */,
@@ -406,6 +417,7 @@
 				D7E5C1302554B6E4004F45ED /* CircleContainer.swift in Sources */,
 				D7D2B51924E7281B00EBC1C8 /* GraphScrollView.swift in Sources */,
 				D7D2B51524E7281B00EBC1C8 /* GraphController.swift in Sources */,
+				D78445EC25855C5E000229A8 /* CGPoint+Extension.swift in Sources */,
 				D7D2B53024E86ED600EBC1C8 /* Links.swift in Sources */,
 				D7D2B53624E8789600EBC1C8 /* Force.swift in Sources */,
 				D7D2B4DF24E71E3300EBC1C8 /* SceneDelegate.swift in Sources */,
