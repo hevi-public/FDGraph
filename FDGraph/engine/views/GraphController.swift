@@ -246,9 +246,8 @@ extension GraphController {
         if let selectedParticle = selectedNode?.nodeParticle {
             self.graph.deselect(nodeParticle: selectedParticle)
         }
-        self.graph.select(nodeParticle: node.nodeParticle)
         selectedNode = node
-        
+        self.graph.select(nodeParticle: selectedNode!.nodeParticle)
     }
     
     public func delete(node: Node) {
