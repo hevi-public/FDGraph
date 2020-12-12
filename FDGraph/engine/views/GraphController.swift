@@ -80,19 +80,10 @@ class GraphController: UIViewController {
             guard let key = press.key else { continue }
             
             //            if self.isFirstResponder {
-            if (key.modifierFlags == .command && key.characters == "i") || key.charactersIgnoringModifiers == UIKeyCommand.inputUpArrow {
-                scrollView.scrollUp()
-                didHandleEvent = true
-            } else if (key.modifierFlags == .command && key.characters == "k") || key.charactersIgnoringModifiers == UIKeyCommand.inputDownArrow {
-                scrollView.scrollDown()
-                didHandleEvent = true
-            } else if (key.modifierFlags == .command && key.characters == "j") || key.charactersIgnoringModifiers == UIKeyCommand.inputLeftArrow{
-                scrollView.scrollLeft()
-                didHandleEvent = true
-            } else if (key.modifierFlags == .command && key.characters == "l") || key.charactersIgnoringModifiers == UIKeyCommand.inputRightArrow {
-                scrollView.scrollRight()
-                didHandleEvent = true
-            } else if key.characters == "u" {
+            
+            didHandleEvent = handleGraphMoving(key: key)
+            
+            if key.characters == "u" {
                 scrollView.zoomIn()
                 didHandleEvent = true
             } else if key.characters == "o" {
@@ -106,6 +97,23 @@ class GraphController: UIViewController {
             super.pressesBegan(presses, with: event)
         }
         
+    }
+    
+    private func handleGraphMoving(key: UIKey) -> Bool {
+        if (key.modifierFlags == .command && key.characters == "i") || key.charactersIgnoringModifiers == UIKeyCommand.inputUpArrow {
+            scrollView.scrollUp()
+            return true
+        } else if (key.modifierFlags == .command && key.characters == "k") || key.charactersIgnoringModifiers == UIKeyCommand.inputDownArrow {
+            scrollView.scrollDown()
+            return true
+        } else if (key.modifierFlags == .command && key.characters == "j") || key.charactersIgnoringModifiers == UIKeyCommand.inputLeftArrow{
+            scrollView.scrollLeft()
+            return true
+        } else if (key.modifierFlags == .command && key.characters == "l") || key.charactersIgnoringModifiers == UIKeyCommand.inputRightArrow {
+            scrollView.scrollRight()
+            return true
+        }
+        return false
     }
 }
 
