@@ -206,19 +206,30 @@ extension GraphController {
     
     private func selectNextSibling() {
         guard let selectedNode = selectedNode else { return }
+        guard let siblings = selectedNode.parent?.children else { return }
+        guard let indexOfSelectedNode = siblings.firstIndex(of: selectedNode) else { return }
         print("selectNextSibling")
         
-        let indexOfSelectedNode = selectedNode.parent?.children.firstIndex(of: selectedNode) ?? -1
         let indexOfNextSelectedNode = indexOfSelectedNode + 1
-        if selectedNode.parent?.children.count ?? -1 > indexOfNextSelectedNode {
-            let nextSelectedNode = selectedNode.parent?.children[indexOfNextSelectedNode]
-            select(node: nextSelectedNode!)
+        if siblings.count > indexOfNextSelectedNode {
+            let nextSelectedNode = siblings[indexOfNextSelectedNode]
+            select(node: nextSelectedNode)
         }
     }
     
     private func selectPreviousSibling() {
         guard let selectedNode = selectedNode else { return }
+        guard let siblings = selectedNode.parent?.children else { return }
+        guard let indexOfSelectedNode = siblings.firstIndex(of: selectedNode) else { return }
         print("selectPreviousSibling")
+        
+        let indexOfNextSelectedNode = indexOfSelectedNode - 1
+        
+        if indexOfNextSelectedNode >= 0 {
+            select(node: siblings[indexOfNextSelectedNode])
+        } else {
+            select(node: siblings[siblings.count - 1])
+        }
     }
     
     private func selectParent() {
