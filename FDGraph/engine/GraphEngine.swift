@@ -16,8 +16,6 @@ public class GraphEngine {
     
     public var followedNode: NodeParticle?
     
-    public var selectedNode: Node?
-    
     public lazy var simulation: Simulation = {
         let simulation: Simulation = Simulation()
         simulation.insert(force: self.manyParticle)
@@ -79,10 +77,12 @@ extension GraphEngine {
     }
     
     // -MARK: SELECT
-    public func select(node: Node) {
-        self.selectedNode?.nodeParticle.circleContainer.circle.removeGlow()
-        self.selectedNode = node
-        node.nodeParticle.circleContainer.circle.addGlow()
+    public func select(nodeParticle: NodeParticle) {
+        nodeParticle.circleContainer.circle.addGlow()
+    }
+    
+    public func deselect(nodeParticle: NodeParticle) {
+        nodeParticle.circleContainer.circle.removeGlow()
     }
 
     // -MARK: DELETE

@@ -210,7 +210,7 @@ class GraphContextMenuInteractionDelegate: NSObject, UIContextMenuInteractionDel
         
         var children = [UIAction]()
         
-        if let selectedNode = graphController.graph.selectedNode,
+        if let selectedNode = graphController.selectedNode,
             selectedNode != node {
             let linkNode = UIAction(title: "Link", image: UIImage(systemName: "square.and.arrow.up")) { action in
                 graphController.link(between: selectedNode, and: node)

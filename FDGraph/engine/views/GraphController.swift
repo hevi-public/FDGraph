@@ -36,6 +36,8 @@ class GraphController: UIViewController {
         }
     }
     
+    public var selectedNode: Node?
+    
     // -MARK: SETUP
     public func setup(graphViewContextMenuDelegate: GraphContextMenuInteractionDelegate, nodeDelegate: NodeDelegate) {
         self.graphViewContextMenuDelegate = graphViewContextMenuDelegate
@@ -113,7 +115,7 @@ extension GraphController {
     
     
     public func addNew(id: Int, contentType: ContentType) -> Node {
-        let newNode = Node(id: id, parent: self.graph.selectedNode, text: "")
+        let newNode = Node(id: id, parent: self.selectedNode, text: "")
         DispatchQueue.main.async {
             newNode.delegate = self.nodeDelegate
             self.graph.add(node: newNode.nodeParticle, parent: newNode.parent?.nodeParticle, contentType: contentType)
@@ -172,7 +174,12 @@ extension GraphController {
     }
     
     public func select(node: Node) {
-        self.graph.select(node: node)
+        if let selectedParticle = selectedNode?.nodeParticle {
+            self.graph.deselect(nodeParticle: selectedParticle)
+        }
+        self.graph.select(nodeParticle: node.nodeParticle)
+        selectedNode = node
+        
     }
     
     public func delete(node: Node) {
