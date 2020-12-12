@@ -242,7 +242,10 @@ extension GraphController {
     
     private func selectChild() {
         guard let selectedNode = selectedNode else { return }
+        guard selectedNode.children.count > 0 else { return }
         print("selectChild")
+        
+        select(node: selectedNode.children[0])
     }
     
     public func select(node: Node) {
