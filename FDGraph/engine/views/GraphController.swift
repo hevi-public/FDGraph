@@ -234,7 +234,10 @@ extension GraphController {
     
     private func selectParent() {
         guard let selectedNode = selectedNode else { return }
+        guard let parent = selectedNode.parent else { return }
         print("selectParent")
+        
+        select(node: parent)
     }
     
     private func selectChild() {
