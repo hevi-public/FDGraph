@@ -88,6 +88,10 @@ class GraphController: UIViewController {
             }
             
             if !didHandleEvent {
+                didHandleEvent = handleNodeAddition(key: key)
+            }
+            
+            if !didHandleEvent {
                 if key.characters == "u" {
                     scrollView.zoomIn()
                     didHandleEvent = true
@@ -138,6 +142,17 @@ class GraphController: UIViewController {
         }
         return false
     }
+    
+    private func handleNodeAddition(key: UIKey) -> Bool {
+        if key.characters == "\r" {
+            self.addChild()
+            return true
+        } else if key.modifierFlags == .command && key.characters == "\r" {
+            self.addSibling()
+            return true
+        }
+        return false
+    }
 }
 
 // -MARK: PUBLIC METHODS
@@ -154,9 +169,9 @@ extension GraphController {
         return newNode
     }
     
-    public func add(node: Node, parent: Node? = nil, contentType: ContentType) {
-        self.graph.add(node: node.nodeParticle, parent: parent?.nodeParticle, contentType: contentType)
-//        self.select(node: node)
+    public func add(node: Node, contentType: ContentType) {
+        node.delegate = self.nodeDelegate
+        self.graph.add(node: node.nodeParticle, parent: node.parent?.nodeParticle, contentType: contentType)
         
     }
     
@@ -200,6 +215,24 @@ extension GraphController {
                 self.scrollView.scrollToView(view: node.nodeParticle.circleContainer, animated: false)
             }
         }
+    }
+    
+    private func addChild() {
+        guard let selectedNode = selectedNode else { return }
+        
+        let newNode = Node(id: 199, parent: selectedNode, text: "")
+        self.add(node: newNode, contentType: .text)
+        self.select(node: newNode)
+    }
+    
+    private func addSibling() {
+        guard let selectedNode = selectedNode else { return }
+        guard let parent = selectedNode.parent else { return }
+        
+        let newNode = Node(id: 199, parent: parent, text: "")
+        
+        self.add(node: newNode, contentType: .text)
+        self.select(node: newNode)
     }
     
     private func selectNextSibling() {
@@ -255,7 +288,7 @@ extension GraphController {
         selectedNode = node
         self.graph.select(nodeParticle: selectedNode!.nodeParticle)
         selectedNode!.parent?.lastSelectedChild = selectedNode!
-        focus(node: selectedNode!)
+//        focus(node: selectedNode!)
     }
     
     public func delete(node: Node) {
