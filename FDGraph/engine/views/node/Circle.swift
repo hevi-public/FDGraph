@@ -11,7 +11,6 @@ import UIKit
 
 public class Circle: UIView {
     
-    private static var glowingCircles = [Circle]()
     static let radius: CGFloat = 10
     var radiusMultiplier: CGFloat
     private var color: UIColor!
@@ -64,23 +63,13 @@ public class Circle: UIView {
         self.layer.shadowColor = UIColor.lightGray.cgColor
         self.layer.shadowRadius = CGFloat(shadowRadius)
         self.layer.shadowOpacity = 1
-        
-        Circle.glowingCircles.append(self)
     }
     
-    public static func removeAllGlow() {
-        Circle.glowingCircles.forEach {
-            $0.layer.shadowOpacity = 0
-        }
-        Circle.glowingCircles.removeAll()
+    public func removeGlow() {
+        self.layer.shadowPath = nil
+        self.layer.shadowOpacity = 0
     }
-    
-    public static func getSelectedCircles() -> [Circle] {
-        var copy = [Circle]()
-        copy.append(contentsOf: Circle.glowingCircles)
-        return copy
-    }
-    
+
     // MARK: - PRIVATE FUNC
     private func drawCircleOnLayer(size: CGSize) -> CAShapeLayer {
         let circleLayer = CAShapeLayer()

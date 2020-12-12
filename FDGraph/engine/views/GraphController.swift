@@ -30,7 +30,7 @@ class GraphController: UIViewController {
         return GraphView(width: GraphController.GRAPH_CANVAS_SIZE, height: GraphController.GRAPH_CANVAS_SIZE)
     }()
     
-    private var graph: GraphEngine {
+    var graph: GraphEngine {
         get {
             return self.graphView.graph
         }
@@ -169,19 +169,6 @@ extension GraphController {
                 self.scrollView.scrollToView(view: node.nodeParticle.circleContainer, animated: false)
             }
         }
-    }
-    
-    public func selectedNode() -> Node? {
-        let selectedCircles = Circle.getSelectedCircles()
-        if !selectedCircles.isEmpty {
-            let nodes = Array(self.graph.simulation.particles)
-            let firstParticle = nodes.filter { node -> Bool in
-                node.circleContainer.circle == selectedCircles[0]
-            }.first
-            return firstParticle?.node
-        }
-        return nil
-        
     }
     
     public func select(node: Node) {

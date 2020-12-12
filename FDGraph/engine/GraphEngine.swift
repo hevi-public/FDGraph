@@ -80,8 +80,8 @@ extension GraphEngine {
     
     // -MARK: SELECT
     public func select(node: Node) {
+        self.selectedNode?.nodeParticle.circleContainer.circle.removeGlow()
         self.selectedNode = node
-        Circle.removeAllGlow()
         node.nodeParticle.circleContainer.circle.addGlow()
     }
 
@@ -101,7 +101,7 @@ extension GraphEngine {
     
     public func deleteSelectedNodes() {
         
-        let selectedCircles = Circle.getSelectedCircles()
+//        let selectedCircles = Circle.getSelectedCircles()
         
         let particles = Array(simulation.particles)
         
