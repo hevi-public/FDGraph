@@ -13,22 +13,23 @@ class GraphTextNode: UIView {
     
     let textView: GraphUITextView
     
-    convenience init(text: String, fontSize: CGFloat, baseHeight: Int, textFieldWidth: Int, textFieldHeight: Int, circleColor: UIColor) {
-
+    convenience init(graphUITextdelegate: GraphUITextDelegate, text: String, fontSize: CGFloat, baseHeight: Int, textFieldWidth: Int, textFieldHeight: Int, circleColor: UIColor) {
+        
         let frame = CGRect(x: 0, y: 0, width: textFieldWidth, height: textFieldHeight)
         
         self.init(frame: frame)
         
-        self.textView.setup(text: text,
-                                   fontSize: fontSize,
-                                   baseHeight: baseHeight,
-                                   textFieldWidth: textFieldWidth,
-                                   textFieldHeight: textFieldHeight)
+        self.textView.setup(graphUITextdelegate: graphUITextdelegate,
+                            text: text,
+                            fontSize: fontSize,
+                            baseHeight: baseHeight,
+                            textFieldWidth: textFieldWidth,
+                            textFieldHeight: textFieldHeight)
         
         self.addSubview(self.textView)
         
-//        super.sizeToFit()
-//        self.sizeToFit()
+        //        super.sizeToFit()
+        //        self.sizeToFit()
     }
     
     override init(frame: CGRect) {

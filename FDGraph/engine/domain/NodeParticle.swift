@@ -28,7 +28,7 @@ public class NodeParticle: Particle {
     
     public var delegate: NodeParticleDelegate?
     
-    init(radiusMultiplier: CGFloat, contentType: ContentType, node: Node) {
+    init(graphUITextdelegate: GraphUITextDelegate, radiusMultiplier: CGFloat, contentType: ContentType, node: Node) {
         
         self.node = node
         
@@ -38,7 +38,11 @@ public class NodeParticle: Particle {
         self.position = CGPoint(x: randomX, y: randomY)
         self.velocity = CGPoint.zero
         
-        self.circleContainer = CircleContainer(text: node.text, radiusMultiplier: radiusMultiplier, color: UIColor.blue, contentType: contentType)
+        self.circleContainer = CircleContainer(graphUITextdelegate: graphUITextdelegate,
+                                               text: node.text,
+                                               radiusMultiplier: radiusMultiplier,
+                                               color: UIColor.blue,
+                                               contentType: contentType)
         
         let singleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleSingleTap(sender:)))
         self.circleContainer.addGestureRecognizer(singleTapGesture)

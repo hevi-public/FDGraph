@@ -84,7 +84,10 @@ public class Node {
         self.expanded = expanded
         self.done = done
         self.type = type
-        self.nodeParticle = NodeParticle(radiusMultiplier: 1.0, contentType: .text, node: self)
+        self.nodeParticle = NodeParticle(graphUITextdelegate: self,
+                                         radiusMultiplier: 1.0,
+                                         contentType: .text,
+                                         node: self)
         nodeParticle.delegate = self
         
         self.parent = parent
@@ -100,6 +103,16 @@ public class Node {
     func addChild(node: Node) {
         self.children.append(node)
         _parent?.updateValue()
+    }
+}
+
+extension Node: GraphUITextDelegate {
+    public func shouldSave(text: String) {
+        print("shouldSaveFrom Delegate")
+    }
+    
+    public func shouldCancel() {
+        print("shouldCancel Delegate")
     }
 }
 

@@ -18,7 +18,9 @@ public class GraphUITextView: UITextView, UITextViewDelegate {
 
     public var graphUITextdelegate: GraphUITextDelegate?
     
-    public func setup(text: String, fontSize: CGFloat, baseHeight: Int, textFieldWidth: Int, textFieldHeight: Int) {
+    public func setup(graphUITextdelegate: GraphUITextDelegate, text: String, fontSize: CGFloat, baseHeight: Int, textFieldWidth: Int, textFieldHeight: Int) {
+        
+        self.graphUITextdelegate = graphUITextdelegate
         
         self.layer.cornerRadius = 5
         self.layer.masksToBounds = true
@@ -57,10 +59,12 @@ public class GraphUITextView: UITextView, UITextViewDelegate {
     @objc func doneButtonAction() {
         self.endEditing(true)
 //        self.resignFirstResponder()
+        graphUITextdelegate?.shouldSave(text: self.text)
     }
     
     @objc func cancelButtonAction() {
         self.endEditing(true)
+        graphUITextdelegate?.shouldCancel()
     }
     
     public func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
