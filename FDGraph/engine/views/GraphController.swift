@@ -152,7 +152,7 @@ class GraphController: UIViewController {
     }
     
     private func handleNodeAddition(key: UIKey) -> Bool {
-        if key.characters == "\r" {
+        if key.modifierFlags != .shift && key.characters == "\r" {
             self.graphDelegate.handleAddChild()
             return true
         } else if key.modifierFlags == .shift && key.characters == "\r" {
