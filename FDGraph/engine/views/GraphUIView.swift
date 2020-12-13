@@ -49,16 +49,16 @@ struct GraphUIView: UIViewControllerRepresentable {
     // -MARK: COORDINATOR
     class Coordinator: NSObject, NodeDelegate, GraphDelegate {
         
-        var parent: GraphUIView
+        var uiView: GraphUIView
         
         var graphController: GraphController {
             get {
-                parent.graphController
+                uiView.graphController
             }
         }
         
-        init(_ parent: GraphUIView) {
-            self.parent = parent
+        init(_ uiView: GraphUIView) {
+            self.uiView = uiView
         }
         
         // -MARK: NodeDelegate
@@ -80,7 +80,9 @@ struct GraphUIView: UIViewControllerRepresentable {
         func handleAddChild() {
             guard let selectedNode = graphController.selectedNode else { return }
             
-            let newNode = Node(id: 199, parent: selectedNode, text: "")
+            let maxId = uiView.getMaxId() ?? 0
+            
+            let newNode = Node(id: maxId + 1, parent: selectedNode, text: "")
             graphController.add(node: newNode, contentType: .text)
             graphController.select(node: newNode)
         }
@@ -89,7 +91,9 @@ struct GraphUIView: UIViewControllerRepresentable {
             guard let selectedNode = graphController.selectedNode else { return }
             guard let parent = selectedNode.parent else { return }
             
-            let newNode = Node(id: 199, parent: parent, text: "")
+            let maxId = uiView.getMaxId() ?? 0
+            
+            let newNode = Node(id: maxId + 1, parent: parent, text: "")
             
             graphController.add(node: newNode, contentType: .text)
             graphController.select(node: newNode)
