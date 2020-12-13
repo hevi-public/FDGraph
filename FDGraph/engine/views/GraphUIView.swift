@@ -97,16 +97,20 @@ struct GraphUIView: UIViewControllerRepresentable {
         
     }
     
-    func addChildToSelectedNode() {
-        
+    private func getMaxId() -> Int? {
         let nodeWithMaxId = self.nodeStore.fetchAll().filter({ node -> Bool in
             node.id != nil
         }).max { (a, b) -> Bool in
             a.id! < b.id!
         }
         
+        return nodeWithMaxId?.id
+    }
+    
+    func addChildToSelectedNode() {
+        let maxId = getMaxId()
         
-        let newNode = self.graphController.addNew(id: (nodeWithMaxId?.id ?? 0) + 1, contentType: .text)
+        let newNode = self.graphController.addNew(id: (maxId ?? 0) + 1, contentType: .text)
         self.nodeStore.add(node: newNode)
     
     }
