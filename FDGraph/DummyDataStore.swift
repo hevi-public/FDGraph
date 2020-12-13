@@ -10,7 +10,7 @@ import Foundation
 
 class DummyDataStore {
     
-    var nodes: [Node] = []
+    private var nodes: [Node] = []
     
     init() {
         self.nodes = buildDummyData()
@@ -44,6 +44,10 @@ class DummyDataStore {
             }
         }
         return result
+    }
+    
+    func add(node: Node) {
+        nodes.append(node)
     }
     
     func save(text: String, parent: Node?, nodeAbove: Node?) {
