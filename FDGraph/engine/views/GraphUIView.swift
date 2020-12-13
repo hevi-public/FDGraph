@@ -35,11 +35,11 @@ struct GraphUIView: UIViewControllerRepresentable {
     
     func updateUIViewController(_ uiViewController: GraphController, context: UIViewControllerRepresentableContext<GraphUIView>) {
         
-        self.nodeStore.rows.forEach { (node) in
+        self.nodeStore.nodes.forEach { (node) in
             node.delegate = context.coordinator
         }
         
-        uiViewController.add(nodes: self.nodeStore.rows)
+        uiViewController.add(nodes: self.nodeStore.nodes)
     }
     
     // -MARK: COORDINATOR
@@ -65,7 +65,7 @@ struct GraphUIView: UIViewControllerRepresentable {
     
     func addChildToSelectedNode() {
         
-        let nodeWithMaxId = self.nodeStore.rows.filter({ node -> Bool in
+        let nodeWithMaxId = self.nodeStore.nodes.filter({ node -> Bool in
             node.id != nil
         }).max { (a, b) -> Bool in
             a.id! < b.id!
@@ -73,8 +73,8 @@ struct GraphUIView: UIViewControllerRepresentable {
         
         
         let newNode = self.graphController.addNew(id: (nodeWithMaxId?.id ?? 0) + 1, contentType: .text)
-        self.nodeStore.rows.append(newNode)
-        print(self.nodeStore.rows.count)
+        self.nodeStore.nodes.append(newNode)
+        print(self.nodeStore.nodes.count)
     
     }
     

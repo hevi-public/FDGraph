@@ -10,14 +10,14 @@ import Foundation
 
 class DummyDataStore {
     
-    var rows: [Node] = []
+    var nodes: [Node] = []
     
     init() {
-        self.rows = buildDummyData()
+        self.nodes = buildDummyData()
     }
     
     public func fetchAll() -> [Node] {
-        return rows
+        return nodes
     }
     
     public func fetch(node: Node?) -> Node? {
@@ -31,7 +31,7 @@ class DummyDataStore {
     }
     
     private func fetch(parent: Node?) -> [Node] {
-        let nodesForParentId = rows.filter { node -> Bool in
+        let nodesForParentId = nodes.filter { node -> Bool in
             node.parent == parent
         }
 
@@ -47,7 +47,7 @@ class DummyDataStore {
     }
     
     func save(text: String, parent: Node?, nodeAbove: Node?) {
-        let maxId = rows.filter { node -> Bool in
+        let maxId = nodes.filter { node -> Bool in
             node.id != nil
         }.map { node -> Int in
             node.id!
@@ -56,15 +56,15 @@ class DummyDataStore {
         let newNode = Node.init(id: (maxId ?? 0) + 1, parent: parent, children: [], text: text, expanded: false, done: false, type: .text)
         
         if let nodeAbove = nodeAbove {
-            let row = rows.firstIndex(of: nodeAbove)! + 1
-            rows.insert(newNode, at: row)
+            let row = nodes.firstIndex(of: nodeAbove)! + 1
+            nodes.insert(newNode, at: row)
             
             if let parent = parent {
                 parent.children.append(newNode)
                 parent.expanded = true
             }
         } else {
-            rows.insert(newNode, at: 0)
+            nodes.insert(newNode, at: 0)
         }
         
         
@@ -78,7 +78,7 @@ class DummyDataStore {
         
         guard let index = possibleIndex else { return }
         
-        rows[index] = node
+        nodes[index] = node
     }
     
     let loremIpsum = """
