@@ -9,15 +9,14 @@
 import Foundation
 import UIKit
 
+public protocol GraphUITextDelegate {
+    func shouldSave(text: String)
+    func shouldCancel()
+}
+
 public class GraphUITextView: UITextView, UITextViewDelegate {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
+    public var graphUITextdelegate: GraphUITextDelegate?
     
     public func setup(text: String, fontSize: CGFloat, baseHeight: Int, textFieldWidth: Int, textFieldHeight: Int) {
         
@@ -67,6 +66,7 @@ public class GraphUITextView: UITextView, UITextViewDelegate {
     public func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if (text == "\n") {
             print("enter pressed")
+            graphUITextdelegate?.shouldSave(text: textView.text)
             return false
         }
         return true
