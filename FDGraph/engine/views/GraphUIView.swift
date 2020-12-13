@@ -83,6 +83,9 @@ struct GraphUIView: UIViewControllerRepresentable {
             let maxId = uiView.getMaxId() ?? 0
             
             let newNode = Node(id: maxId + 1, parent: selectedNode, text: "")
+            
+            uiView.nodeStore.add(node: newNode)
+            
             graphController.add(node: newNode, contentType: .text)
             graphController.select(node: newNode)
         }
@@ -94,6 +97,8 @@ struct GraphUIView: UIViewControllerRepresentable {
             let maxId = uiView.getMaxId() ?? 0
             
             let newNode = Node(id: maxId + 1, parent: parent, text: "")
+            
+            uiView.nodeStore.add(node: newNode)
             
             graphController.add(node: newNode, contentType: .text)
             graphController.select(node: newNode)
