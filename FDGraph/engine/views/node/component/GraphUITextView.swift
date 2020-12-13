@@ -63,4 +63,28 @@ public class GraphUITextView: UITextView, UITextViewDelegate {
     @objc func cancelButtonAction() {
         self.endEditing(true)
     }
+    
+    public func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if (text == "\n") {
+            print("enter pressed")
+            return false
+        }
+        return true
+    }
+    
+    override public func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        var didHandleEvent = false
+        for press in presses {
+            guard let key = press.key else { continue }
+
+            if key.modifierFlags == .command {
+                print("command pressed")
+                didHandleEvent = true
+            }
+        }
+
+        if didHandleEvent == false {
+            super.pressesBegan(presses, with: event)
+        }
+    }
 }
