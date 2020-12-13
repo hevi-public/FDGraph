@@ -9,6 +9,12 @@
 import Foundation
 import UIKit
 
+public protocol GraphDelegate {
+    
+    func handleAddChild()
+    func handleAddSibling()
+}
+
 // -MARK: DECLARATIONS
 class GraphController: UIViewController {
     
@@ -16,6 +22,7 @@ class GraphController: UIViewController {
     
     private var graphViewContextMenuDelegate: GraphContextMenuInteractionDelegate!
     private var nodeDelegate: NodeDelegate!
+    private var graphDelegate: GraphDelegate!
     
     private lazy var scrollView: GraphScrollView = {
         let view = GraphScrollView()
@@ -39,9 +46,10 @@ class GraphController: UIViewController {
     public var selectedNode: Node?
     
     // -MARK: SETUP
-    public func setup(graphViewContextMenuDelegate: GraphContextMenuInteractionDelegate, nodeDelegate: NodeDelegate) {
+    public func setup(graphViewContextMenuDelegate: GraphContextMenuInteractionDelegate, nodeDelegate: NodeDelegate, graphDelegate: GraphDelegate) {
         self.graphViewContextMenuDelegate = graphViewContextMenuDelegate
         self.nodeDelegate = nodeDelegate
+        self.graphDelegate = graphDelegate
     }
     
     // -MARK: VIEWDIDLOAD
@@ -145,10 +153,10 @@ class GraphController: UIViewController {
     
     private func handleNodeAddition(key: UIKey) -> Bool {
         if key.characters == "\r" {
-            self.addChild()
+            self.graphDelegate.handleAddChild()
             return true
         } else if key.modifierFlags == .shift && key.characters == "\r" {
-            self.addSibling()
+            self.graphDelegate.handleAddSibling()
             return true
         }
         return false
@@ -215,24 +223,6 @@ extension GraphController {
                 self.scrollView.scrollToView(view: node.nodeParticle.circleContainer, animated: false)
             }
         }
-    }
-    
-    private func addChild() {
-        guard let selectedNode = selectedNode else { return }
-        
-        let newNode = Node(id: 199, parent: selectedNode, text: "")
-        self.add(node: newNode, contentType: .text)
-        self.select(node: newNode)
-    }
-    
-    private func addSibling() {
-        guard let selectedNode = selectedNode else { return }
-        guard let parent = selectedNode.parent else { return }
-        
-        let newNode = Node(id: 199, parent: parent, text: "")
-        
-        self.add(node: newNode, contentType: .text)
-        self.select(node: newNode)
     }
     
     private func selectNextSibling() {

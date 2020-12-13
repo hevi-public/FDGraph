@@ -25,7 +25,9 @@ struct GraphUIView: UIViewControllerRepresentable {
     func makeUIViewController(context: UIViewControllerRepresentableContext<GraphUIView>) -> GraphController {
         
         self.graphContextMenuInteractionDelegate.setup(graphController: self.graphController)
-        self.graphController.setup(graphViewContextMenuDelegate: graphContextMenuInteractionDelegate, nodeDelegate: context.coordinator)
+        self.graphController.setup(graphViewContextMenuDelegate: graphContextMenuInteractionDelegate,
+                                   nodeDelegate: context.coordinator,
+                                   graphDelegate: context.coordinator)
         
         
         
@@ -45,15 +47,24 @@ struct GraphUIView: UIViewControllerRepresentable {
     }
     
     // -MARK: COORDINATOR
-    class Coordinator: NSObject, NodeDelegate {
+    class Coordinator: NSObject, NodeDelegate, GraphDelegate {
+        
         var parent: GraphUIView
+        
+        var graphController: GraphController {
+            get {
+                parent.graphController
+            }
+        }
         
         init(_ parent: GraphUIView) {
             self.parent = parent
         }
         
+        // -MARK: NodeDelegate
+        
         func handleSingleTap(node: Node) {
-            self.parent.graphController.select(node: node)
+            graphController.select(node: node)
         }
         
         func handleDoubleTap(node: Node) {
@@ -61,8 +72,29 @@ struct GraphUIView: UIViewControllerRepresentable {
             //            newNode.delegate = self
             //            self.parent.graphController.add(node: newNode, parent: node)
             //            self.parent.graphController.focus(node: newNode)
-            self.parent.graphController.edit(node: node)
+            graphController.edit(node: node)
         }
+        
+        // -MARK: GraphDelegate
+        
+        func handleAddChild() {
+            guard let selectedNode = graphController.selectedNode else { return }
+            
+            let newNode = Node(id: 199, parent: selectedNode, text: "")
+            graphController.add(node: newNode, contentType: .text)
+            graphController.select(node: newNode)
+        }
+        
+        func handleAddSibling() {
+            guard let selectedNode = graphController.selectedNode else { return }
+            guard let parent = selectedNode.parent else { return }
+            
+            let newNode = Node(id: 199, parent: parent, text: "")
+            
+            graphController.add(node: newNode, contentType: .text)
+            graphController.select(node: newNode)
+        }
+        
     }
     
     func addChildToSelectedNode() {
