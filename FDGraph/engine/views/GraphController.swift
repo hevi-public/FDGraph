@@ -147,7 +147,7 @@ class GraphController: UIViewController {
         if key.characters == "\r" {
             self.addChild()
             return true
-        } else if key.modifierFlags == .command && key.characters == "\r" {
+        } else if key.modifierFlags == .shift && key.characters == "\r" {
             self.addSibling()
             return true
         }
