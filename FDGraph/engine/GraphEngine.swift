@@ -21,9 +21,25 @@ public class GraphEngine {
         simulation.insert(force: self.manyParticle)
         simulation.insert(force: self.links)
         simulation.insert(force: self.center)
-        simulation.insert(tick: { self.linkLayer.path = self.links.path(from: &$0) })
+        simulation.insert(tick: {
+            self.linkLayer.path = self.links.path(from: &$0)
+            self.childrenLinkDraw()
+        })
         return simulation
     }()
+    
+    func childrenLinkDraw() {
+        if let selectedNode = self.selectedNode {
+            if let nodeParticle = selectedNode.nodeParticle {
+            
+                let childrenParticles = nodeParticle.node.children.map { (node) -> NodeParticle in
+                    node.nodeParticle
+                }
+                
+                self.selectedNodeLinkLayer.path = self.links.pathForSelectedAndChildren(parent: nodeParticle, children: childrenParticles)
+            }
+        }
+    }
     
     private lazy var linkLayer: CAShapeLayer = {
         let linkLayer = CAShapeLayer()
@@ -47,10 +63,12 @@ public class GraphEngine {
     private let manyParticle: ManyParticle = ManyParticle()
     private let links: Links = Links()
     
+    weak var selectedNode: Node?
     var glowingParticles: [NodeParticle] = []
     
     init(containerView: UIView) {
         self.containerView = containerView
+        
         self.center = Center(CGPoint(x: self.containerView.frame.width / 2, y: self.containerView.frame.height / 2))
         self.simulation.start()
     }
@@ -91,11 +109,6 @@ extension GraphEngine {
     
     // -MARK: SELECT
     public func select(nodeParticle: NodeParticle) {
-        let childrenParticles = nodeParticle.node.children.map { (node) -> NodeParticle in
-            node.nodeParticle
-        }
-        selectedNodeLinkLayer.path = links.pathForSelectedAndChildren(parent: nodeParticle, children: childrenParticles)
-        
         let siblingParticles = nodeParticle.node.parent?.children.map({ (node) -> NodeParticle in
             node.nodeParticle
         })
@@ -104,9 +117,11 @@ extension GraphEngine {
         }
         
         nodeParticle.circleContainer.circle.addGlow(color: UIColor.orange, opacity: 1)
-        
-        glowingParticles.append(contentsOf: childrenParticles)
+        if let siblingParticles = siblingParticles {
+            glowingParticles.append(contentsOf: siblingParticles)
+        }
         glowingParticles.append(nodeParticle)
+        childrenLinkDraw()
     }
     
     public func deselect(nodeParticle: NodeParticle) {

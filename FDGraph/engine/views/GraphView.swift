@@ -11,11 +11,6 @@ import UIKit
 
 class GraphView: UIView {
     
-    lazy var graph: GraphEngine = {
-        let graphEngine = GraphEngine(containerView: self)
-        return graphEngine
-    }()
-    
     init(width: CGFloat, height: CGFloat) {
         
         let frame = CGRect(x: 0, y: 0, width: width, height: height)

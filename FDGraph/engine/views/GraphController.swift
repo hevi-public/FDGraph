@@ -37,13 +37,21 @@ class GraphController: UIViewController {
         return GraphView(width: GraphController.GRAPH_CANVAS_SIZE, height: GraphController.GRAPH_CANVAS_SIZE)
     }()
     
-    var graph: GraphEngine {
+    lazy var graph: GraphEngine = {
+        let graphEngine = GraphEngine(containerView: self.graphView)
+        return graphEngine
+    }()
+    
+    private var _selectedNode: Node?
+    public var selectedNode: Node? {
+        set {
+            self._selectedNode = newValue
+            self.graph.selectedNode = newValue
+        }
         get {
-            return self.graphView.graph
+            return _selectedNode
         }
     }
-    
-    public var selectedNode: Node?
     
     // -MARK: SETUP
     public func setup(graphViewContextMenuDelegate: GraphContextMenuInteractionDelegate, nodeDelegate: NodeDelegate, graphDelegate: GraphDelegate) {
