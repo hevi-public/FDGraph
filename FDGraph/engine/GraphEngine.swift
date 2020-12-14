@@ -24,6 +24,7 @@ public class GraphEngine {
         simulation.insert(tick: {
             self.linkLayer.path = self.links.path(from: &$0)
             self.childrenLinkDraw()
+            self.parentLinkDraw()
         })
         return simulation
     }()
@@ -37,11 +38,22 @@ public class GraphEngine {
         return linkLayer
     }()
     
-    private lazy var selectedNodeLinkLayer: CAShapeLayer = {
+    private lazy var selectedNodeChildrenLinkLayer: CAShapeLayer = {
         let selectedNodeLinkLayer = CAShapeLayer()
         selectedNodeLinkLayer.strokeColor = UIColor.orange.cgColor
         selectedNodeLinkLayer.fillColor = UIColor.clear.cgColor
-        selectedNodeLinkLayer.lineWidth = 2
+        selectedNodeLinkLayer.lineWidth = 2.5
+        self.containerView.layer.insertSublayer(selectedNodeLinkLayer, at: 1)
+        return selectedNodeLinkLayer
+    }()
+    
+    private lazy var selectedNodeParentLinkLayer: CAShapeLayer = {
+        let selectedNodeLinkLayer = CAShapeLayer()
+        let color = UIColor.orange
+        selectedNodeLinkLayer.strokeColor = color.cgColor
+
+        selectedNodeLinkLayer.fillColor = UIColor.clear.cgColor
+        selectedNodeLinkLayer.lineWidth = 1
         self.containerView.layer.insertSublayer(selectedNodeLinkLayer, at: 1)
         return selectedNodeLinkLayer
     }()
@@ -64,13 +76,13 @@ public class GraphEngine {
 // -MARK: PUBLIC METHODS
 
 extension GraphEngine {
-        
+    
     // -MARK: ADD
     public func add(node: NodeParticle, parent: NodeParticle? = nil, contentType: ContentType) {
         
         simulation.particles.update(with: node)
         self.containerView.addSubview(node.circleContainer)
-    
+        
         if let parent = parent {
             
             node.position = CGPoint(x: parent.position.x + 10, y: parent.position.y + 10)
@@ -109,15 +121,16 @@ extension GraphEngine {
         }
         glowingParticles.append(nodeParticle)
         childrenLinkDraw()
+        parentLinkDraw()
     }
     
     public func deselect(nodeParticle: NodeParticle) {
-//        nodeParticle.circleContainer.circle.removeGlow()
+        //        nodeParticle.circleContainer.circle.removeGlow()
         glowingParticles.forEach { (particle) in
             particle.circleContainer.circle.removeGlow()
         }
     }
-
+    
     // -MARK: DELETE
     public func delete(node: NodeParticle, shouldKick: Bool = true) {
         self.simulation.remove(particle: node)
@@ -144,13 +157,25 @@ extension GraphEngine {
     private func childrenLinkDraw() {
         if let selectedNode = self.selectedNode {
             if let nodeParticle = selectedNode.nodeParticle {
-            
+                
                 let childrenParticles = nodeParticle.node.children.map { (node) -> NodeParticle in
                     node.nodeParticle
                 }
                 
-                self.selectedNodeLinkLayer.path = self.links.pathForSelectedAndChildren(parent: nodeParticle, children: childrenParticles)
+                self.selectedNodeChildrenLinkLayer.path = self.links.pathForSelectedAndChildren(selected: nodeParticle, children: childrenParticles)
             }
         }
+    }
+    
+    private func parentLinkDraw() {
+        if let selectedNode = self.selectedNode,
+           let nodeParticle = selectedNode.nodeParticle,
+           let parent = selectedNode.parent,
+           let parentParticle = parent.nodeParticle {
+            
+            
+            self.selectedNodeParentLinkLayer.path = self.links.pathForSelectedAndParent(selected: nodeParticle, parent: parentParticle)
+        }
+        
     }
 }

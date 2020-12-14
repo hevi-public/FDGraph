@@ -60,12 +60,19 @@ public final class Links: Force {
         return path
     }
     
-    public func pathForSelectedAndChildren(parent: NodeParticle, children: [NodeParticle]) -> CGPath {
+    public func pathForSelectedAndChildren(selected: NodeParticle, children: [NodeParticle]) -> CGPath {
         let path = CGMutablePath()
         for child in children {
-            path.move(to: parent.position)
+            path.move(to: selected.position)
             path.addLine(to: child.position)
         }
+        return path
+    }
+    
+    public func pathForSelectedAndParent(selected: NodeParticle, parent: NodeParticle) -> CGPath {
+        let path = CGMutablePath()
+        path.move(to: selected.position)
+        path.addLine(to: parent.position)
         return path
     }
 }
