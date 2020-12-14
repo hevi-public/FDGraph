@@ -25,6 +25,7 @@ public class GraphEngine {
             self.linkLayer.path = self.links.path(from: &$0)
             self.childrenLinkDraw()
             self.parentLinkDraw()
+            self.preSelectedChildLinkDraw()
         })
         return simulation
     }()
@@ -40,21 +41,28 @@ public class GraphEngine {
     
     private lazy var selectedNodeChildrenLinkLayer: CAShapeLayer = {
         let selectedNodeLinkLayer = CAShapeLayer()
-        selectedNodeLinkLayer.strokeColor = UIColor.orange.cgColor
+        selectedNodeLinkLayer.strokeColor = #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
         selectedNodeLinkLayer.fillColor = UIColor.clear.cgColor
         selectedNodeLinkLayer.lineWidth = 2.5
         self.containerView.layer.insertSublayer(selectedNodeLinkLayer, at: 1)
         return selectedNodeLinkLayer
     }()
     
+    private lazy var preSelectedNodeChildrenLinkLayer: CAShapeLayer = {
+        let selectedNodeLinkLayer = CAShapeLayer()
+        selectedNodeLinkLayer.strokeColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+        selectedNodeLinkLayer.fillColor = UIColor.clear.cgColor
+        selectedNodeLinkLayer.lineWidth = 3.5
+        self.containerView.layer.insertSublayer(selectedNodeLinkLayer, at: 2)
+        return selectedNodeLinkLayer
+    }()
+    
     private lazy var selectedNodeParentLinkLayer: CAShapeLayer = {
         let selectedNodeLinkLayer = CAShapeLayer()
-        let color = UIColor.orange
-        selectedNodeLinkLayer.strokeColor = color.cgColor
-
+        selectedNodeLinkLayer.strokeColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
         selectedNodeLinkLayer.fillColor = UIColor.clear.cgColor
-        selectedNodeLinkLayer.lineWidth = 1
-        self.containerView.layer.insertSublayer(selectedNodeLinkLayer, at: 1)
+        selectedNodeLinkLayer.lineWidth = 1.5
+        self.containerView.layer.insertSublayer(selectedNodeLinkLayer, at: 3)
         return selectedNodeLinkLayer
     }()
     
@@ -122,6 +130,7 @@ extension GraphEngine {
         glowingParticles.append(nodeParticle)
         childrenLinkDraw()
         parentLinkDraw()
+        preSelectedChildLinkDraw()
     }
     
     public func deselect(nodeParticle: NodeParticle) {
@@ -129,6 +138,12 @@ extension GraphEngine {
         glowingParticles.forEach { (particle) in
             particle.circleContainer.circle.removeGlow()
         }
+        preSelectedChildLinkDraw()
+    }
+    
+    public func preSelect() {
+        
+        preSelectedChildLinkDraw()
     }
     
     // -MARK: DELETE
@@ -164,6 +179,19 @@ extension GraphEngine {
                 
                 self.selectedNodeChildrenLinkLayer.path = self.links.pathForSelectedAndChildren(selected: nodeParticle, children: childrenParticles)
             }
+        }
+    }
+    
+    private func preSelectedChildLinkDraw() {
+        if let selectedNode = self.selectedNode,
+           let selectedNodeParticle = selectedNode.nodeParticle,
+           let preSelectedChildParticle = selectedNode.preSelectedChild?.nodeParticle {
+           
+                
+                self.preSelectedNodeChildrenLinkLayer.path = self.links.pathForSelectedAndParent(selected: selectedNodeParticle, parent: preSelectedChildParticle)
+            
+        } else {
+            self.preSelectedNodeChildrenLinkLayer.path = nil
         }
     }
     

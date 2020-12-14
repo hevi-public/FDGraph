@@ -63,7 +63,7 @@ class GraphController: UIViewController {
     // -MARK: VIEWDIDLOAD
     override func viewDidLoad() {
         print("GraphController viewDidLoad")
-
+        
         
         scrollView.display(self.graphView)
         self.view.addSubview(scrollView)
@@ -74,22 +74,22 @@ class GraphController: UIViewController {
         scrollView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         
         scrollView.setup()
-
         
-
+        
+        
         self.view.isMultipleTouchEnabled = true
         self.graphView.isMultipleTouchEnabled = true
         
         let graphViewContextMenuInteraction = UIContextMenuInteraction(delegate: graphViewContextMenuDelegate)
         graphView.addInteraction(graphViewContextMenuInteraction)
         
-
+        
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
     }
-
+    
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         var didHandleEvent = false
         for press in presses {
@@ -144,10 +144,10 @@ class GraphController: UIViewController {
     
     private func handleNodeSelection(key: UIKey) -> Bool {
         if (key.modifierFlags != .command && key.characters == "i") || key.charactersIgnoringModifiers == UIKeyCommand.inputUpArrow {
-            self.selectNextSibling()
+            self.preSelectNextChild()
             return true
         } else if (key.modifierFlags != .command && key.characters == "k") || key.charactersIgnoringModifiers == UIKeyCommand.inputDownArrow {
-            self.selectPreviousSibling()
+            self.preSelectPreviousChild()
             return true
         } else if (key.modifierFlags != .command && key.characters == "j") || key.charactersIgnoringModifiers == UIKeyCommand.inputLeftArrow{
             self.selectParent()
@@ -233,6 +233,42 @@ extension GraphController {
         }
     }
     
+    private func preSelectNextChild() {
+        guard let selectedNode = selectedNode else { return }
+        let children = selectedNode.children
+        
+        print("preSelectNextChild")
+        
+        
+        if let preSelectedChild = selectedNode.preSelectedChild,
+           let preSelectedChildIndex = children.firstIndex(of: preSelectedChild),
+           children.count > preSelectedChildIndex + 1 {
+            let nextSelectedNode = children[preSelectedChildIndex + 1]
+            preSelect(node: nextSelectedNode)
+        } else if children.count > 0 {
+            let nextSelectedNode = children[0]
+            preSelect(node: nextSelectedNode)
+        }
+    }
+    
+    private func preSelectPreviousChild() {
+        guard let selectedNode = selectedNode else { return }
+        let children = selectedNode.children
+        
+        print("preSelectPreviousChild")
+        
+        
+        if let preSelectedChild = selectedNode.preSelectedChild,
+           let preSelectedChildIndex = children.firstIndex(of: preSelectedChild),
+            preSelectedChildIndex - 1 >= 0 {
+            let prevSelectedNode = children[preSelectedChildIndex - 1]
+            preSelect(node: prevSelectedNode)
+        } else if children.count > 0 {
+            let prevSelectedNode = children[children.count - 1]
+            preSelect(node: prevSelectedNode)
+        }
+    }
+    
     private func selectNextSibling() {
         guard let selectedNode = selectedNode else { return }
         guard let siblings = selectedNode.parent?.children else { return }
@@ -274,19 +310,35 @@ extension GraphController {
         guard selectedNode.children.count > 0 else { return }
         print("selectChild")
         
-        let selectedChild = selectedNode.lastSelectedChild ?? selectedNode.children[0]
+        let selectedChild = selectedNode.preSelectedChild ?? selectedNode.lastSelectedChild ?? selectedNode.children[0]
         
         select(node: selectedChild)
     }
     
+    public func preSelect(node: Node) {
+        node.parent?.preSelectedChild = node
+        self.graph.preSelect()
+    }
+    
     public func select(node: Node) {
-        if let selectedParticle = selectedNode?.nodeParticle {
-            self.graph.deselect(nodeParticle: selectedParticle)
+        if let selectedNode = selectedNode {
+            deselect(node: selectedNode)
         }
+        
         selectedNode = node
-        self.graph.select(nodeParticle: selectedNode!.nodeParticle)
+        
         selectedNode!.parent?.lastSelectedChild = selectedNode!
-//        focus(node: selectedNode!)
+        selectedNode!.parent?.preSelectedChild = selectedNode!
+
+        self.graph.select(nodeParticle: selectedNode!.nodeParticle)
+    }
+    
+    public func deselect(node: Node) {
+        selectedNode = nil
+        
+        if let nodeParticle = node.nodeParticle {
+            self.graph.deselect(nodeParticle: nodeParticle)
+        }
     }
     
     public func delete(node: Node) {

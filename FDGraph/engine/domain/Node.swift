@@ -36,6 +36,7 @@ public class Node {
     let text: String
     let type: NodeType
     var children: [Node]
+    var preSelectedChild: Node? = nil
     var lastSelectedChild: Node? = nil
     
     var expanded: Bool
