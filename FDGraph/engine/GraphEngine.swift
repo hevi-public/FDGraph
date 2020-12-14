@@ -47,6 +47,8 @@ public class GraphEngine {
     private let manyParticle: ManyParticle = ManyParticle()
     private let links: Links = Links()
     
+    var glowingParticles: [NodeParticle] = []
+    
     init(containerView: UIView) {
         self.containerView = containerView
         self.center = Center(CGPoint(x: self.containerView.frame.width / 2, y: self.containerView.frame.height / 2))
@@ -85,17 +87,33 @@ extension GraphEngine {
         simulation.kick()
     }
     
+    
+    
     // -MARK: SELECT
     public func select(nodeParticle: NodeParticle) {
-        nodeParticle.circleContainer.circle.addGlow()
         let childrenParticles = nodeParticle.node.children.map { (node) -> NodeParticle in
             node.nodeParticle
         }
         selectedNodeLinkLayer.path = links.pathForSelectedAndChildren(parent: nodeParticle, children: childrenParticles)
+        
+        let siblingParticles = nodeParticle.node.parent?.children.map({ (node) -> NodeParticle in
+            node.nodeParticle
+        })
+        siblingParticles?.forEach { (particle) in
+            particle.circleContainer.circle.addGlow(color: UIColor.lightGray, opacity: 0.5)
+        }
+        
+        nodeParticle.circleContainer.circle.addGlow(color: UIColor.orange, opacity: 1)
+        
+        glowingParticles.append(contentsOf: childrenParticles)
+        glowingParticles.append(nodeParticle)
     }
     
     public func deselect(nodeParticle: NodeParticle) {
-        nodeParticle.circleContainer.circle.removeGlow()
+//        nodeParticle.circleContainer.circle.removeGlow()
+        glowingParticles.forEach { (particle) in
+            particle.circleContainer.circle.removeGlow()
+        }
     }
 
     // -MARK: DELETE

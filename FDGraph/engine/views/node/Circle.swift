@@ -52,7 +52,7 @@ public class Circle: UIView {
     }
     
     // -MARK: ADD GLOW
-    public func addGlow() {
+    public func addGlow(color: UIColor, opacity: Float) {
         
         let multipliedRadius = Circle.radius * self.radiusMultiplier
         let shadowRadius = multipliedRadius * 3
@@ -60,9 +60,9 @@ public class Circle: UIView {
         
         self.layer.shadowPath = UIBezierPath(ovalIn: rect).cgPath
         self.layer.shadowOffset = CGSize(width: -(multipliedRadius / 2), height: -(multipliedRadius / 2))
-        self.layer.shadowColor = UIColor.lightGray.cgColor
+        self.layer.shadowColor = color.cgColor
         self.layer.shadowRadius = CGFloat(shadowRadius)
-        self.layer.shadowOpacity = 1
+        self.layer.shadowOpacity = opacity
     }
     
     public func removeGlow() {
