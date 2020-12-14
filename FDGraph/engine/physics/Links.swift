@@ -59,6 +59,15 @@ public final class Links: Force {
         }
         return path
     }
+    
+    public func pathForSelectedAndChildren(parent: NodeParticle, children: [NodeParticle]) -> CGPath {
+        let path = CGMutablePath()
+        for child in children {
+            path.move(to: parent.position)
+            path.addLine(to: child.position)
+        }
+        return path
+    }
 }
 
 fileprivate struct Link: Hashable {

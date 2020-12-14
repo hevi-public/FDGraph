@@ -34,6 +34,15 @@ public class GraphEngine {
         return linkLayer
     }()
     
+    private lazy var selectedNodeLinkLayer: CAShapeLayer = {
+        let selectedNodeLinkLayer = CAShapeLayer()
+        selectedNodeLinkLayer.strokeColor = UIColor.orange.cgColor
+        selectedNodeLinkLayer.fillColor = UIColor.clear.cgColor
+        selectedNodeLinkLayer.lineWidth = 2
+        self.containerView.layer.insertSublayer(selectedNodeLinkLayer, at: 1)
+        return selectedNodeLinkLayer
+    }()
+    
     internal let center: Center!
     private let manyParticle: ManyParticle = ManyParticle()
     private let links: Links = Links()
@@ -79,6 +88,10 @@ extension GraphEngine {
     // -MARK: SELECT
     public func select(nodeParticle: NodeParticle) {
         nodeParticle.circleContainer.circle.addGlow()
+        let childrenParticles = nodeParticle.node.children.map { (node) -> NodeParticle in
+            node.nodeParticle
+        }
+        selectedNodeLinkLayer.path = links.pathForSelectedAndChildren(parent: nodeParticle, children: childrenParticles)
     }
     
     public func deselect(nodeParticle: NodeParticle) {
