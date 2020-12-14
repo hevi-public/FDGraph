@@ -28,19 +28,6 @@ public class GraphEngine {
         return simulation
     }()
     
-    func childrenLinkDraw() {
-        if let selectedNode = self.selectedNode {
-            if let nodeParticle = selectedNode.nodeParticle {
-            
-                let childrenParticles = nodeParticle.node.children.map { (node) -> NodeParticle in
-                    node.nodeParticle
-                }
-                
-                self.selectedNodeLinkLayer.path = self.links.pathForSelectedAndChildren(parent: nodeParticle, children: childrenParticles)
-            }
-        }
-    }
-    
     private lazy var linkLayer: CAShapeLayer = {
         let linkLayer = CAShapeLayer()
         linkLayer.strokeColor = UIColor.gray.cgColor
@@ -148,10 +135,22 @@ extension GraphEngine {
 
 extension GraphEngine {
     
-    
     public func objectAtPoint(location: CGPoint) -> NodeParticle? {
         return self.simulation.particles.first { (viewParticle) -> Bool in
             return viewParticle.circleContainer.frame.contains(location)
+        }
+    }
+    
+    private func childrenLinkDraw() {
+        if let selectedNode = self.selectedNode {
+            if let nodeParticle = selectedNode.nodeParticle {
+            
+                let childrenParticles = nodeParticle.node.children.map { (node) -> NodeParticle in
+                    node.nodeParticle
+                }
+                
+                self.selectedNodeLinkLayer.path = self.links.pathForSelectedAndChildren(parent: nodeParticle, children: childrenParticles)
+            }
         }
     }
 }
