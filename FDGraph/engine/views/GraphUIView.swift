@@ -88,6 +88,7 @@ struct GraphUIView: UIViewControllerRepresentable {
             
             graphController.add(node: newNode, contentType: .text)
             graphController.select(node: newNode)
+            graphController.edit(node: newNode)
         }
         
         func handleAddSibling() {
@@ -102,6 +103,7 @@ struct GraphUIView: UIViewControllerRepresentable {
             
             graphController.add(node: newNode, contentType: .text)
             graphController.select(node: newNode)
+            graphController.edit(node: newNode)
         }
         
     }
