@@ -106,6 +106,10 @@ struct GraphUIView: UIViewControllerRepresentable {
             graphController.edit(node: newNode)
         }
         
+        func save(node: Node) {
+            uiView.nodeStore.update(node: node)
+        }
+        
     }
     
     private func getMaxId() -> Int? {

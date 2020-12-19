@@ -71,6 +71,7 @@ public class GraphUITextView: UITextView, UITextViewDelegate {
         if (text == "\n") {
             print("enter pressed")
             graphUITextdelegate?.shouldSave(text: textView.text)
+            self.endEditing(true)
             return false
         }
         return true

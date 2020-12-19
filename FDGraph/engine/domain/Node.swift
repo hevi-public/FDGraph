@@ -13,6 +13,8 @@ public protocol NodeDelegate {
     
     func handleSingleTap(node: Node)
     func handleDoubleTap(node: Node)
+    
+    func save(node: Node)
 }
 
 public class Node {
@@ -33,7 +35,7 @@ public class Node {
             _parent?.updateValue()
         }
     }
-    let text: String
+    var text: String
     let type: NodeType
     var children: [Node]
     var preSelectedChild: Node? = nil
@@ -107,16 +109,6 @@ public class Node {
     }
 }
 
-extension Node: GraphUITextDelegate {
-    public func shouldSave(text: String) {
-        print("shouldSaveFrom Delegate")
-    }
-    
-    public func shouldCancel() {
-        print("shouldCancel Delegate")
-    }
-}
-
 extension Node: Equatable {
     public static func == (lhs: Node, rhs: Node) -> Bool {
         return lhs.id == rhs.id &&
@@ -162,3 +154,16 @@ extension Node: NodeParticleDelegate {
     
     
 }
+
+extension Node: GraphUITextDelegate {
+    public func shouldSave(text: String) {
+        print("shouldSave Delegate")
+        self.text = text
+        self.delegate?.save(node: self)
+    }
+    
+    public func shouldCancel() {
+        print("shouldCancel Delegate")
+    }
+}
+
