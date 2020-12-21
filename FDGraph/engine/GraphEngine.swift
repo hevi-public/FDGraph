@@ -67,7 +67,7 @@ public class GraphEngine {
     }()
     
     internal let center: Center!
-    private let manyParticle: ManyParticle = ManyParticle()
+    let manyParticle: ManyParticle = ManyParticle()
     private let links: Links = Links()
     
     weak var selectedNode: Node?
