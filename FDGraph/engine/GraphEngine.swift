@@ -208,9 +208,25 @@ extension GraphEngine {
     }
     
     public func determinePointsAbove() -> [Node] {
+        determinePointsAbove(points: Array(simulation.particles))
+    }
+    
+    public func determinePointsBelow() -> [Node] {
+        determinePointsBelow(points: Array(simulation.particles))
+    }
+    
+    public func determinePointsLeft() -> [Node] {
+        determinePointsLeft(points: Array(simulation.particles))
+    }
+    
+    public func determinePointsRight() -> [Node] {
+        determinePointsRight(points: Array(simulation.particles))
+    }
+    
+    private func determinePointsAbove(points: [NodeParticle]) -> [Node] {
         guard let selectedNode = selectedNode else { return [] }
         
-        let allNodesWithoutSelected = simulation.particles.filter { (particle) -> Bool in
+        let allNodesWithoutSelected = points.filter { (particle) -> Bool in
             selectedNode.nodeParticle != particle
         }
         
@@ -226,10 +242,10 @@ extension GraphEngine {
         return nodesAbove
     }
 
-    public func determinePointsBelow() -> [Node] {
+    private func determinePointsBelow(points: [NodeParticle]) -> [Node] {
         guard let selectedNode = selectedNode else { return [] }
         
-        let allNodesWithoutSelected = simulation.particles.filter { (particle) -> Bool in
+        let allNodesWithoutSelected = points.filter { (particle) -> Bool in
             selectedNode.nodeParticle != particle
         }
         
@@ -245,10 +261,10 @@ extension GraphEngine {
         return nodesBelow
     }
 
-    public func determinePointsLeft() -> [Node] {
+    private func determinePointsLeft(points: [NodeParticle]) -> [Node] {
         guard let selectedNode = selectedNode else { return [] }
         
-        let allNodesWithoutSelected = simulation.particles.filter { (particle) -> Bool in
+        let allNodesWithoutSelected = points.filter { (particle) -> Bool in
             selectedNode.nodeParticle != particle
         }
         
@@ -264,10 +280,10 @@ extension GraphEngine {
         return nodesLeft
     }
 
-    public func determinePointsRight() -> [Node] {
+    private func determinePointsRight(points: [NodeParticle]) -> [Node] {
         guard let selectedNode = selectedNode else { return [] }
         
-        let allNodesWithoutSelected = simulation.particles.filter { (particle) -> Bool in
+        let allNodesWithoutSelected = points.filter { (particle) -> Bool in
             selectedNode.nodeParticle != particle
         }
         
