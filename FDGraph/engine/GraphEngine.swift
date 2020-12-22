@@ -67,7 +67,7 @@ public class GraphEngine {
     }()
     
     internal let center: Center!
-    let manyParticle: ManyParticle = ManyParticle()
+    private let manyParticle: ManyParticle = ManyParticle()
     private let links: Links = Links()
     
     weak var selectedNode: Node?
@@ -205,5 +205,96 @@ extension GraphEngine {
             self.selectedNodeParentLinkLayer.path = self.links.pathForSelectedAndParent(selected: nodeParticle, parent: parentParticle)
         }
         
+    }
+    
+    public func determinePointsAbove() -> [Node] {
+        guard let selectedNode = selectedNode else { return [] }
+        
+        let allNodesWithoutSelected = simulation.particles.filter { (particle) -> Bool in
+            selectedNode.nodeParticle != particle
+        }
+        
+        let possiblePointsAbove = allNodesWithoutSelected.filter { (point) -> Bool in
+            let d = abs(selectedNode.nodeParticle.position.x - point.position.x)
+            return point.position.y >= selectedNode.nodeParticle.position.y + d &&
+                (point.position.x <= selectedNode.nodeParticle.position.x + d ||
+                point.position.x >= selectedNode.nodeParticle.position.x - d)
+        }
+        let nodesAbove = possiblePointsAbove.map { (particle) -> Node in
+            particle.node
+        }
+        return nodesAbove
+    }
+
+    public func determinePointsBelow() -> [Node] {
+        guard let selectedNode = selectedNode else { return [] }
+        
+        let allNodesWithoutSelected = simulation.particles.filter { (particle) -> Bool in
+            selectedNode.nodeParticle != particle
+        }
+        
+        let possiblePointsBelow = allNodesWithoutSelected.filter { (point) -> Bool in
+            let d = abs(selectedNode.nodeParticle.position.x - point.position.x)
+            return point.position.y <= selectedNode.nodeParticle.position.y - d &&
+                (point.position.x <= selectedNode.nodeParticle.position.x + d ||
+                point.position.x >= selectedNode.nodeParticle.position.x - d)
+        }
+        let nodesBelow = possiblePointsBelow.map { (particle) -> Node in
+            particle.node
+        }
+        return nodesBelow
+    }
+
+    public func determinePointsLeft() -> [Node] {
+        guard let selectedNode = selectedNode else { return [] }
+        
+        let allNodesWithoutSelected = simulation.particles.filter { (particle) -> Bool in
+            selectedNode.nodeParticle != particle
+        }
+        
+        let possiblePointsLeft = allNodesWithoutSelected.filter { (point) -> Bool in
+            let d = abs(selectedNode.nodeParticle.position.y - point.position.y)
+            return point.position.x <= selectedNode.nodeParticle.position.x - d &&
+                (point.position.y <= selectedNode.nodeParticle.position.y + d ||
+                point.position.y >= selectedNode.nodeParticle.position.y - d)
+        }
+        let nodesLeft = possiblePointsLeft.map { (particle) -> Node in
+            particle.node
+        }
+        return nodesLeft
+    }
+
+    public func determinePointsRight() -> [Node] {
+        guard let selectedNode = selectedNode else { return [] }
+        
+        let allNodesWithoutSelected = simulation.particles.filter { (particle) -> Bool in
+            selectedNode.nodeParticle != particle
+        }
+        
+        let possiblePointsRight = allNodesWithoutSelected.filter { (point) -> Bool in
+            let d = abs(selectedNode.nodeParticle.position.y - point.position.y)
+            return point.position.x >= selectedNode.nodeParticle.position.x + d &&
+                (point.position.y <= selectedNode.nodeParticle.position.y + d ||
+                point.position.y >= selectedNode.nodeParticle.position.y - d)
+        }
+        let nodesRight = possiblePointsRight.map { (particle) -> Node in
+            particle.node
+        }
+        return nodesRight
+    }
+    
+    public func determineClosest(center: Node, points: [Node]) -> Node? {
+        guard points.count != 0 else { return nil }
+        guard points.count != 1 else { return points[0] }
+        
+        var closest = points[0]
+        for i in 1...points.count - 1 {
+            let nextPoint = points[i]
+            if center.nodeParticle.position.distanceToPoint(otherPoint: nextPoint.nodeParticle.position) <
+                center.nodeParticle.position.distanceToPoint(otherPoint: closest.nodeParticle.position) {
+                closest = nextPoint
+            }
+        }
+        return closest
     }
 }

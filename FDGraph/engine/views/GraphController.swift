@@ -362,78 +362,11 @@ extension GraphController {
     
     // TEMP
     
-    func determinePointsAbove(points: [Node]) -> [Node] {
-        guard let selectedNode = selectedNode else { return [] }
-        
-        let possiblePointsAbove = points.filter { (point) -> Bool in
-            let d = abs(selectedNode.nodeParticle.position.x - point.nodeParticle.position.x)
-            return point.nodeParticle.position.y >= selectedNode.nodeParticle.position.y + d &&
-                (point.nodeParticle.position.x <= selectedNode.nodeParticle.position.x + d ||
-                point.nodeParticle.position.x >= selectedNode.nodeParticle.position.x - d)
-        }
-        return possiblePointsAbove
-    }
-
-    func determinePointsBelow(points: [Node]) -> [Node] {
-        guard let selectedNode = selectedNode else { return [] }
-        
-        let possiblePointsBelow = points.filter { (point) -> Bool in
-            let d = abs(selectedNode.nodeParticle.position.x - point.nodeParticle.position.x)
-            return point.nodeParticle.position.y <= selectedNode.nodeParticle.position.y - d &&
-                (point.nodeParticle.position.x <= selectedNode.nodeParticle.position.x + d ||
-                point.nodeParticle.position.x >= selectedNode.nodeParticle.position.x - d)
-        }
-        return possiblePointsBelow
-    }
-
-    func determinePointsLeft(points: [Node]) -> [Node] {
-        guard let selectedNode = selectedNode else { return [] }
-        
-        let possiblePointsLeft = points.filter { (point) -> Bool in
-            let d = abs(selectedNode.nodeParticle.position.y - point.nodeParticle.position.y)
-            return point.nodeParticle.position.x <= selectedNode.nodeParticle.position.x - d &&
-                (point.nodeParticle.position.y <= selectedNode.nodeParticle.position.y + d ||
-                point.nodeParticle.position.y >= selectedNode.nodeParticle.position.y - d)
-        }
-        return possiblePointsLeft
-    }
-
-    func determinePointsRight(points: [Node]) -> [Node] {
-        guard let selectedNode = selectedNode else { return [] }
-        
-        let possiblePointsRight = points.filter { (point) -> Bool in
-            let d = abs(selectedNode.nodeParticle.position.y - point.nodeParticle.position.y)
-            return point.nodeParticle.position.x >= selectedNode.nodeParticle.position.x + d &&
-                (point.nodeParticle.position.y <= selectedNode.nodeParticle.position.y + d ||
-                point.nodeParticle.position.y >= selectedNode.nodeParticle.position.y - d)
-        }
-        return possiblePointsRight
-    }
-    
-    func determineClosest(center: Node, points: [Node]) -> Node? {
-        guard points.count != 0 else { return nil }
-        guard points.count != 1 else { return points[0] }
-        
-        var closest = points[0]
-        for i in 1...points.count - 1 {
-            let nextPoint = points[i]
-            if center.nodeParticle.position.distanceToPoint(otherPoint: nextPoint.nodeParticle.position) <
-                center.nodeParticle.position.distanceToPoint(otherPoint: closest.nodeParticle.position) {
-                closest = nextPoint
-            }
-        }
-        return closest
-    }
-    
     func selectAbove() {
         guard let selectedNode = selectedNode else { return }
-        
-        let allNodesWithoutSelected = allNodes.filter { (node) -> Bool in
-            node != selectedNode
-        }
 
-        let pointsAbove = determinePointsAbove(points: allNodesWithoutSelected)
-        if let closestAbove = determineClosest(center: selectedNode, points: pointsAbove) {
+        let pointsAbove = graph.determinePointsAbove()
+        if let closestAbove = graph.determineClosest(center: selectedNode, points: pointsAbove) {
             select(node: closestAbove)
             focus(node: closestAbove)
         }
@@ -442,12 +375,8 @@ extension GraphController {
     func selectBelow() {
         guard let selectedNode = selectedNode else { return }
         
-        let allNodesWithoutSelected = allNodes.filter { (node) -> Bool in
-            node != selectedNode
-        }
-
-        let pointsBelow = determinePointsBelow(points: allNodesWithoutSelected)
-        if let closestBelow = determineClosest(center: selectedNode, points: pointsBelow) {
+        let pointsBelow = graph.determinePointsBelow()
+        if let closestBelow = graph.determineClosest(center: selectedNode, points: pointsBelow) {
             select(node: closestBelow)
             focus(node: closestBelow)
         }
@@ -456,12 +385,8 @@ extension GraphController {
     func selectLeft() {
         guard let selectedNode = selectedNode else { return }
         
-        let allNodesWithoutSelected = allNodes.filter { (node) -> Bool in
-            node != selectedNode
-        }
-
-        let pointsLeft = determinePointsLeft(points: allNodesWithoutSelected)
-        if let closestLeft = determineClosest(center: selectedNode, points: pointsLeft) {
+        let pointsLeft = graph.determinePointsLeft()
+        if let closestLeft = graph.determineClosest(center: selectedNode, points: pointsLeft) {
             select(node: closestLeft)
             focus(node: closestLeft)
         }
@@ -470,12 +395,8 @@ extension GraphController {
     func selectRight() {
         guard let selectedNode = selectedNode else { return }
         
-        let allNodesWithoutSelected = allNodes.filter { (node) -> Bool in
-            node != selectedNode
-        }
-
-        let pointsRight = determinePointsRight(points: allNodesWithoutSelected)
-        if let closestRight = determineClosest(center: selectedNode, points: pointsRight) {
+        let pointsRight = graph.determinePointsRight()
+        if let closestRight = graph.determineClosest(center: selectedNode, points: pointsRight) {
             select(node: closestRight)
             focus(node: closestRight)
         }
