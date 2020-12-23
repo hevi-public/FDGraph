@@ -146,18 +146,29 @@ class GraphController: UIViewController {
     }
     
     private func handleNodeSelection(key: UIKey) -> Bool {
-        if (key.modifierFlags != .command && key.characters == "i") || key.charactersIgnoringModifiers == UIKeyCommand.inputUpArrow {
-            self.selectBelow()
+        if (key.modifierFlags == .shift && key.charactersIgnoringModifiers == "i") {
+            self.selectBelow(nodesInTree: false)
+            return true
+        } else if (key.modifierFlags == .shift && key.charactersIgnoringModifiers == "k") {
+            self.selectAbove(nodesInTree: false)
+            return true
+        } else if (key.modifierFlags == .shift && key.charactersIgnoringModifiers == "j") {
+            self.selectLeft(nodesInTree: false)
+            return true
+        } else if (key.modifierFlags == .shift && key.charactersIgnoringModifiers == "l") {
+            self.selectRight(nodesInTree: false)
+            return true
+        } else if (key.modifierFlags != .command && key.characters == "i") || key.charactersIgnoringModifiers == UIKeyCommand.inputUpArrow {
+            self.selectBelow(nodesInTree: true)
             return true
         } else if (key.modifierFlags != .command && key.characters == "k") || key.charactersIgnoringModifiers == UIKeyCommand.inputDownArrow {
-            self.selectAbove()
-            
+            self.selectAbove(nodesInTree: true)
             return true
-        } else if (key.modifierFlags != .command && key.characters == "j") || key.charactersIgnoringModifiers == UIKeyCommand.inputLeftArrow{
-            self.selectLeft()
+        } else if (key.modifierFlags != .command && key.characters == "j") || key.charactersIgnoringModifiers == UIKeyCommand.inputLeftArrow {
+            self.selectLeft(nodesInTree: true)
             return true
         } else if (key.modifierFlags != .command && key.characters == "l") || key.charactersIgnoringModifiers == UIKeyCommand.inputRightArrow {
-            self.selectRight()
+            self.selectRight(nodesInTree: true)
             return true
         }
         return false
@@ -362,48 +373,72 @@ extension GraphController {
     
     // TEMP
     
-    func selectAbove() {
+    func selectAbove(nodesInTree: Bool) {
         guard let selectedNode = selectedNode else { return }
         
         let allNodesInTree = selectedNode.root?.childNodesInTree
 
-        let pointsAbove = graph.determinePointsAbove(points: allNodesInTree)
+        var pointsAbove: [Node] = []
+        if nodesInTree {
+            pointsAbove = graph.determinePointsAbove(points: allNodesInTree)
+        } else {
+            pointsAbove = graph.determinePointsAbove()
+        }
+        
         if let closestAbove = graph.determineClosest(center: selectedNode, points: pointsAbove) {
             select(node: closestAbove)
             focus(node: closestAbove)
         }
     }
     
-    func selectBelow() {
+    func selectBelow(nodesInTree: Bool) {
         guard let selectedNode = selectedNode else { return }
         
         let allNodesInTree = selectedNode.root?.childNodesInTree
         
-        let pointsBelow = graph.determinePointsBelow(points: allNodesInTree)
+        var pointsBelow: [Node] = []
+        if nodesInTree {
+            pointsBelow = graph.determinePointsBelow(points: allNodesInTree)
+        } else {
+            pointsBelow = graph.determinePointsBelow()
+        }
+        
         if let closestBelow = graph.determineClosest(center: selectedNode, points: pointsBelow) {
             select(node: closestBelow)
             focus(node: closestBelow)
         }
     }
     
-    func selectLeft() {
+    func selectLeft(nodesInTree: Bool) {
         guard let selectedNode = selectedNode else { return }
         
         let allNodesInTree = selectedNode.root?.childNodesInTree
         
-        let pointsLeft = graph.determinePointsLeft(points: allNodesInTree)
+        var pointsLeft: [Node] = []
+        if nodesInTree {
+            pointsLeft = graph.determinePointsLeft(points: allNodesInTree)
+        } else {
+            pointsLeft = graph.determinePointsLeft()
+        }
+        
         if let closestLeft = graph.determineClosest(center: selectedNode, points: pointsLeft) {
             select(node: closestLeft)
             focus(node: closestLeft)
         }
     }
     
-    func selectRight() {
+    func selectRight(nodesInTree: Bool) {
         guard let selectedNode = selectedNode else { return }
         
         let allNodesInTree = selectedNode.root?.childNodesInTree
         
-        let pointsRight = graph.determinePointsRight(points: allNodesInTree)
+        var pointsRight: [Node] = []
+        if nodesInTree {
+            pointsRight = graph.determinePointsRight(points: allNodesInTree)
+        } else {
+            pointsRight = graph.determinePointsRight()
+        }
+        
         if let closestRight = graph.determineClosest(center: selectedNode, points: pointsRight) {
             select(node: closestRight)
             focus(node: closestRight)
