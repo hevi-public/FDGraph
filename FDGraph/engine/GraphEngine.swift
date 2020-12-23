@@ -207,20 +207,36 @@ extension GraphEngine {
         
     }
     
-    public func determinePointsAbove() -> [Node] {
-        determinePointsAbove(points: Array(simulation.particles))
+    public func determinePointsAbove(points: [NodeParticle]? = nil) -> [Node] {
+        if let points = points {
+            return determinePointsAbove(points: points)
+        } else {
+            return determinePointsAbove(points: Array(simulation.particles))
+        }
     }
     
-    public func determinePointsBelow() -> [Node] {
-        determinePointsBelow(points: Array(simulation.particles))
+    public func determinePointsBelow(points: [NodeParticle]? = nil) -> [Node] {
+        if let points = points {
+            return determinePointsBelow(points: points)
+        } else {
+            return determinePointsBelow(points: Array(simulation.particles))
+        }
     }
     
-    public func determinePointsLeft() -> [Node] {
-        determinePointsLeft(points: Array(simulation.particles))
+    public func determinePointsLeft(points: [NodeParticle]? = nil) -> [Node] {
+        if let points = points {
+            return determinePointsLeft(points: points)
+        } else {
+            return determinePointsLeft(points: Array(simulation.particles))
+        }
     }
     
-    public func determinePointsRight() -> [Node] {
-        determinePointsRight(points: Array(simulation.particles))
+    public func determinePointsRight(points: [NodeParticle]? = nil) -> [Node] {
+        if let points = points {
+            return determinePointsRight(points: points)
+        } else {
+            return determinePointsRight(points: Array(simulation.particles))
+        }
     }
     
     private func determinePointsAbove(points: [NodeParticle]) -> [Node] {
