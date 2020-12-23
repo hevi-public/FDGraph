@@ -207,33 +207,45 @@ extension GraphEngine {
         
     }
     
-    public func determinePointsAbove(points: [NodeParticle]? = nil) -> [Node] {
+    public func determinePointsAbove(points: [Node]? = nil) -> [Node] {
         if let points = points {
-            return determinePointsAbove(points: points)
+            let allParticlesInTree = points.map { (node) -> NodeParticle in
+                node.nodeParticle
+            }
+            return determinePointsAbove(points: allParticlesInTree)
         } else {
             return determinePointsAbove(points: Array(simulation.particles))
         }
     }
     
-    public func determinePointsBelow(points: [NodeParticle]? = nil) -> [Node] {
+    public func determinePointsBelow(points: [Node]? = nil) -> [Node] {
         if let points = points {
-            return determinePointsBelow(points: points)
+            let allParticlesInTree = points.map { (node) -> NodeParticle in
+                node.nodeParticle
+            }
+            return determinePointsBelow(points: allParticlesInTree)
         } else {
             return determinePointsBelow(points: Array(simulation.particles))
         }
     }
     
-    public func determinePointsLeft(points: [NodeParticle]? = nil) -> [Node] {
+    public func determinePointsLeft(points: [Node]? = nil) -> [Node] {
         if let points = points {
-            return determinePointsLeft(points: points)
+            let allParticlesInTree = points.map { (node) -> NodeParticle in
+                node.nodeParticle
+            }
+            return determinePointsLeft(points: allParticlesInTree)
         } else {
             return determinePointsLeft(points: Array(simulation.particles))
         }
     }
     
-    public func determinePointsRight(points: [NodeParticle]? = nil) -> [Node] {
+    public func determinePointsRight(points: [Node]? = nil) -> [Node] {
         if let points = points {
-            return determinePointsRight(points: points)
+            let allParticlesInTree = points.map { (node) -> NodeParticle in
+                node.nodeParticle
+            }
+            return determinePointsRight(points: allParticlesInTree)
         } else {
             return determinePointsRight(points: Array(simulation.particles))
         }

@@ -57,7 +57,7 @@ class DummyDataStore {
             node.id!
         }.max()
         
-        let newNode = Node.init(id: (maxId ?? 0) + 1, parent: parent, children: [], text: text, expanded: false, done: false, type: .text)
+        let newNode = Node.init(id: (maxId ?? 0) + 1, parent: parent, text: text, expanded: false, done: false, type: .text)
         
         if let nodeAbove = nodeAbove {
             let row = nodes.firstIndex(of: nodeAbove)! + 1
@@ -95,7 +95,7 @@ class DummyDataStore {
         
         let nodeWithParent1 = Node(id: 4, text: "row4")
         let nodeWithParent2 = Node(id: 5, text: "row5")
-        let nodeParent = Node(id: 3, children: [nodeWithParent1, nodeWithParent2], text: "row3")
+        let nodeParent = Node(id: 3, text: "row3")
         nodeWithParent1.parent = nodeParent
         nodeWithParent2.parent = nodeParent
         

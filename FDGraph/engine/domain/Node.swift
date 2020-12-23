@@ -80,9 +80,29 @@ public class Node {
         return returnValue
     }
     
-    init(id: Int?, parent: Node? = nil, children: [Node] = [], text: String, expanded: Bool = false, done: Bool = false, type: NodeType = .text) {
+    var root: Node? {
+        if parent != nil {
+            return parent?.root
+        } else {
+            return self
+        }
+    }
+    
+    var childNodesInTree: [Node] {
+        var returnValue: [Node] = []
+        
+        for child in children {
+            returnValue.append(contentsOf: child.childNodesInTree)
+        }
+        
+        returnValue.append(self)
+        
+        return returnValue
+    }
+    
+    init(id: Int?, parent: Node? = nil, text: String, expanded: Bool = false, done: Bool = false, type: NodeType = .text) {
         self.id = id
-        self.children = children
+        self.children = []
         self.text = text
         self.expanded = expanded
         self.done = done

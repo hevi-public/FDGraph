@@ -364,8 +364,10 @@ extension GraphController {
     
     func selectAbove() {
         guard let selectedNode = selectedNode else { return }
+        
+        let allNodesInTree = selectedNode.root?.childNodesInTree
 
-        let pointsAbove = graph.determinePointsAbove()
+        let pointsAbove = graph.determinePointsAbove(points: allNodesInTree)
         if let closestAbove = graph.determineClosest(center: selectedNode, points: pointsAbove) {
             select(node: closestAbove)
             focus(node: closestAbove)
@@ -375,7 +377,9 @@ extension GraphController {
     func selectBelow() {
         guard let selectedNode = selectedNode else { return }
         
-        let pointsBelow = graph.determinePointsBelow()
+        let allNodesInTree = selectedNode.root?.childNodesInTree
+        
+        let pointsBelow = graph.determinePointsBelow(points: allNodesInTree)
         if let closestBelow = graph.determineClosest(center: selectedNode, points: pointsBelow) {
             select(node: closestBelow)
             focus(node: closestBelow)
@@ -385,7 +389,9 @@ extension GraphController {
     func selectLeft() {
         guard let selectedNode = selectedNode else { return }
         
-        let pointsLeft = graph.determinePointsLeft()
+        let allNodesInTree = selectedNode.root?.childNodesInTree
+        
+        let pointsLeft = graph.determinePointsLeft(points: allNodesInTree)
         if let closestLeft = graph.determineClosest(center: selectedNode, points: pointsLeft) {
             select(node: closestLeft)
             focus(node: closestLeft)
@@ -395,7 +401,9 @@ extension GraphController {
     func selectRight() {
         guard let selectedNode = selectedNode else { return }
         
-        let pointsRight = graph.determinePointsRight()
+        let allNodesInTree = selectedNode.root?.childNodesInTree
+        
+        let pointsRight = graph.determinePointsRight(points: allNodesInTree)
         if let closestRight = graph.determineClosest(center: selectedNode, points: pointsRight) {
             select(node: closestRight)
             focus(node: closestRight)
