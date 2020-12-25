@@ -104,6 +104,7 @@ struct GraphUIView: UIViewControllerRepresentable {
         
         func save(node: Node) {
             uiView.save(node: node)
+            graphController.endEdit(node: node)
         }
         
     }

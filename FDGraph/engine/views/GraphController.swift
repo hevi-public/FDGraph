@@ -55,6 +55,8 @@ class GraphController: UIViewController {
         }
     }
     
+    private var isEditMode: Bool = false
+    
     // -MARK: SETUP
     public func setup(graphViewContextMenuDelegate: GraphContextMenuInteractionDelegate, nodeDelegate: NodeDelegate, graphDelegate: GraphDelegate) {
         self.graphViewContextMenuDelegate = graphViewContextMenuDelegate
@@ -100,23 +102,26 @@ class GraphController: UIViewController {
             
             //            if self.isFirstResponder {
             
-            didHandleEvent = handleGraphMoving(key: key)
+            if !self.isEditMode {
             
-            if !didHandleEvent {
-                didHandleEvent = handleNodeSelection(key: key)
-            }
-            
-            if !didHandleEvent {
-                didHandleEvent = handleNodeAddition(key: key)
-            }
-            
-            if !didHandleEvent {
-                if key.characters == "u" {
-                    scrollView.zoomIn()
-                    didHandleEvent = true
-                } else if key.characters == "o" {
-                    scrollView.zoomOut()
-                    didHandleEvent = true
+                didHandleEvent = handleGraphMoving(key: key)
+                
+                if !didHandleEvent {
+                    didHandleEvent = handleNodeSelection(key: key)
+                }
+                
+                if !didHandleEvent {
+                    didHandleEvent = handleNodeAddition(key: key)
+                }
+                
+                if !didHandleEvent {
+                    if key.characters == "u" {
+                        scrollView.zoomIn()
+                        didHandleEvent = true
+                    } else if key.characters == "o" {
+                        scrollView.zoomOut()
+                        didHandleEvent = true
+                    }
                 }
             }
         }
@@ -237,10 +242,14 @@ extension GraphController {
         case .text:
             let textView = particle?.circleContainer.content as! GraphTextNode
             textView.textView.becomeFirstResponder()
+            self.isEditMode = true
         case .none:
             break
         }
-        
+    }
+    
+    public func endEdit(node: Node) {
+        self.isEditMode = false
     }
     
     public func follow(node: Node?) {
