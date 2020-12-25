@@ -108,7 +108,7 @@ extension GraphEngine {
     
     // -MARK: LINK
     public func link(between a: NodeParticle, and b: NodeParticle) {
-        links.link(between: a, and: b, strength: 0.007)
+        links.link(between: a, and: b, strength: 0.07, distance: 200)
         simulation.kick()
     }
     
