@@ -83,7 +83,7 @@ struct GraphUIView: UIViewControllerRepresentable {
             case .began:
                 particle.fixed = true
             case .changed:
-                particle.position = gestureRecognizer.location(in: particle.circleContainer)
+                particle.position = gestureRecognizer.location(in: graphController.graphView)
                 self.graphController.graph.simulation.kick()
 //            case .cancelled, .ended:
             default:

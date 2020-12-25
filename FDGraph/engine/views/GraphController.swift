@@ -35,7 +35,7 @@ class GraphController: UIViewController {
         return view
     }()
     
-    private lazy var graphView: GraphView = {
+    lazy var graphView: GraphView = {
         return GraphView(width: GraphController.GRAPH_CANVAS_SIZE, height: GraphController.GRAPH_CANVAS_SIZE)
     }()
     
