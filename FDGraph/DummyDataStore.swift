@@ -95,7 +95,9 @@ class DummyDataStore {
         
         let nodeWithParent1 = Node(id: 4, text: "row4")
         let nodeWithParent2 = Node(id: 5, text: "row5")
-        let nodeParent = Node(id: 3, text: "row3")
+        let nodeParent = Node(id: 3, text: "row3", position: CGPoint(x: 25000, y: 25000))
+        nodeParent.fixed = true
+        
         nodeWithParent1.parent = nodeParent
         nodeWithParent2.parent = nodeParent
         

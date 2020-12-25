@@ -100,7 +100,16 @@ public class Node {
         return returnValue
     }
     
-    init(id: Int?, parent: Node? = nil, text: String, expanded: Bool = false, done: Bool = false, type: NodeType = .text) {
+    var fixed: Bool {
+        get {
+            return nodeParticle.fixed
+        }
+        set {
+            nodeParticle.fixed = newValue
+        }
+    }
+    
+    init(id: Int?, parent: Node? = nil, text: String, expanded: Bool = false, done: Bool = false, type: NodeType = .text, fixed: Bool = false, position: CGPoint? = nil) {
         self.id = id
         self.children = []
         self.text = text
@@ -112,6 +121,11 @@ public class Node {
                                          contentType: .text,
                                          node: self)
         nodeParticle.delegate = self
+        
+        self.fixed = fixed
+        if let position = position {
+            self.nodeParticle.position = position
+        }
         
         self.parent = parent
     }
