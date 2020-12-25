@@ -78,38 +78,50 @@ struct GraphUIView: UIViewControllerRepresentable {
         // -MARK: GraphDelegate
         
         func handleAddChild() {
-            guard let selectedNode = graphController.selectedNode else { return }
-            
-            let maxId = uiView.getMaxId() ?? 0
-            
-            let newNode = Node(id: maxId + 1, parent: selectedNode, text: "")
-            
-            uiView.nodeStore.add(node: newNode)
-            
-            graphController.add(node: newNode, contentType: .text)
-            graphController.select(node: newNode)
-            graphController.edit(node: newNode)
+            uiView.handleAddChild()
         }
         
         func handleAddSibling() {
-            guard let selectedNode = graphController.selectedNode else { return }
-            guard let parent = selectedNode.parent else { return }
-            
-            let maxId = uiView.getMaxId() ?? 0
-            
-            let newNode = Node(id: maxId + 1, parent: parent, text: "")
-            
-            uiView.nodeStore.add(node: newNode)
-            
-            graphController.add(node: newNode, contentType: .text)
-            graphController.select(node: newNode)
-            graphController.edit(node: newNode)
+            uiView.handleAddSibling()
         }
         
         func save(node: Node) {
-            uiView.nodeStore.update(node: node)
+            uiView.save(node: node)
         }
         
+    }
+    
+    func handleAddChild() {
+        guard let selectedNode = graphController.selectedNode else { return }
+        
+        let maxId = getMaxId() ?? 0
+        
+        let newNode = Node(id: maxId + 1, parent: selectedNode, text: "")
+        
+        nodeStore.add(node: newNode)
+        
+        graphController.add(node: newNode, contentType: .text)
+        graphController.select(node: newNode)
+        graphController.edit(node: newNode)
+    }
+    
+    func handleAddSibling() {
+        guard let selectedNode = graphController.selectedNode else { return }
+        guard let parent = selectedNode.parent else { return }
+        
+        let maxId = getMaxId() ?? 0
+        
+        let newNode = Node(id: maxId + 1, parent: parent, text: "")
+        
+        nodeStore.add(node: newNode)
+        
+        graphController.add(node: newNode, contentType: .text)
+        graphController.select(node: newNode)
+        graphController.edit(node: newNode)
+    }
+    
+    func save(node: Node) {
+        nodeStore.update(node: node)
     }
     
     private func getMaxId() -> Int? {
