@@ -24,7 +24,9 @@ struct GraphUIView: UIViewControllerRepresentable {
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<GraphUIView>) -> GraphController {
         
-        self.graphContextMenuInteractionDelegate.setup(graphController: self.graphController)
+        self.graphContextMenuInteractionDelegate.setup(uiView: self,
+                                                       graphController: self.graphController)
+        
         self.graphController.setup(graphViewContextMenuDelegate: graphContextMenuInteractionDelegate,
                                    nodeDelegate: context.coordinator,
                                    graphDelegate: context.coordinator)
@@ -91,6 +93,18 @@ struct GraphUIView: UIViewControllerRepresentable {
         
     }
     
+    func handleAddRoot(position: CGPoint) {
+        let maxId = getMaxId() ?? 0
+        
+        let newNode = Node(id: maxId + 1, parent: nil, text: "", position: position)
+        
+        nodeStore.add(node: newNode)
+        
+        graphController.add(node: newNode, contentType: .text)
+        graphController.select(node: newNode)
+        graphController.edit(node: newNode)
+    }
+    
     func handleAddChild() {
         guard let selectedNode = graphController.selectedNode else { return }
         
@@ -153,8 +167,11 @@ struct GraphUIView: UIViewControllerRepresentable {
 class GraphContextMenuInteractionDelegate: NSObject, UIContextMenuInteractionDelegate {
     
     private unowned var graphController: GraphController!
+    private var uiView: GraphUIView! // FIX look into how to remove this reference
     
-    func setup(graphController: GraphController) {
+    func setup(uiView: GraphUIView,
+               graphController: GraphController) {
+        self.uiView = uiView
         self.graphController = graphController
     }
     
@@ -166,20 +183,20 @@ class GraphContextMenuInteractionDelegate: NSObject, UIContextMenuInteractionDel
             })
         } else {
             return UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { suggestedActions in
-                return self.makeContextMenuForCanvas()
+                return self.makeContextMenuForCanvas(location: location)
             })
             
         }
     }
     
     // -MARK: CONTEXT FOR CANVAS
-    func makeContextMenuForCanvas() -> UIMenu {
+    func makeContextMenuForCanvas(location: CGPoint) -> UIMenu {
         
-        let share = UIAction(title: "makeContextMenuForCanvas", image: UIImage(systemName: "square.and.arrow.up")) { action in
-            
+        let add = UIAction(title: "Add new root node", image: UIImage(systemName: "plus.circle")) { action in
+            self.uiView.handleAddRoot(position: location)
         }
         
-        return UIMenu(title: "Main Menu", children: [share])
+        return UIMenu(title: "Main Menu", children: [add])
     }
     
     // -MARK: CONTEXT FOR NODE
