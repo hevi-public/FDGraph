@@ -13,6 +13,7 @@ public protocol NodeParticleDelegate {
     
     func handleSingleTap(particle: NodeParticle)
     func handleDoubleTap(particle: NodeParticle)
+    func handleDragged(particle: NodeParticle, gestureRecognizer: UIGestureRecognizer)
 }
 
 // -MARK: NODE
@@ -51,6 +52,9 @@ public class NodeParticle: Particle {
         doubleTapGesture.numberOfTapsRequired = 2
         self.circleContainer.addGestureRecognizer(doubleTapGesture)
         
+        let dragGestureRecogizer = UIPanGestureRecognizer(target: self, action: #selector(dragged(_:)))
+        self.circleContainer.addGestureRecognizer(dragGestureRecogizer)
+        
     }
     
     public func tick() {
@@ -77,6 +81,10 @@ extension NodeParticle {
     @objc func handleDoubleTap(sender: UITapGestureRecognizer) {
         
         self.delegate?.handleDoubleTap(particle: self)
+    }
+    
+    @objc private func dragged(_ gestureRecognizer: UIPanGestureRecognizer) {
+        self.delegate?.handleDragged(particle: self, gestureRecognizer: gestureRecognizer)
     }
 }
 

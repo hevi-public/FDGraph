@@ -13,6 +13,7 @@ public protocol NodeDelegate {
     
     func handleSingleTap(node: Node)
     func handleDoubleTap(node: Node)
+    func handleDragged(node: Node, gestureRecognizer: UIGestureRecognizer)
     
     func save(node: Node)
 }
@@ -186,6 +187,9 @@ extension Node: NodeParticleDelegate {
         self.delegate?.handleDoubleTap(node: particle.node)
     }
     
+    public func handleDragged(particle: NodeParticle, gestureRecognizer: UIGestureRecognizer) {
+        self.delegate?.handleDragged(node: particle.node, gestureRecognizer: gestureRecognizer)
+    }
     
 }
 

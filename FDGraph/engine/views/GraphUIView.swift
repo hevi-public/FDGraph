@@ -77,6 +77,21 @@ struct GraphUIView: UIViewControllerRepresentable {
             graphController.edit(node: node)
         }
         
+        func handleDragged(node: Node, gestureRecognizer: UIGestureRecognizer) {
+            guard let particle = node.nodeParticle else { return }
+            switch gestureRecognizer.state {
+            case .began:
+                particle.fixed = true
+            case .changed:
+                particle.position = gestureRecognizer.location(in: particle.circleContainer)
+                self.graphController.graph.simulation.kick()
+//            case .cancelled, .ended:
+            default:
+                break
+            }
+            self.graphController.graph.simulation.particles.update(with: particle)
+        }
+        
         // -MARK: GraphDelegate
         
         func handleAddChild() {
