@@ -379,6 +379,15 @@ extension GraphController {
         }
     }
     
+    public func pin(node: Node) {
+        node.fixed = true
+    }
+    
+    public func unpin(node: Node) {
+        node.fixed = false
+        
+    }
+    
     
     // TEMP
     
