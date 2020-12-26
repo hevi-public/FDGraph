@@ -66,7 +66,7 @@ public class GraphEngine {
         return selectedNodeLinkLayer
     }()
     
-    internal let center: Center!
+    internal var center: Center!
     private let manyParticle: ManyParticle = ManyParticle()
     private let links: Links = Links()
     
@@ -167,6 +167,10 @@ extension GraphEngine {
         return self.simulation.particles.first { (viewParticle) -> Bool in
             return viewParticle.circleContainer.frame.contains(location)
         }
+    }
+    
+    public func setCenter(to particle: NodeParticle) {
+        self.center = Center(particle.position)
     }
     
     private func childrenLinkDraw() {

@@ -128,6 +128,10 @@ struct GraphUIView: UIViewControllerRepresentable {
         
         let newNode = Node(id: maxId + 1, parent: selectedNode, text: "")
         
+        if let rootParticle = newNode.root?.nodeParticle {
+            graphController.graph.setCenter(to: rootParticle)
+        }
+        
         nodeStore.add(node: newNode)
         
         graphController.add(node: newNode, contentType: .text)
