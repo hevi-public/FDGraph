@@ -228,21 +228,21 @@ class GraphContextMenuInteractionDelegate: NSObject, UIContextMenuInteractionDel
             children.append(linkNode)
         }
         
-        if let selectedNode = graphController.selectedNode {
-            if selectedNode.fixed {
-                let unPin = UIAction(title: "Unpin", image: UIImage(systemName: "pin.slash")) { action in
-                    graphController.unpin(node: node)
-                    self.uiView.save(node: node)
-                }
-                children.append(unPin)
-            } else {
-                let pin = UIAction(title: "Pin", image: UIImage(systemName: "pin.slash")) { action in
-                    graphController.pin(node: node)
-                    self.uiView.save(node: node)
-                }
-                children.append(pin)
+        
+        if node.fixed {
+            let unPin = UIAction(title: "Unpin", image: UIImage(systemName: "pin.slash")) { action in
+                graphController.unpin(node: node)
+                self.uiView.save(node: node)
             }
+            children.append(unPin)
+        } else {
+            let pin = UIAction(title: "Pin", image: UIImage(systemName: "pin.slash")) { action in
+                graphController.pin(node: node)
+                self.uiView.save(node: node)
+            }
+            children.append(pin)
         }
+        
         
         let deleteNode = UIAction(title: "Delete", image: UIImage(systemName: "square.and.arrow.up")) { action in
             graphController.delete(node: node)
