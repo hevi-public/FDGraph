@@ -103,10 +103,25 @@ public class Node {
     
     var fixed: Bool {
         get {
-            return nodeParticle.fixed
+            if nodeParticle != nil {
+                return nodeParticle.fixed
+            } else {
+                return false
+            }
         }
         set {
             nodeParticle.fixed = newValue
+            nodeParticle.updateCircleColor()
+        }
+    }
+    
+    var color: UIColor {
+        get {
+            if fixed {
+                return UIColor.green
+            } else {
+                return UIColor.blue
+            }
         }
     }
     
@@ -122,6 +137,8 @@ public class Node {
                                          contentType: .text,
                                          node: self)
         nodeParticle.delegate = self
+        nodeParticle.updateCircleSize()
+        nodeParticle.updateCircleColor()
         
         self.fixed = fixed
         if let position = position {

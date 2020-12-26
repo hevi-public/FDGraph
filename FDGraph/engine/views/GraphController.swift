@@ -385,7 +385,7 @@ extension GraphController {
     
     public func unpin(node: Node) {
         node.fixed = false
-        
+        self.graph.simulation.kick()
     }
     
     

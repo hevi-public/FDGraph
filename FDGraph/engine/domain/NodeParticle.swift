@@ -69,6 +69,10 @@ public class NodeParticle: Particle {
         self.circleContainer.updateCircleSize(nodeValue: CGFloat(node.value))
     }
     
+    public func updateCircleColor() {
+        circleContainer.updateCircleColor(color: node.color)
+    }
+    
 }
 
 // -MARK: DELEGATE HANDLER

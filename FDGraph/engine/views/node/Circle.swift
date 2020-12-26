@@ -51,6 +51,11 @@ public class Circle: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    public func updateColor(color: UIColor) {
+        self.color = color
+        self.circleLayer.fillColor = color.cgColor
+    }
+    
     // -MARK: ADD GLOW
     public func addGlow(color: UIColor, opacity: Float) {
         

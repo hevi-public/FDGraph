@@ -87,6 +87,10 @@ class CircleContainer: UIView {
         circle.sizeToFit()
     }
     
+    func updateCircleColor(color: UIColor) {
+        circle.updateColor(color: color)
+    }
+    
 //    public override func sizeThatFits(_ size: CGSize) -> CGSize {
 //        circle.sizeToFit()
 //        return size
