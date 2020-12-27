@@ -98,6 +98,7 @@ struct GraphUIView: UIViewControllerRepresentable {
                 break
             }
             self.graphController.graph.simulation.allParticles.update(with: particle)
+            self.graphController.graph.simulation.forceParticles.update(with: particle)
         }
         
         // -MARK: GraphDelegate

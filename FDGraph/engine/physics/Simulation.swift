@@ -19,6 +19,7 @@ public class Simulation {
     private let velocityDecay: CGFloat = 0.9
     
     var allParticles: Set<NodeParticle> = []
+    var forceParticles: Set<NodeParticle> = []
     
     private var centerForce: (CGFloat, inout Set<NodeParticle>) -> Void
     private var linksForce: (CGFloat, inout Set<NodeParticle>) -> Void
@@ -88,21 +89,22 @@ public class Simulation {
         alpha += (alphaTarget - alpha) * alphaDecay;
         guard alpha > alphaMin else { return }
         
-        self.manyParticleForce(alpha, &allParticles)
-        self.linksForce(alpha, &allParticles)
-        self.centerForce(alpha, &allParticles)
+        self.manyParticleForce(alpha, &forceParticles)
+        self.linksForce(alpha, &forceParticles)
+        self.centerForce(alpha, &forceParticles)
         
-        for particle in allParticles {
+        for particle in forceParticles {
             if particle.fixed {
                 particle.velocity = .zero
             } else {
                 particle.velocity *= velocityDecay
                 particle.position += particle.velocity
             }
+            forceParticles.update(with: particle)
             allParticles.update(with: particle)
         }
         
-        for particle in allParticles {
+        for particle in forceParticles {
             particle.tick()
         }
         for tick in ticks {

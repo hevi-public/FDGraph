@@ -90,6 +90,7 @@ extension GraphEngine {
     public func add(node: NodeParticle, parent: NodeParticle? = nil, contentType: ContentType) {
         
         simulation.allParticles.update(with: node)
+        simulation.forceParticles.update(with: node)
         self.containerView.addSubview(node.circleContainer)
         
         if let parent = parent {
@@ -176,7 +177,7 @@ extension GraphEngine {
     }
     
     public func setParticles(particles: [NodeParticle]) {
-        self.simulation.allParticles = Set(particles)
+        self.simulation.forceParticles = Set(particles)
     }
     
     private func childrenLinkDraw() {
