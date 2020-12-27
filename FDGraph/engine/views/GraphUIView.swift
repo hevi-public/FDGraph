@@ -82,8 +82,13 @@ struct GraphUIView: UIViewControllerRepresentable {
             switch gestureRecognizer.state {
             case .began:
                 particle.node.fixed = true
-                if let rootParticle = node.root?.nodeParticle {
-                    graphController.graph.setCenter(to: rootParticle)
+                if let root = node.root {
+                    graphController.graph.setCenter(to: root.nodeParticle)
+                    
+                    let childParticles = root.childNodesInTree.map { (node) -> NodeParticle in
+                        node.nodeParticle
+                    }
+                    graphController.graph.setParticles(particles: childParticles)
                 }
             case .changed:
                 particle.position = gestureRecognizer.location(in: graphController.graphView)

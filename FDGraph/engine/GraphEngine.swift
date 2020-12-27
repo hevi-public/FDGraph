@@ -173,6 +173,10 @@ extension GraphEngine {
         self.center = Center(particle.position)
     }
     
+    public func setParticles(particles: [NodeParticle]) {
+        self.simulation.particles = Set(particles)
+    }
+    
     private func childrenLinkDraw() {
         if let selectedNode = self.selectedNode {
             if let nodeParticle = selectedNode.nodeParticle {

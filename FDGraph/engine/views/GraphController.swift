@@ -208,8 +208,13 @@ extension GraphController {
     public func add(node: Node, contentType: ContentType) {
         node.delegate = self.nodeDelegate
         
-        if let rootParticle = node.root?.nodeParticle {
-            graph.setCenter(to: rootParticle)
+        if let root = node.root {
+            graph.setCenter(to: root.nodeParticle)
+            
+            let childParticles = root.childNodesInTree.map { (node) -> NodeParticle in
+                node.nodeParticle
+            }
+            self.graph.setParticles(particles: childParticles)
         }
         
         self.graph.add(node: node.nodeParticle, parent: node.parent?.nodeParticle, contentType: contentType)
@@ -376,8 +381,13 @@ extension GraphController {
     public func delete(node: Node) {
         // TODO: delete from repository
         
-        if let rootParticle = node.root?.nodeParticle {
-            graph.setCenter(to: rootParticle)
+        if let root = node.root {
+            graph.setCenter(to: root.nodeParticle)
+            
+            let childParticles = root.childNodesInTree.map { (node) -> NodeParticle in
+                node.nodeParticle
+            }
+            self.graph.setParticles(particles: childParticles)
         }
         
         self.graph.delete(node: node.nodeParticle)
