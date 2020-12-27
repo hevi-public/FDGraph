@@ -20,7 +20,7 @@ public class GraphEngine {
         let simulation: Simulation = Simulation()
         simulation.insert(force: self.manyParticle)
         simulation.insert(force: self.links)
-        simulation.insert(force: self.center)
+        simulation.insert(center: self.center)
         simulation.insert(tick: {
             self.linkLayer.path = self.links.path(from: &$0)
             self.childrenLinkDraw()
@@ -171,6 +171,7 @@ extension GraphEngine {
     
     public func setCenter(to particle: NodeParticle) {
         self.center = Center(particle.position)
+        self.simulation.insert(center: self.center)
     }
     
     public func setParticles(particles: [NodeParticle]) {

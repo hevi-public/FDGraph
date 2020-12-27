@@ -35,8 +35,19 @@ public class Simulation {
         }
     }
     
+    private var centerIndex: Int?
+    
     public init() {
         
+    }
+    
+    public func insert(center: Center) {
+        if let centerIndex = centerIndex {
+            forces.remove(at: centerIndex)
+        }
+        let centerNewIndex = forces.endIndex
+        forces.insert(center.tick, at: centerNewIndex)
+        centerIndex = centerNewIndex
     }
     
     public func insert<U: Force>(force: U) {

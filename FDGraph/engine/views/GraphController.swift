@@ -366,6 +366,11 @@ extension GraphController {
         
         selectedNode!.parent?.lastSelectedChild = selectedNode!
         selectedNode!.parent?.preSelectedChild = selectedNode!
+        
+        if let root = node.root {
+            graph.setCenter(to: root.nodeParticle)
+            print(graph.center.center)
+        }
 
         self.graph.select(nodeParticle: selectedNode!.nodeParticle)
     }
