@@ -18,7 +18,7 @@ public class Simulation {
     private let alphaDecay: CGFloat = 1 - pow(0.001, 1 / 500)
     private let velocityDecay: CGFloat = 0.9
     
-    var particles: Set<NodeParticle> = []
+    var allParticles: Set<NodeParticle> = []
     
     private var centerForce: (CGFloat, inout Set<NodeParticle>) -> Void
     private var linksForce: (CGFloat, inout Set<NodeParticle>) -> Void
@@ -59,11 +59,11 @@ public class Simulation {
     }
     
     public func insert(particle: NodeParticle) {
-        particles.insert(particle)
+        allParticles.insert(particle)
     }
     
     public func remove(particle: NodeParticle) {
-        particles.remove(particle)
+        allParticles.remove(particle)
     }
     
     public func start() {
@@ -88,25 +88,25 @@ public class Simulation {
         alpha += (alphaTarget - alpha) * alphaDecay;
         guard alpha > alphaMin else { return }
         
-        self.manyParticleForce(alpha, &particles)
-        self.linksForce(alpha, &particles)
-        self.centerForce(alpha, &particles)
+        self.manyParticleForce(alpha, &allParticles)
+        self.linksForce(alpha, &allParticles)
+        self.centerForce(alpha, &allParticles)
         
-        for particle in particles {
+        for particle in allParticles {
             if particle.fixed {
                 particle.velocity = .zero
             } else {
                 particle.velocity *= velocityDecay
                 particle.position += particle.velocity
             }
-            particles.update(with: particle)
+            allParticles.update(with: particle)
         }
         
-        for particle in particles {
+        for particle in allParticles {
             particle.tick()
         }
         for tick in ticks {
-            tick(&particles)
+            tick(&allParticles)
         }
         
         tickCallback?()

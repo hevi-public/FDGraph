@@ -89,7 +89,7 @@ extension GraphEngine {
     // -MARK: ADD
     public func add(node: NodeParticle, parent: NodeParticle? = nil, contentType: ContentType) {
         
-        simulation.particles.update(with: node)
+        simulation.allParticles.update(with: node)
         self.containerView.addSubview(node.circleContainer)
         
         if let parent = parent {
@@ -165,7 +165,7 @@ extension GraphEngine {
 extension GraphEngine {
     
     public func objectAtPoint(location: CGPoint) -> NodeParticle? {
-        return self.simulation.particles.first { (viewParticle) -> Bool in
+        return self.simulation.allParticles.first { (viewParticle) -> Bool in
             return viewParticle.circleContainer.frame.contains(location)
         }
     }
@@ -176,7 +176,7 @@ extension GraphEngine {
     }
     
     public func setParticles(particles: [NodeParticle]) {
-        self.simulation.particles = Set(particles)
+        self.simulation.allParticles = Set(particles)
     }
     
     private func childrenLinkDraw() {
@@ -224,7 +224,7 @@ extension GraphEngine {
             }
             return determinePointsAbove(points: allParticlesInTree)
         } else {
-            return determinePointsAbove(points: Array(simulation.particles))
+            return determinePointsAbove(points: Array(simulation.allParticles))
         }
     }
     
@@ -235,7 +235,7 @@ extension GraphEngine {
             }
             return determinePointsBelow(points: allParticlesInTree)
         } else {
-            return determinePointsBelow(points: Array(simulation.particles))
+            return determinePointsBelow(points: Array(simulation.allParticles))
         }
     }
     
@@ -246,7 +246,7 @@ extension GraphEngine {
             }
             return determinePointsLeft(points: allParticlesInTree)
         } else {
-            return determinePointsLeft(points: Array(simulation.particles))
+            return determinePointsLeft(points: Array(simulation.allParticles))
         }
     }
     
@@ -257,7 +257,7 @@ extension GraphEngine {
             }
             return determinePointsRight(points: allParticlesInTree)
         } else {
-            return determinePointsRight(points: Array(simulation.particles))
+            return determinePointsRight(points: Array(simulation.allParticles))
         }
     }
     
