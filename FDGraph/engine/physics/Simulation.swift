@@ -19,7 +19,11 @@ public class Simulation {
     private let velocityDecay: CGFloat = 0.9
     
     var particles: Set<NodeParticle> = []
-    private var forces: [(CGFloat, inout Set<NodeParticle>) -> Void] = []
+    
+    private var centerForce: (CGFloat, inout Set<NodeParticle>) -> Void
+    private var linksForce: (CGFloat, inout Set<NodeParticle>) -> Void
+    private var manyParticleForce: (CGFloat, inout Set<NodeParticle>) -> Void
+    
     private var ticks: [(inout Set<NodeParticle>) -> Void] = []
     
     private weak var displayLink: CADisplayLink?
@@ -37,21 +41,17 @@ public class Simulation {
     
     private var centerIndex: Int?
     
-    public init() {
+    public init(manyParticleForce: @escaping (CGFloat, inout Set<NodeParticle>) -> Void,
+                linksForce: @escaping (CGFloat, inout Set<NodeParticle>) -> Void,
+                centerForce: @escaping (CGFloat, inout Set<NodeParticle>) -> Void) {
         
+        self.manyParticleForce = manyParticleForce
+        self.linksForce = linksForce
+        self.centerForce = centerForce
     }
     
     public func insert(center: Center) {
-        if let centerIndex = centerIndex {
-            forces.remove(at: centerIndex)
-        }
-        let centerNewIndex = forces.endIndex
-        forces.insert(center.tick, at: centerNewIndex)
-        centerIndex = centerNewIndex
-    }
-    
-    public func insert<U: Force>(force: U) {
-        forces.append(force.tick)
+        self.centerForce = center.tick
     }
     
     public func insert(tick: @escaping (inout Set<NodeParticle>) -> Void) {
@@ -88,9 +88,9 @@ public class Simulation {
         alpha += (alphaTarget - alpha) * alphaDecay;
         guard alpha > alphaMin else { return }
         
-        for force in forces {
-            force(alpha, &particles)
-        }
+        self.manyParticleForce(alpha, &particles)
+        self.linksForce(alpha, &particles)
+        self.centerForce(alpha, &particles)
         
         for particle in particles {
             if particle.fixed {

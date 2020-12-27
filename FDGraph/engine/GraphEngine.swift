@@ -17,10 +17,11 @@ public class GraphEngine {
     public var followedNode: NodeParticle?
     
     public lazy var simulation: Simulation = {
-        let simulation: Simulation = Simulation()
-        simulation.insert(force: self.manyParticle)
-        simulation.insert(force: self.links)
-        simulation.insert(center: self.center)
+        let simulation: Simulation = Simulation(
+            manyParticleForce: self.manyParticle.tick,
+            linksForce: self.links.tick,
+            centerForce: self.center.tick)
+        
         simulation.insert(tick: {
             self.linkLayer.path = self.links.path(from: &$0)
             self.childrenLinkDraw()
