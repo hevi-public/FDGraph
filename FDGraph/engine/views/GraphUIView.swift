@@ -82,6 +82,9 @@ struct GraphUIView: UIViewControllerRepresentable {
             switch gestureRecognizer.state {
             case .began:
                 particle.node.fixed = true
+                if let rootParticle = node.root?.nodeParticle {
+                    graphController.graph.setCenter(to: rootParticle)
+                }
             case .changed:
                 particle.position = gestureRecognizer.location(in: graphController.graphView)
                 self.graphController.graph.simulation.kick()
@@ -127,10 +130,6 @@ struct GraphUIView: UIViewControllerRepresentable {
         let maxId = getMaxId() ?? 0
         
         let newNode = Node(id: maxId + 1, parent: selectedNode, text: "")
-        
-        if let rootParticle = newNode.root?.nodeParticle {
-            graphController.graph.setCenter(to: rootParticle)
-        }
         
         nodeStore.add(node: newNode)
         
