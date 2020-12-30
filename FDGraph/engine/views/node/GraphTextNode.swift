@@ -13,7 +13,7 @@ class GraphTextNode: UIView {
     
     let textView: GraphUITextView
     
-    convenience init(graphUITextdelegate: GraphUITextDelegate, text: String, fontSize: CGFloat, baseHeight: Int, textFieldWidth: Int, textFieldHeight: Int, circleColor: UIColor) {
+    convenience init(graphUITextdelegate: GraphUITextDelegate, text: String, fontSize: CGFloat, textFieldWidth: Int, textFieldHeight: Int, circleColor: UIColor) {
         
         let frame = CGRect(x: 0, y: 0, width: textFieldWidth, height: textFieldHeight)
         
@@ -22,7 +22,6 @@ class GraphTextNode: UIView {
         self.textView.setup(graphUITextdelegate: graphUITextdelegate,
                             text: text,
                             fontSize: fontSize,
-                            baseHeight: baseHeight,
                             textFieldWidth: textFieldWidth,
                             textFieldHeight: textFieldHeight)
         

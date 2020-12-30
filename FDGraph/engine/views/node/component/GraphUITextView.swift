@@ -18,7 +18,7 @@ public class GraphUITextView: UITextView, UITextViewDelegate {
 
     public var graphUITextdelegate: GraphUITextDelegate?
     
-    public func setup(graphUITextdelegate: GraphUITextDelegate, text: String, fontSize: CGFloat, baseHeight: Int, textFieldWidth: Int, textFieldHeight: Int) {
+    public func setup(graphUITextdelegate: GraphUITextDelegate, text: String, fontSize: CGFloat, textFieldWidth: Int, textFieldHeight: Int) {
         
         self.graphUITextdelegate = graphUITextdelegate
         
@@ -27,7 +27,6 @@ public class GraphUITextView: UITextView, UITextViewDelegate {
         self.font = UIFont.systemFont(ofSize: fontSize)
         self.delegate = self
     
-//        self.frame = CGRect(x: 0, y: baseHeight / 2 + Int(radius), width: textFieldWidth, height: textFieldHeight)
         self.frame = CGRect(x: -textFieldWidth / 2, y: 0, width: textFieldWidth, height: textFieldHeight)
         self.textColor = UIColor.lightGray
         self.backgroundColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 0.2008775685)

@@ -33,7 +33,6 @@ class CircleContainer: UIView {
             contentView = GraphTextNode(graphUITextdelegate: graphUITextdelegate,
                                         text: text,
                                         fontSize: 12.0,
-                                        baseHeight: 50,
                                         textFieldWidth: 100,
                                         textFieldHeight: 200,
                                         circleColor: UIColor.blue)
