@@ -133,6 +133,14 @@
 			path = domain;
 			sourceTree = "<group>";
 		};
+		D742EFDD25A4FDF200A5454B /* datastore */ = {
+			isa = PBXGroup;
+			children = (
+				D78445F325859340000229A8 /* DummyDataStore.swift */,
+			);
+			path = datastore;
+			sourceTree = "<group>";
+		};
 		D78445EA25855C42000229A8 /* extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -192,6 +200,7 @@
 		D7D2B4DB24E71E3300EBC1C8 /* FDGraph */ = {
 			isa = PBXGroup;
 			children = (
+				D742EFDD25A4FDF200A5454B /* datastore */,
 				D7D2B52124E82DC100EBC1C8 /* FDGraph.entitlements */,
 				D7D2B51A24E7553B00EBC1C8 /* engine */,
 				D7D2B4DC24E71E3300EBC1C8 /* AppDelegate.swift */,
@@ -202,7 +211,6 @@
 				D7D2B4ED24E71E3900EBC1C8 /* Info.plist */,
 				D7D2B4E024E71E3300EBC1C8 /* FDGraph.xcdatamodeld */,
 				D7D2B4E724E71E3900EBC1C8 /* Preview Content */,
-				D78445F325859340000229A8 /* DummyDataStore.swift */,
 			);
 			path = FDGraph;
 			sourceTree = "<group>";
