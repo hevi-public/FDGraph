@@ -8,7 +8,7 @@
 
 import Foundation
 
-class DummyDataStore {
+class DummyDataStore: DataStore {
     
     private var nodes: [Node] = []
     
