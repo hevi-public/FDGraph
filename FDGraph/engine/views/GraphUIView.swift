@@ -32,7 +32,7 @@ struct GraphUIView: UIViewControllerRepresentable {
                                    graphDelegate: context.coordinator)
         
         
-        
+        jsonStore.fetchAll()
         
         return self.graphController
     }
@@ -40,6 +40,7 @@ struct GraphUIView: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: GraphController, context: UIViewControllerRepresentableContext<GraphUIView>) {
         
         let allNodes = self.nodeStore.fetchAll()
+        
         
         allNodes.forEach { (node) in
             node.delegate = context.coordinator

@@ -15,7 +15,13 @@ class JsonFileBasedDataStore: DataStore {
     private var fileCache: [NodeJsonRepresentation] = []
     
     func fetchAll() -> [Node] {
-        fatalError("fetchAll not implemented")
+        do {
+            let nodeJsons = try JSONSerialization.loadJSON(withFilename: storeFileName)
+            print(nodeJsons?[0].text)
+        } catch {
+            print("error fetching all, TODO proper error handling")
+        }
+        return []
     }
     
     func fetch(node: Node?) -> Node? {
@@ -27,7 +33,23 @@ class JsonFileBasedDataStore: DataStore {
     }
     
     func add(node: Node) {
-        let jsonRepresentation = NodeJsonRepresentation(text: node.text)
+//        guard let id = node.id else { return }
+        
+        var nodeType: NodeTypeJsonRepresentation = .text
+        
+        switch node.type {
+        case .text:
+            nodeType = .text
+        default:
+            nodeType = .text
+        }
+        
+        let jsonRepresentation = NodeJsonRepresentation(
+//            id: id,
+//            parent: node.parent?.id,
+            text: node.text
+//            type: nodeType
+        )
         
         do {
             fileCache.append(jsonRepresentation)
@@ -51,19 +73,28 @@ class JsonFileBasedDataStore: DataStore {
 }
 
 struct NodeJsonRepresentation: Codable {
+//    let id: Int
+//    let parent: Int?
     let text: String
+//    let type: NodeTypeJsonRepresentation
+}
+
+enum NodeTypeJsonRepresentation: String, Codable {
+    case text
+    case input
 }
 
 extension JSONSerialization {
     
-    static func loadJSON(withFilename filename: String) throws -> Any? {
+    static func loadJSON(withFilename filename: String) throws -> [NodeJsonRepresentation]? {
         let fm = FileManager.default
         let urls = fm.urls(for: .documentDirectory, in: .userDomainMask)
         if let url = urls.first {
             var fileURL = url.appendingPathComponent(filename)
             fileURL = fileURL.appendingPathExtension("json")
             let data = try Data(contentsOf: fileURL)
-            let jsonObject = try JSONSerialization.jsonObject(with: data, options: [.mutableContainers, .mutableLeaves])
+            let jsonObject = try JSONDecoder().decode([NodeJsonRepresentation].self, from: data)
+//            let jsonObject = try JSONSerialization.jsonObject(with: data, options: [.mutableContainers, .mutableLeaves])
             return jsonObject
         }
         return nil
