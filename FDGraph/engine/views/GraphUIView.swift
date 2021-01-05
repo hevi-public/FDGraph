@@ -11,7 +11,7 @@ import SwiftUI
 struct GraphUIView: UIViewControllerRepresentable {
     
     let nodeStore = DummyDataStore()
-    
+    let jsonStore = JsonFileBasedDataStore()
     
     typealias UIViewControllerType = GraphController
     
@@ -122,6 +122,9 @@ struct GraphUIView: UIViewControllerRepresentable {
         let newNode = Node(id: maxId + 1, parent: nil, text: "", position: position)
         
         nodeStore.add(node: newNode)
+        jsonStore.add(node: newNode)
+        
+        JsonFileBasedDataStore().add(node: newNode)
         
         graphController.add(node: newNode, contentType: .text)
         graphController.select(node: newNode)

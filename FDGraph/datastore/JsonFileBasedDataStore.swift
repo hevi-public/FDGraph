@@ -10,6 +10,9 @@ import Foundation
 
 class JsonFileBasedDataStore: DataStore {
     
+    private let storeFileName: String = "FDGraphData"
+    
+    private var fileCache: [NodeJsonRepresentation] = []
     
     func fetchAll() -> [Node] {
         fatalError("fetchAll not implemented")
@@ -24,7 +27,16 @@ class JsonFileBasedDataStore: DataStore {
     }
     
     func add(node: Node) {
-        fatalError("add not implemented")
+        let jsonRepresentation = NodeJsonRepresentation(text: node.text)
+        
+        do {
+            fileCache.append(jsonRepresentation)
+//            let data = try JSONEncoder().encode(jsonRepresentation)
+//            let jsonString = String(data: data, encoding: .utf8)!
+            try JSONSerialization.save(jsonObject: fileCache, toFilename: storeFileName)
+        } catch {
+            print("error adding node to Json, TODO proper error handling")
+        }
     }
     
     func save(text: String, parent: Node?, nodeAbove: Node?) {
@@ -36,6 +48,10 @@ class JsonFileBasedDataStore: DataStore {
     }
     
     
+}
+
+struct NodeJsonRepresentation: Codable {
+    let text: String
 }
 
 extension JSONSerialization {
@@ -53,14 +69,19 @@ extension JSONSerialization {
         return nil
     }
     
-    static func save(jsonObject: Any, toFilename filename: String) throws -> Bool{
+    static func save(jsonObject: [NodeJsonRepresentation], toFilename filename: String) throws -> Bool {
         let fm = FileManager.default
         let urls = fm.urls(for: .documentDirectory, in: .userDomainMask)
         if let url = urls.first {
             var fileURL = url.appendingPathComponent(filename)
             fileURL = fileURL.appendingPathExtension("json")
-            let data = try JSONSerialization.data(withJSONObject: jsonObject, options: [.prettyPrinted])
-            try data.write(to: fileURL, options: [.atomicWrite])
+            
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = .prettyPrinted
+            
+            let jsonData = try encoder.encode(jsonObject)
+            try jsonData.write(to: fileURL, options: [.atomicWrite])
+            
             return true
         }
         
