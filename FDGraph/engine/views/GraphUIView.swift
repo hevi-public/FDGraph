@@ -83,8 +83,6 @@ struct GraphUIView: UIViewControllerRepresentable {
             case .began:
                 particle.node.fixed = true
                 if let root = node.root {
-                    graphController.graph.setCenter(to: root.nodeParticle)
-                    
                     let childParticles = root.childNodesInTree.map { (node) -> NodeParticle in
                         node.nodeParticle
                     }

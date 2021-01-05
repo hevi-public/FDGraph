@@ -21,7 +21,7 @@ public class Simulation {
     var allParticles: Set<NodeParticle> = []
     var forceParticles: Set<NodeParticle> = []
     
-    private var centerForce: (CGFloat, inout Set<NodeParticle>) -> Void
+    private var centerForce: ((CGFloat, inout Set<NodeParticle>) -> Void)?
     private var linksForce: (CGFloat, inout Set<NodeParticle>) -> Void
     private var manyParticleForce: (CGFloat, inout Set<NodeParticle>) -> Void
     
@@ -44,7 +44,7 @@ public class Simulation {
     
     public init(manyParticleForce: @escaping (CGFloat, inout Set<NodeParticle>) -> Void,
                 linksForce: @escaping (CGFloat, inout Set<NodeParticle>) -> Void,
-                centerForce: @escaping (CGFloat, inout Set<NodeParticle>) -> Void) {
+                centerForce: ((CGFloat, inout Set<NodeParticle>) -> Void)?) {
         
         self.manyParticleForce = manyParticleForce
         self.linksForce = linksForce
@@ -91,7 +91,7 @@ public class Simulation {
         
         self.manyParticleForce(alpha, &forceParticles)
         self.linksForce(alpha, &forceParticles)
-        self.centerForce(alpha, &forceParticles)
+        self.centerForce?(alpha, &forceParticles)
         
         for particle in forceParticles {
             if particle.fixed {

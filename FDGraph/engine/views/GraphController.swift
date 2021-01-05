@@ -209,7 +209,6 @@ extension GraphController {
         node.delegate = self.nodeDelegate
         
         if let root = node.root {
-            graph.setCenter(to: root.nodeParticle)
             
             let childParticles = root.childNodesInTree.map { (node) -> NodeParticle in
                 node.nodeParticle
@@ -367,11 +366,6 @@ extension GraphController {
         selectedNode!.parent?.lastSelectedChild = selectedNode!
         selectedNode!.parent?.preSelectedChild = selectedNode!
         
-        if let root = node.root {
-            graph.setCenter(to: root.nodeParticle)
-            print(graph.center.center)
-        }
-
         self.graph.select(nodeParticle: selectedNode!.nodeParticle)
     }
     
@@ -387,8 +381,6 @@ extension GraphController {
         // TODO: delete from repository
         
         if let root = node.root {
-            graph.setCenter(to: root.nodeParticle)
-            
             let childParticles = root.childNodesInTree.map { (node) -> NodeParticle in
                 node.nodeParticle
             }

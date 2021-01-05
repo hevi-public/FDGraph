@@ -20,7 +20,7 @@ public class GraphEngine {
         let simulation: Simulation = Simulation(
             manyParticleForce: self.manyParticle.tick,
             linksForce: self.links.tick,
-            centerForce: self.center.tick)
+            centerForce: self.center?.tick ?? nil)
         
         simulation.insert(tick: {
             self.linkLayer.path = self.links.path(from: &$0)
@@ -67,7 +67,7 @@ public class GraphEngine {
         return selectedNodeLinkLayer
     }()
     
-    internal var center: Center!
+    internal var center: Center?
     private let manyParticle: ManyParticle = ManyParticle()
     private let links: Links = Links()
     
@@ -77,7 +77,8 @@ public class GraphEngine {
     init(containerView: UIView) {
         self.containerView = containerView
         
-        self.center = Center(CGPoint(x: self.containerView.frame.width / 2, y: self.containerView.frame.height / 2))
+//        self.center = Center(CGPoint(x: self.containerView.frame.width / 2, y: self.containerView.frame.height / 2))
+        self.center = nil
         self.simulation.start()
     }
 }
@@ -173,7 +174,7 @@ extension GraphEngine {
     
     public func setCenter(to particle: NodeParticle) {
         self.center = Center(particle.position)
-        self.simulation.insert(center: self.center)
+        self.simulation.insert(center: self.center!)
     }
     
     public func setParticles(particles: [NodeParticle]) {
