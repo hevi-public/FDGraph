@@ -140,6 +140,7 @@ struct GraphUIView: UIViewControllerRepresentable {
         let newNode = Node(id: maxId + 1, parent: selectedNode, text: "")
         
         nodeStore.add(node: newNode)
+        jsonStore.add(node: newNode)
         
         graphController.add(node: newNode, contentType: .text)
         graphController.select(node: newNode)
@@ -155,6 +156,7 @@ struct GraphUIView: UIViewControllerRepresentable {
         let newNode = Node(id: maxId + 1, parent: parent, text: "")
         
         nodeStore.add(node: newNode)
+        jsonStore.add(node: newNode)
         
         graphController.add(node: newNode, contentType: .text)
         graphController.select(node: newNode)
@@ -163,6 +165,7 @@ struct GraphUIView: UIViewControllerRepresentable {
     
     func save(node: Node) {
         nodeStore.update(node: node)
+        jsonStore.update(node: node)
     }
     
     private func getMaxId() -> Int? {
@@ -180,6 +183,7 @@ struct GraphUIView: UIViewControllerRepresentable {
         
         let newNode = self.graphController.addNew(id: (maxId ?? 0) + 1, contentType: .text)
         self.nodeStore.add(node: newNode)
+        self.jsonStore.add(node: newNode)
     
     }
     

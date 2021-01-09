@@ -66,7 +66,7 @@ class JsonFileBasedDataStore: DataStore {
     }
     
     func update(node: Node) {
-        fatalError("update not implemented")
+        add(node: node)
     }
     
     
