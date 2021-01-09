@@ -16,8 +16,9 @@ class JsonFileBasedDataStore: DataStore {
     
     func fetchAll() -> [Node] {
         do {
-            let nodeJsonRepresentations = try JSONSerialization.loadJSON(withFilename: storeFileName)
-            let nodeJsons = nodeJsonRepresentations.map { nodeJson -> Node in
+            fileCache = try JSONSerialization.loadJSON(withFilename: storeFileName)
+            
+            let nodeJsons = fileCache.map { nodeJson -> Node in
                 Node(id: nodeJson.id, text: nodeJson.text)
             }
             return nodeJsons

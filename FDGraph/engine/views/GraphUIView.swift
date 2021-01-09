@@ -10,7 +10,7 @@ import SwiftUI
 
 struct GraphUIView: UIViewControllerRepresentable {
     
-    let nodeStore = DummyDataStore()
+//    let nodeStore = DummyDataStore()
     let jsonStore = JsonFileBasedDataStore()
     
     typealias UIViewControllerType = GraphController
@@ -31,15 +31,13 @@ struct GraphUIView: UIViewControllerRepresentable {
                                    nodeDelegate: context.coordinator,
                                    graphDelegate: context.coordinator)
         
-        
-        jsonStore.fetchAll()
-        
         return self.graphController
     }
     
     func updateUIViewController(_ uiViewController: GraphController, context: UIViewControllerRepresentableContext<GraphUIView>) {
         
-        let allNodes = self.nodeStore.fetchAll()
+//        let allNodes = self.nodeStore.fetchAll()
+        let allNodes = self.jsonStore.fetchAll()
         
         
         allNodes.forEach { (node) in
@@ -122,7 +120,7 @@ struct GraphUIView: UIViewControllerRepresentable {
         
         let newNode = Node(id: maxId + 1, parent: nil, text: "", position: position)
         
-        nodeStore.add(node: newNode)
+//        nodeStore.add(node: newNode)
         jsonStore.add(node: newNode)
         
         graphController.add(node: newNode, contentType: .text)
@@ -137,7 +135,7 @@ struct GraphUIView: UIViewControllerRepresentable {
         
         let newNode = Node(id: maxId + 1, parent: selectedNode, text: "")
         
-        nodeStore.add(node: newNode)
+//        nodeStore.add(node: newNode)
         jsonStore.add(node: newNode)
         
         graphController.add(node: newNode, contentType: .text)
@@ -153,7 +151,7 @@ struct GraphUIView: UIViewControllerRepresentable {
         
         let newNode = Node(id: maxId + 1, parent: parent, text: "")
         
-        nodeStore.add(node: newNode)
+//        nodeStore.add(node: newNode)
         jsonStore.add(node: newNode)
         
         graphController.add(node: newNode, contentType: .text)
@@ -162,12 +160,13 @@ struct GraphUIView: UIViewControllerRepresentable {
     }
     
     func save(node: Node) {
-        nodeStore.update(node: node)
+//        nodeStore.update(node: node)
         jsonStore.update(node: node)
     }
     
     private func getMaxId() -> Int? {
-        let nodeWithMaxId = self.nodeStore.fetchAll().filter({ node -> Bool in
+//        let nodeWithMaxId = self.nodeStore.fetchAll().filter({ node -> Bool in
+        let nodeWithMaxId = self.jsonStore.fetchAll().filter({ node -> Bool in
             node.id != nil
         }).max { (a, b) -> Bool in
             a.id! < b.id!
@@ -180,7 +179,7 @@ struct GraphUIView: UIViewControllerRepresentable {
         let maxId = getMaxId()
         
         let newNode = self.graphController.addNew(id: (maxId ?? 0) + 1, contentType: .text)
-        self.nodeStore.add(node: newNode)
+//        self.nodeStore.add(node: newNode)
         self.jsonStore.add(node: newNode)
     
     }
