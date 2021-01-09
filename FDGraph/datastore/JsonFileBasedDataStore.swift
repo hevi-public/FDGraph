@@ -52,7 +52,8 @@ class JsonFileBasedDataStore: DataStore {
             id: node.id ?? 0,
             parentId: node.parent?.id ?? nil,
             text: node.text,
-            type: nodeType
+            type: nodeType,
+            expanded: node.expanded
         )
         
         fileCache.append(jsonRepresentation)
@@ -90,6 +91,7 @@ struct NodeJsonRepresentation: Codable {
     let parentId: Int?
     var text: String
     let type: NodeTypeJsonRepresentation
+    var expanded: Bool
 }
 
 enum NodeTypeJsonRepresentation: String, Codable {
