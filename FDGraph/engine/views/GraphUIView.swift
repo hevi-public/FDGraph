@@ -125,8 +125,6 @@ struct GraphUIView: UIViewControllerRepresentable {
         nodeStore.add(node: newNode)
         jsonStore.add(node: newNode)
         
-        JsonFileBasedDataStore().add(node: newNode)
-        
         graphController.add(node: newNode, contentType: .text)
         graphController.select(node: newNode)
         graphController.edit(node: newNode)
