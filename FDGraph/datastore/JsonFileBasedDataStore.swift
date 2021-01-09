@@ -49,7 +49,7 @@ class JsonFileBasedDataStore: DataStore {
         
         let jsonRepresentation = NodeJsonRepresentation(
             id: node.id ?? 0,
-//            parent: node.parent?.id,
+            parentId: node.parent?.id ?? nil,
             text: node.text
 //            type: nodeType
         )
@@ -86,7 +86,7 @@ class JsonFileBasedDataStore: DataStore {
 
 struct NodeJsonRepresentation: Codable {
     let id: Int
-//    let parent: Int?
+    let parentId: Int?
     var text: String
 //    let type: NodeTypeJsonRepresentation
 }
