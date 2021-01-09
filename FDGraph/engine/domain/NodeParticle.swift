@@ -58,6 +58,10 @@ public class NodeParticle: Particle {
     }
     
     public func tick() {
+        updateContainerPosition()
+    }
+    
+    public func updateContainerPosition() {
         let x = position.x
         let y = position.y + (circleContainer.frame.height - circleContainer.circle.frame.height) / 2
         

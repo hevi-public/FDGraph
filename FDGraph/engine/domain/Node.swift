@@ -141,6 +141,7 @@ public class Node {
         self.fixed = fixed
         if let position = position {
             self.nodeParticle.position = position
+            nodeParticle.updateContainerPosition()
         }
         
         self.parent = parent
