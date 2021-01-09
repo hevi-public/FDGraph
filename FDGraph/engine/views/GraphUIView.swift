@@ -45,7 +45,8 @@ struct GraphUIView: UIViewControllerRepresentable {
             node.delegate = context.coordinator
         }
         
-        uiViewController.add(nodes: allNodes)
+        uiViewController.add(nodes: allNodes,
+                             addToForceParticles: false)
     }
     
     // -MARK: COORDINATOR

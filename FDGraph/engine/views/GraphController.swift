@@ -208,7 +208,7 @@ extension GraphController {
         let newNode = Node(id: id, parent: self.selectedNode, text: "")
         DispatchQueue.main.async {
             newNode.delegate = self.nodeDelegate
-            self.graph.add(node: newNode.nodeParticle, parent: newNode.parent?.nodeParticle, contentType: contentType)
+            self.graph.add(node: newNode.nodeParticle, parent: newNode.parent?.nodeParticle, contentType: contentType, addToForceParticles: true)
         }
         return newNode
     }
@@ -224,18 +224,20 @@ extension GraphController {
             self.graph.setParticles(particles: childParticles)
         }
         
-        self.graph.add(node: node.nodeParticle, parent: node.parent?.nodeParticle, contentType: contentType)
+        self.graph.add(node: node.nodeParticle, parent: node.parent?.nodeParticle, contentType: contentType, addToForceParticles: true)
     }
     
     
     
-    public func add(nodes: [Node]) {
+    public func add(nodes: [Node],
+                    addToForceParticles: Bool) {
         allNodes = nodes
         
         let nodeParticles = nodes.map { (node) -> NodeParticle in
             node.nodeParticle
         }
-        self.graph.add(nodes: nodeParticles)
+        self.graph.add(nodes: nodeParticles,
+                       addToForceParticles: addToForceParticles)
         
         nodes.filter { (node) -> Bool in
             node.parent != nil

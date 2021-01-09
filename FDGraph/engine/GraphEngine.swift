@@ -92,10 +92,15 @@ public class GraphEngine {
 extension GraphEngine {
     
     // -MARK: ADD
-    public func add(node: NodeParticle, parent: NodeParticle? = nil, contentType: ContentType) {
+    public func add(node: NodeParticle,
+                    parent: NodeParticle? = nil,
+                    contentType: ContentType,
+                    addToForceParticles: Bool) {
         
         simulation.allParticles.update(with: node)
-        simulation.forceParticles.update(with: node)
+        if addToForceParticles {
+            simulation.forceParticles.update(with: node)
+        }
         self.containerView.addSubview(node.circleContainer)
         
         if let parent = parent {
@@ -107,9 +112,10 @@ extension GraphEngine {
         simulation.kick()
     }
     
-    public func add(nodes: [NodeParticle]) {
+    public func add(nodes: [NodeParticle],
+                    addToForceParticles: Bool) {
         nodes.forEach { (node) in
-            self.add(node: node, contentType: .text)
+            self.add(node: node, contentType: .text, addToForceParticles: addToForceParticles)
         }
     }
     
