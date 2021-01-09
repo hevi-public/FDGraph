@@ -19,7 +19,14 @@ class JsonFileBasedDataStore: DataStore {
             fileCache = try JSONSerialization.loadJSON(withFilename: storeFileName)
             
             let nodeJsons = fileCache.map { nodeJson -> Node in
-                Node(id: nodeJson.id, text: nodeJson.text)
+                Node(id: nodeJson.id,
+                     parent: nil,
+                     text: nodeJson.text,
+                     expanded: nodeJson.expanded,
+                     done: nodeJson.done,
+                     type: nodeJson.type.nodeType(),
+                     fixed: nodeJson.fixed,
+                     position: CGPoint(x: nodeJson.posX, y: nodeJson.posY))
             }
             return nodeJsons
         } catch {
@@ -106,6 +113,17 @@ struct NodeJsonRepresentation: Codable {
 enum NodeTypeJsonRepresentation: String, Codable {
     case text
     case input
+    
+    func nodeType() -> NodeType {
+        switch self {
+        case .text:
+            return NodeType.text
+        case .input:
+            return NodeType.input
+        default:
+            fatalError("Node without type cannot be converted")
+        }
+    }
 }
 
 extension JSONSerialization {
