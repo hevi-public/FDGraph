@@ -29,7 +29,8 @@ struct GraphUIView: UIViewControllerRepresentable {
         
         self.graphController.setup(graphViewContextMenuDelegate: graphContextMenuInteractionDelegate,
                                    nodeDelegate: context.coordinator,
-                                   graphDelegate: context.coordinator)
+                                   graphDelegate: context.coordinator,
+                                   simulationDelegate: self)
         
         return self.graphController
     }
@@ -188,6 +189,12 @@ struct GraphUIView: UIViewControllerRepresentable {
         self.graphController.delete(node: node)
     }
     
+}
+
+extension GraphUIView: SimulationDelegate {
+    func simulationStop() {
+        print("simulation Stop in Delegate")
+    }
 }
 
 

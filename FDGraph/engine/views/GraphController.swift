@@ -39,11 +39,8 @@ class GraphController: UIViewController {
         return GraphView(width: GraphController.GRAPH_CANVAS_SIZE, height: GraphController.GRAPH_CANVAS_SIZE)
     }()
     
-    lazy var graph: GraphEngine = {
-        let graphEngine = GraphEngine(containerView: self.graphView)
-        return graphEngine
-    }()
-    
+    var graph: GraphEngine!
+        
     private var _selectedNode: Node?
     public var selectedNode: Node? {
         set {
@@ -58,10 +55,21 @@ class GraphController: UIViewController {
     private var isEditMode: Bool = false
     
     // -MARK: SETUP
-    public func setup(graphViewContextMenuDelegate: GraphContextMenuInteractionDelegate, nodeDelegate: NodeDelegate, graphDelegate: GraphDelegate) {
+    public func setup(graphViewContextMenuDelegate: GraphContextMenuInteractionDelegate,
+                      nodeDelegate: NodeDelegate,
+                      graphDelegate: GraphDelegate,
+                      simulationDelegate: SimulationDelegate) {
         self.graphViewContextMenuDelegate = graphViewContextMenuDelegate
         self.nodeDelegate = nodeDelegate
         self.graphDelegate = graphDelegate
+        
+        self.graph = setupGraphEngine(simulationDelegate: simulationDelegate)
+    }
+    
+    private func setupGraphEngine(simulationDelegate: SimulationDelegate) -> GraphEngine {
+        let graphEngine = GraphEngine(containerView: self.graphView,
+                                      simulationDelegate: simulationDelegate)
+        return graphEngine
     }
     
     // -MARK: VIEWDIDLOAD

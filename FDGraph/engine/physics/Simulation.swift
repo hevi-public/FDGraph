@@ -9,7 +9,13 @@
 import CoreGraphics
 import QuartzCore
 
+public protocol SimulationDelegate {
+    func simulationStop()
+}
+
 public class Simulation {
+    
+    private let delegate: SimulationDelegate?
     
     public var tickCallback: (() -> ())?
     
@@ -44,11 +50,13 @@ public class Simulation {
     
     public init(manyParticleForce: @escaping (CGFloat, inout Set<NodeParticle>) -> Void,
                 linksForce: @escaping (CGFloat, inout Set<NodeParticle>) -> Void,
-                centerForce: ((CGFloat, inout Set<NodeParticle>) -> Void)?) {
+                centerForce: ((CGFloat, inout Set<NodeParticle>) -> Void)?,
+                delegate: SimulationDelegate) {
         
         self.manyParticleForce = manyParticleForce
         self.linksForce = linksForce
         self.centerForce = centerForce
+        self.delegate = delegate
     }
     
     public func insert(center: Center) {
@@ -77,6 +85,7 @@ public class Simulation {
     
     public func stop() {
         print("simulation stop...")
+        delegate?.simulationStop()
         displayLink?.remove(from: RunLoop.main, forMode: RunLoop.Mode.common)
     }
     

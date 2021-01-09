@@ -16,11 +16,14 @@ public class GraphEngine {
     
     public var followedNode: NodeParticle?
     
+    private let simulationDelegate: SimulationDelegate
+    
     public lazy var simulation: Simulation = {
         let simulation: Simulation = Simulation(
             manyParticleForce: self.manyParticle.tick,
             linksForce: self.links.tick,
-            centerForce: self.center?.tick ?? nil)
+            centerForce: self.center?.tick ?? nil,
+            delegate: simulationDelegate)
         
         simulation.insert(tick: {
             self.linkLayer.path = self.links.path(from: &$0)
@@ -74,9 +77,10 @@ public class GraphEngine {
     weak var selectedNode: Node?
     var glowingParticles: [NodeParticle] = []
     
-    init(containerView: UIView) {
+    init(containerView: UIView,
+         simulationDelegate: SimulationDelegate) {
         self.containerView = containerView
-        
+        self.simulationDelegate = simulationDelegate
 //        self.center = Center(CGPoint(x: self.containerView.frame.width / 2, y: self.containerView.frame.height / 2))
         self.center = nil
         self.simulation.start()
