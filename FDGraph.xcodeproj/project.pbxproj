@@ -147,6 +147,15 @@
 			path = datastore;
 			sourceTree = "<group>";
 		};
+		D742EFEF25AA777800A5454B /* views */ = {
+			isa = PBXGroup;
+			children = (
+				D78CEAEB24F82CA6006C5E70 /* node */,
+				D7D2B53B24EB057100EBC1C8 /* GraphUIView.swift */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
 		D78445EA25855C42000229A8 /* extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -206,6 +215,7 @@
 		D7D2B4DB24E71E3300EBC1C8 /* FDGraph */ = {
 			isa = PBXGroup;
 			children = (
+				D742EFEF25AA777800A5454B /* views */,
 				D742EFDD25A4FDF200A5454B /* datastore */,
 				D7D2B52124E82DC100EBC1C8 /* FDGraph.entitlements */,
 				D7D2B51A24E7553B00EBC1C8 /* engine */,
@@ -250,8 +260,6 @@
 		D7D2B50F24E7281B00EBC1C8 /* views */ = {
 			isa = PBXGroup;
 			children = (
-				D78CEAEB24F82CA6006C5E70 /* node */,
-				D7D2B53B24EB057100EBC1C8 /* GraphUIView.swift */,
 				D7D2B51024E7281B00EBC1C8 /* GraphController.swift */,
 				D7D2B51424E7281B00EBC1C8 /* GraphScrollView.swift */,
 				D7D2B51124E7281B00EBC1C8 /* GraphView.swift */,
