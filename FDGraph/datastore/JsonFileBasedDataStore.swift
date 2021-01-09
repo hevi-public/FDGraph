@@ -45,7 +45,7 @@ class JsonFileBasedDataStore: DataStore {
         }
         
         let jsonRepresentation = NodeJsonRepresentation(
-//            id: id,
+            id: node.id ?? 0,
 //            parent: node.parent?.id,
             text: node.text
 //            type: nodeType
@@ -73,7 +73,7 @@ class JsonFileBasedDataStore: DataStore {
 }
 
 struct NodeJsonRepresentation: Codable {
-//    let id: Int
+    let id: Int
 //    let parent: Int?
     let text: String
 //    let type: NodeTypeJsonRepresentation
@@ -86,7 +86,7 @@ enum NodeTypeJsonRepresentation: String, Codable {
 
 extension JSONSerialization {
     
-    static func loadJSON(withFilename filename: String) throws -> [NodeJsonRepresentation]? {
+    static func loadJSON(withFilename filename: String) throws -> [NodeJsonRepresentation] {
         let fm = FileManager.default
         let urls = fm.urls(for: .documentDirectory, in: .userDomainMask)
         if let url = urls.first {
@@ -94,10 +94,9 @@ extension JSONSerialization {
             fileURL = fileURL.appendingPathExtension("json")
             let data = try Data(contentsOf: fileURL)
             let jsonObject = try JSONDecoder().decode([NodeJsonRepresentation].self, from: data)
-//            let jsonObject = try JSONSerialization.jsonObject(with: data, options: [.mutableContainers, .mutableLeaves])
             return jsonObject
         }
-        return nil
+        return []
     }
     
     static func save(jsonObject: [NodeJsonRepresentation], toFilename filename: String) throws -> Bool {
