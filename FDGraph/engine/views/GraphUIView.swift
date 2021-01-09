@@ -126,7 +126,7 @@ struct GraphUIView: UIViewControllerRepresentable {
     }
     
     func handleAddRoot(position: CGPoint) {
-        let maxId = getMaxId() ?? 0
+        let maxId = self.jsonStore.getMaxId() ?? 0
         
         let newNode = Node(id: maxId + 1, parent: nil, text: "", fixed: true, position: position)
         
@@ -141,7 +141,7 @@ struct GraphUIView: UIViewControllerRepresentable {
     func handleAddChild() {
         guard let selectedNode = graphController.selectedNode else { return }
         
-        let maxId = getMaxId() ?? 0
+        let maxId = self.jsonStore.getMaxId() ?? 0
         
         let newNode = Node(id: maxId + 1, parent: selectedNode, text: "")
         
@@ -157,7 +157,7 @@ struct GraphUIView: UIViewControllerRepresentable {
         guard let selectedNode = graphController.selectedNode else { return }
         guard let parent = selectedNode.parent else { return }
         
-        let maxId = getMaxId() ?? 0
+        let maxId = self.jsonStore.getMaxId() ?? 0
         
         let newNode = Node(id: maxId + 1, parent: parent, text: "")
         
@@ -174,19 +174,8 @@ struct GraphUIView: UIViewControllerRepresentable {
         jsonStore.update(node: node)
     }
     
-    private func getMaxId() -> Int? {
-//        let nodeWithMaxId = self.nodeStore.fetchAll().filter({ node -> Bool in
-        let nodeWithMaxId = self.jsonStore.fetchAll().filter({ node -> Bool in
-            node.id != nil
-        }).max { (a, b) -> Bool in
-            a.id! < b.id!
-        }
-        
-        return nodeWithMaxId?.id
-    }
-    
     func addChildToSelectedNode() {
-        let maxId = getMaxId()
+        let maxId = self.jsonStore.getMaxId()
         
         let newNode = self.graphController.addNew(id: (maxId ?? 0) + 1, contentType: .text)
 //        self.nodeStore.add(node: newNode)

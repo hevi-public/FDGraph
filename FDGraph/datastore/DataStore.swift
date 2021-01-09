@@ -15,4 +15,5 @@ protocol DataStore {
     func add(node: Node)
     func save(text: String, parent: Node?, nodeAbove: Node?)
     func update(node: Node)
+    func getMaxId() -> Int?
 }

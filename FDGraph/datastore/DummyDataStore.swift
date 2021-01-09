@@ -85,6 +85,17 @@ class DummyDataStore: DataStore {
         nodes[index] = node
     }
     
+    public func getMaxId() -> Int? {
+//        let nodeWithMaxId = self.nodeStore.fetchAll().filter({ node -> Bool in
+        let nodeWithMaxId = self.fetchAll().filter({ node -> Bool in
+            node.id != nil
+        }).max { (a, b) -> Bool in
+            a.id! < b.id!
+        }
+        
+        return nodeWithMaxId?.id
+    }
+    
     let loremIpsum = """
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut pellentesque dui. Vivamus pharetra justo ut ex vehicula euismod. In hac habitasse platea dictumst. Sed sit amet dictum ipsum. Mauris sollicitudin vulputate est eget lacinia. Morbi volutpat et libero eu tincidunt. Suspendisse sodales orci eu arcu dictum, sit amet finibus purus eleifend. Etiam ac dolor quis purus vehicula vehicula.
         """

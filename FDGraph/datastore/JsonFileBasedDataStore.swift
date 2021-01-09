@@ -89,6 +89,17 @@ class JsonFileBasedDataStore: DataStore {
         }
     }
     
+    public func getMaxId() -> Int? {
+//        let nodeWithMaxId = self.nodeStore.fetchAll().filter({ node -> Bool in
+        let nodeWithMaxId = self.fetchAll().filter({ node -> Bool in
+            node.id != nil
+        }).max { (a, b) -> Bool in
+            a.id! < b.id!
+        }
+        
+        return nodeWithMaxId?.id
+    }
+    
     private func convertToNodes() -> [Node] {
         return fileCache.map { nodeJson -> Node in
             Node(id: nodeJson.id,
