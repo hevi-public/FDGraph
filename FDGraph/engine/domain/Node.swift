@@ -101,15 +101,13 @@ public class Node {
         return returnValue
     }
     
+    private var _fixed: Bool = false
     var fixed: Bool {
         get {
-            if nodeParticle != nil {
-                return nodeParticle.fixed
-            } else {
-                return false
-            }
+            _fixed
         }
         set {
+            _fixed = newValue
             nodeParticle.fixed = newValue
             nodeParticle.updateCircleColor()
         }
