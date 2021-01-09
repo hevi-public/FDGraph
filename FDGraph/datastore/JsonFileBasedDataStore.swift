@@ -18,7 +18,8 @@ class JsonFileBasedDataStore: DataStore {
         do {
             fileCache = try JSONSerialization.loadJSON(withFilename: storeFileName)
             
-            let nodeJsons = fileCache.map { nodeJson -> Node in
+            // Convert to Nodes
+            let nodes = fileCache.map { nodeJson -> Node in
                 Node(id: nodeJson.id,
                      parent: nil,
                      text: nodeJson.text,
@@ -28,7 +29,21 @@ class JsonFileBasedDataStore: DataStore {
                      fixed: nodeJson.fixed,
                      position: CGPoint(x: nodeJson.posX, y: nodeJson.posY))
             }
-            return nodeJsons
+            
+            // Set parent
+            fileCache.forEach { jsonRepr in
+                if jsonRepr.parentId != nil {
+                    if let parentId = jsonRepr.parentId,
+                       let nodeWithId = findNodeWithId(id: jsonRepr.id, nodes: nodes),
+                       let nodeWithParentId = findNodeWithId(id: parentId, nodes: nodes) {
+                        
+                        nodeWithId.parent = nodeWithParentId
+                    }
+                }
+            }
+            
+            
+            return nodes
         } catch {
             print("error fetching all, TODO proper error handling")
         }
@@ -92,6 +107,12 @@ class JsonFileBasedDataStore: DataStore {
             fileCache[i].posY = node.nodeParticle.position.y
             
             updateFile()
+        }
+    }
+    
+    private func findNodeWithId(id: Int, nodes: [Node]) -> Node? {
+        return nodes.first { node -> Bool in
+            node.id == id
         }
     }
     
