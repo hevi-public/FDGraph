@@ -120,7 +120,7 @@ struct GraphUIView: UIViewControllerRepresentable {
     func handleAddRoot(position: CGPoint) {
         let maxId = getMaxId() ?? 0
         
-        let newNode = Node(id: maxId + 1, parent: nil, text: "", position: position)
+        let newNode = Node(id: maxId + 1, parent: nil, text: "", fixed: true, position: position)
         
 //        nodeStore.add(node: newNode)
         jsonStore.add(node: newNode)
