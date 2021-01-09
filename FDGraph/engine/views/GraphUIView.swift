@@ -194,6 +194,11 @@ struct GraphUIView: UIViewControllerRepresentable {
 extension GraphUIView: SimulationDelegate {
     func simulationStop() {
         print("simulation Stop in Delegate")
+        
+        graphController.graph.simulation.forceParticles.forEach { (particle) in
+            let node = particle.node
+            jsonStore.update(node: node)
+        }
     }
 }
 

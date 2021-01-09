@@ -81,8 +81,16 @@ class JsonFileBasedDataStore: DataStore {
             jsonNode.id == node.id
         })
         
-        if let nodeFromCacheIndex = nodeFromCacheIndex {
-            fileCache[nodeFromCacheIndex].text = node.text
+        if let i = nodeFromCacheIndex {
+            fileCache[i].parentId = node.parent?.id
+            fileCache[i].text = node.text
+//            fileCache[i].type = node
+            fileCache[i].expanded = node.expanded
+            fileCache[i].done = node.done
+            fileCache[i].fixed = node.fixed
+            fileCache[i].posX = node.nodeParticle.position.x
+            fileCache[i].posY = node.nodeParticle.position.y
+            
             updateFile()
         }
     }
@@ -99,9 +107,9 @@ class JsonFileBasedDataStore: DataStore {
 
 struct NodeJsonRepresentation: Codable {
     let id: Int
-    let parentId: Int?
+    var parentId: Int?
     var text: String
-    let type: NodeTypeJsonRepresentation
+    var type: NodeTypeJsonRepresentation
     var expanded: Bool
     var done: Bool
     var fixed: Bool
