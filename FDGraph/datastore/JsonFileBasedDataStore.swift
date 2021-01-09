@@ -16,8 +16,11 @@ class JsonFileBasedDataStore: DataStore {
     
     func fetchAll() -> [Node] {
         do {
-            let nodeJsons = try JSONSerialization.loadJSON(withFilename: storeFileName)
-            print(nodeJsons?[0].text)
+            let nodeJsonRepresentations = try JSONSerialization.loadJSON(withFilename: storeFileName)
+            let nodeJsons = nodeJsonRepresentations.map { nodeJson -> Node in
+                Node(id: nodeJson.id, text: nodeJson.text)
+            }
+            return nodeJsons
         } catch {
             print("error fetching all, TODO proper error handling")
         }
