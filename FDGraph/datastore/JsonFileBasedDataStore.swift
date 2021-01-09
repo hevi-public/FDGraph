@@ -18,30 +18,9 @@ class JsonFileBasedDataStore: DataStore {
         do {
             fileCache = try JSONSerialization.loadJSON(withFilename: storeFileName)
             
-            // Convert to Nodes
-            let nodes = fileCache.map { nodeJson -> Node in
-                Node(id: nodeJson.id,
-                     parent: nil,
-                     text: nodeJson.text,
-                     expanded: nodeJson.expanded,
-                     done: nodeJson.done,
-                     type: nodeJson.type.nodeType(),
-                     fixed: nodeJson.fixed,
-                     position: CGPoint(x: nodeJson.posX, y: nodeJson.posY))
-            }
+            let nodes = convertToNodes()
             
-            // Set parent
-            fileCache.forEach { jsonRepr in
-                if jsonRepr.parentId != nil {
-                    if let parentId = jsonRepr.parentId,
-                       let nodeWithId = findNodeWithId(id: jsonRepr.id, nodes: nodes),
-                       let nodeWithParentId = findNodeWithId(id: parentId, nodes: nodes) {
-                        
-                        nodeWithId.parent = nodeWithParentId
-                    }
-                }
-            }
-            
+            setParent(nodes: nodes)
             
             return nodes
         } catch {
@@ -107,6 +86,32 @@ class JsonFileBasedDataStore: DataStore {
             fileCache[i].posY = node.nodeParticle.position.y
             
             updateFile()
+        }
+    }
+    
+    private func convertToNodes() -> [Node] {
+        return fileCache.map { nodeJson -> Node in
+            Node(id: nodeJson.id,
+                 parent: nil,
+                 text: nodeJson.text,
+                 expanded: nodeJson.expanded,
+                 done: nodeJson.done,
+                 type: nodeJson.type.nodeType(),
+                 fixed: nodeJson.fixed,
+                 position: CGPoint(x: nodeJson.posX, y: nodeJson.posY))
+        }
+    }
+    
+    private func setParent(nodes: [Node]) {
+        fileCache.forEach { jsonRepr in
+            if jsonRepr.parentId != nil {
+                if let parentId = jsonRepr.parentId,
+                   let nodeWithId = findNodeWithId(id: jsonRepr.id, nodes: nodes),
+                   let nodeWithParentId = findNodeWithId(id: parentId, nodes: nodes) {
+                    
+                    nodeWithId.parent = nodeWithParentId
+                }
+            }
         }
     }
     
