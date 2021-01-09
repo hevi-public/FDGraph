@@ -32,21 +32,29 @@ struct GraphUIView: UIViewControllerRepresentable {
                                    graphDelegate: context.coordinator,
                                    simulationDelegate: self)
         
+//        let allNodes = self.nodeStore.fetchAll()
+        let allNodes = initNodes(delegate: context.coordinator)
+        
+        graphController.add(nodes: allNodes,
+                             addToForceParticles: false)
+        
+        
         return self.graphController
     }
     
     func updateUIViewController(_ uiViewController: GraphController, context: UIViewControllerRepresentableContext<GraphUIView>) {
         
-//        let allNodes = self.nodeStore.fetchAll()
+
+    }
+    
+    private func initNodes(delegate: NodeDelegate) -> [Node] {
         let allNodes = self.jsonStore.fetchAll()
         
-        
         allNodes.forEach { (node) in
-            node.delegate = context.coordinator
+            node.delegate = delegate
         }
         
-        uiViewController.add(nodes: allNodes,
-                             addToForceParticles: false)
+        return allNodes
     }
     
     // -MARK: COORDINATOR
