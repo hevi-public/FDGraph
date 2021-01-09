@@ -54,14 +54,9 @@ class JsonFileBasedDataStore: DataStore {
 //            type: nodeType
         )
         
-        do {
-            fileCache.append(jsonRepresentation)
-//            let data = try JSONEncoder().encode(jsonRepresentation)
-//            let jsonString = String(data: data, encoding: .utf8)!
-            try JSONSerialization.save(jsonObject: fileCache, toFilename: storeFileName)
-        } catch {
-            print("error adding node to Json, TODO proper error handling")
-        }
+        fileCache.append(jsonRepresentation)
+        
+        updateFile()
     }
     
     func save(text: String, parent: Node?, nodeAbove: Node?) {
@@ -69,16 +64,30 @@ class JsonFileBasedDataStore: DataStore {
     }
     
     func update(node: Node) {
-        add(node: node)
+        let nodeFromCacheIndex = fileCache.firstIndex(where: { jsonNode -> Bool in
+            jsonNode.id == node.id
+        })
+        
+        if let nodeFromCacheIndex = nodeFromCacheIndex {
+            fileCache[nodeFromCacheIndex].text = node.text
+            updateFile()
+        }
     }
     
+    private func updateFile() {
+        do {
+            _ = try JSONSerialization.save(jsonObject: fileCache, toFilename: storeFileName)
+        } catch {
+            print("error adding node to Json, TODO proper error handling")
+        }
+    }
     
 }
 
 struct NodeJsonRepresentation: Codable {
     let id: Int
 //    let parent: Int?
-    let text: String
+    var text: String
 //    let type: NodeTypeJsonRepresentation
 }
 
