@@ -12,17 +12,16 @@ import UIKit
 public class Circle: UIView {
     
     static let radius: CGFloat = 10
-    var radiusMultiplier: CGFloat
+    var radiusMultiplier: CGFloat!
     private var color: UIColor!
     
     private var circleLayer: CAShapeLayer!
     
     public convenience init(radiusMultiplier: CGFloat, color: UIColor) {
         
-        let frame = CGRect(x: 0,
-                           y: 0,
-                           width: Circle.radius * 2 * radiusMultiplier,
-                           height: Circle.radius * 2 * radiusMultiplier)
+        let circleSize = CGSize(width: Circle.radius * 2 * radiusMultiplier, height: Circle.radius * 2 * radiusMultiplier)
+        
+        let frame = CGRect(origin: CGPoint(x: 0, y: 0), size: circleSize)
         
         self.init(frame: frame)
         
@@ -36,12 +35,11 @@ public class Circle: UIView {
         
         self.isUserInteractionEnabled = true
         
-        
     }
     
     public override init(frame: CGRect) {
         
-        self.radiusMultiplier = 1
+//        self.radiusMultiplier = 1
         
         super.init(frame: frame)
         

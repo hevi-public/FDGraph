@@ -123,13 +123,22 @@ public class Node {
         }
     }
     
-    init(id: Int?, parent: Node? = nil, text: String, expanded: Bool = false, done: Bool = false, type: NodeType = .text, fixed: Bool = false, position: CGPoint? = nil) {
+    init(id: Int?,
+         parent: Node? = nil,
+         text: String,
+         expanded: Bool = false,
+         done: Bool = false,
+         type: NodeType = .text,
+         fixed: Bool = false,
+         position: CGPoint? = nil) {
         self.id = id
         self.children = []
         self.text = text
         self.expanded = expanded
         self.done = done
         self.type = type
+        self.parent = parent
+        
         self.nodeParticle = NodeParticle(graphUITextdelegate: self,
                                          radiusMultiplier: 1.0,
                                          contentType: .text,
@@ -144,7 +153,7 @@ public class Node {
             nodeParticle.updateContainerPosition()
         }
         
-        self.parent = parent
+        
     }
     
     func updateValue() {

@@ -19,8 +19,8 @@ class JsonFileBasedDataStore: DataStore {
             fileCache = try JSONSerialization.loadJSON(withFilename: storeFileName)
             
             let nodes = convertToNodes()
-            
             setParent(nodes: nodes)
+            updatePosition(nodes: nodes)
             
             return nodes
         } catch {
@@ -123,6 +123,12 @@ class JsonFileBasedDataStore: DataStore {
                     nodeWithId.parent = nodeWithParentId
                 }
             }
+        }
+    }
+    
+    private func updatePosition(nodes: [Node]) {
+        nodes.forEach { node in
+            node.nodeParticle.updateContainerPosition()
         }
     }
     
