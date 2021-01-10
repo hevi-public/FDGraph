@@ -419,7 +419,14 @@ extension GraphController {
     func selectAbove(nodesInTree: Bool) {
         guard let selectedNode = selectedNode else { return }
         
-        let allNodesInTree = selectedNode.root?.childNodesInTree
+        var allNodesInTree = selectedNode.children
+        if let parent = selectedNode.parent {
+            allNodesInTree.append(parent)
+            allNodesInTree.append(contentsOf: parent.children)
+            if let index = allNodesInTree.firstIndex(of: selectedNode) {
+                allNodesInTree.remove(at: index)
+            }
+        }
 
         var pointsAbove: [Node] = []
         if nodesInTree {
@@ -437,7 +444,14 @@ extension GraphController {
     func selectBelow(nodesInTree: Bool) {
         guard let selectedNode = selectedNode else { return }
         
-        let allNodesInTree = selectedNode.root?.childNodesInTree
+        var allNodesInTree = selectedNode.children
+        if let parent = selectedNode.parent {
+            allNodesInTree.append(parent)
+            allNodesInTree.append(contentsOf: parent.children)
+            if let index = allNodesInTree.firstIndex(of: selectedNode) {
+                allNodesInTree.remove(at: index)
+            }
+        }
         
         var pointsBelow: [Node] = []
         if nodesInTree {
@@ -455,7 +469,14 @@ extension GraphController {
     func selectLeft(nodesInTree: Bool) {
         guard let selectedNode = selectedNode else { return }
         
-        let allNodesInTree = selectedNode.root?.childNodesInTree
+        var allNodesInTree = selectedNode.children
+        if let parent = selectedNode.parent {
+            allNodesInTree.append(parent)
+            allNodesInTree.append(contentsOf: parent.children)
+            if let index = allNodesInTree.firstIndex(of: selectedNode) {
+                allNodesInTree.remove(at: index)
+            }
+        }
         
         var pointsLeft: [Node] = []
         if nodesInTree {
@@ -473,7 +494,14 @@ extension GraphController {
     func selectRight(nodesInTree: Bool) {
         guard let selectedNode = selectedNode else { return }
         
-        let allNodesInTree = selectedNode.root?.childNodesInTree
+        var allNodesInTree = selectedNode.children
+        if let parent = selectedNode.parent {
+            allNodesInTree.append(parent)
+            allNodesInTree.append(contentsOf: parent.children)
+            if let index = allNodesInTree.firstIndex(of: selectedNode) {
+                allNodesInTree.remove(at: index)
+            }
+        }
         
         var pointsRight: [Node] = []
         if nodesInTree {
