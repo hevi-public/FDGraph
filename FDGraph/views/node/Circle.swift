@@ -21,14 +21,16 @@ public class Circle: UIView {
         
         let frame = CGRect(x: 0,
                            y: 0,
-                           width: Circle.radius * 2,
-                           height: Circle.radius * 2)
+                           width: Circle.radius * 2 * radiusMultiplier,
+                           height: Circle.radius * 2 * radiusMultiplier)
         
         self.init(frame: frame)
         
+        self.radiusMultiplier = radiusMultiplier
+        
         self.color = color
         
-        self.circleLayer = self.drawCircleOnLayer(size: CGSize(width: 2, height: 2))
+        self.circleLayer = self.drawCircleOnLayer(size: CGSize(width: frame.width, height: frame.height))
         
         self.layer.addSublayer(self.circleLayer)
         
@@ -78,9 +80,10 @@ public class Circle: UIView {
     // MARK: - PRIVATE FUNC
     private func drawCircleOnLayer(size: CGSize) -> CAShapeLayer {
         let circleLayer = CAShapeLayer()
-        circleLayer.frame = frame
+        circleLayer.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        circleLayer.bounds = circleLayer.frame
         
-        circleLayer.path = UIBezierPath(ovalIn: CGRect(x: 0, y: 0, width: size.width, height: size.height)).cgPath
+        circleLayer.path = UIBezierPath(ovalIn: CGRect(x: size.width / 2, y: size.height / 2, width: size.width, height: size.height)).cgPath
         circleLayer.fillColor = color.cgColor
         
         circleLayer.strokeColor = UIColor.gray.cgColor
@@ -100,8 +103,10 @@ public class Circle: UIView {
         
         self.layer.sublayers?.removeAll()
         
-        circleLayer = drawCircleOnLayer(size: CGSize(width: Circle.radius * 2 * radiusMultiplier, height: Circle.radius * 2 * radiusMultiplier))
-        circleLayer.frame = self.bounds
+        let circleSize = CGSize(width: Circle.radius * 2 * radiusMultiplier, height: Circle.radius * 2 * radiusMultiplier)
+        
+        circleLayer = drawCircleOnLayer(size: circleSize)
+        circleLayer.frame = CGRect(x: -circleSize.width / 2, y: -circleSize.height / 2, width: circleSize.width, height: circleSize.height)
         layer.addSublayer(circleLayer)
 
     }
