@@ -160,10 +160,10 @@ class GraphController: UIViewController {
     
     private func handleNodeSelection(key: UIKey) -> Bool {
         if (key.modifierFlags == .shift && key.charactersIgnoringModifiers == "i") {
-            self.selectBelow(nodesInTree: false)
+            self.selectAbove(nodesInTree: false)
             return true
         } else if (key.modifierFlags == .shift && key.charactersIgnoringModifiers == "k") {
-            self.selectAbove(nodesInTree: false)
+            self.selectBelow(nodesInTree: false)
             return true
         } else if (key.modifierFlags == .shift && key.charactersIgnoringModifiers == "j") {
             self.selectLeft(nodesInTree: false)
@@ -172,10 +172,10 @@ class GraphController: UIViewController {
             self.selectRight(nodesInTree: false)
             return true
         } else if (key.modifierFlags != .command && key.characters == "i") || key.charactersIgnoringModifiers == UIKeyCommand.inputUpArrow {
-            self.selectBelow(nodesInTree: true)
+            self.selectAbove(nodesInTree: true)
             return true
         } else if (key.modifierFlags != .command && key.characters == "k") || key.charactersIgnoringModifiers == UIKeyCommand.inputDownArrow {
-            self.selectAbove(nodesInTree: true)
+            self.selectBelow(nodesInTree: true)
             return true
         } else if (key.modifierFlags != .command && key.characters == "j") || key.charactersIgnoringModifiers == UIKeyCommand.inputLeftArrow {
             self.selectLeft(nodesInTree: true)
@@ -427,17 +427,17 @@ extension GraphController {
                 allNodesInTree.remove(at: index)
             }
         }
-
-        var pointsAbove: [Node] = []
+        
+        var pointsBelow: [Node] = []
         if nodesInTree {
-            pointsAbove = graph.determinePointsAbove(points: allNodesInTree)
+            pointsBelow = graph.determinePointsBelow(points: allNodesInTree)
         } else {
-            pointsAbove = graph.determinePointsAbove()
+            pointsBelow = graph.determinePointsBelow()
         }
         
-        if let closestAbove = graph.determineClosest(center: selectedNode, points: pointsAbove) {
-            select(node: closestAbove)
-            focus(node: closestAbove)
+        if let closestBelow = graph.determineClosest(center: selectedNode, points: pointsBelow) {
+            select(node: closestBelow)
+            focus(node: closestBelow)
         }
     }
     
@@ -452,17 +452,17 @@ extension GraphController {
                 allNodesInTree.remove(at: index)
             }
         }
-        
-        var pointsBelow: [Node] = []
+
+        var pointsAbove: [Node] = []
         if nodesInTree {
-            pointsBelow = graph.determinePointsBelow(points: allNodesInTree)
+            pointsAbove = graph.determinePointsAbove(points: allNodesInTree)
         } else {
-            pointsBelow = graph.determinePointsBelow()
+            pointsAbove = graph.determinePointsAbove()
         }
         
-        if let closestBelow = graph.determineClosest(center: selectedNode, points: pointsBelow) {
-            select(node: closestBelow)
-            focus(node: closestBelow)
+        if let closestAbove = graph.determineClosest(center: selectedNode, points: pointsAbove) {
+            select(node: closestAbove)
+            focus(node: closestAbove)
         }
     }
     
