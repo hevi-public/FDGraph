@@ -106,7 +106,10 @@ fileprivate struct Link: Hashable {
         let toDegree = CGFloat(degrees[b] ?? 0)
         
         let bias = fromDegree / (fromDegree + toDegree)
-        let distance = (self.distance ?? distance)
+        
+        let dist = calculateDist(to: to, from: from, distance: self.distance ?? distance)
+        
+        let distance = (dist)
         let strength = (self.strength ?? 0.7 / CGFloat(min(fromDegree, toDegree)))
         
         let delta = (to.position + to.velocity - from.position - from.velocity).jiggled
@@ -118,6 +121,13 @@ fileprivate struct Link: Hashable {
         
         particles.update(with: from)
         particles.update(with: to)
+    }
+    
+    private func calculateDist(to: NodeParticle, from: NodeParticle, distance: CGFloat) -> CGFloat {
+        let distWidth = max(from.circleContainer.frame.width, to.circleContainer.frame.width)
+        let distHeight = max(from.circleContainer.frame.height, to.circleContainer.frame.height)
+        let distDimension = max(distWidth, distHeight)
+        return max(distDimension, distance)
     }
 }
 
