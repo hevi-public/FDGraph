@@ -13,12 +13,14 @@ public enum QuadTree {
     case Leaf(CGPoint, Charge)
     indirect case Internal(CGRect, QuadTree?, QuadTree?, QuadTree?, QuadTree?, Charge)
     
-    init?<U: Particle, V: Collection>(particles: V, initial: (U) -> Charge, accumulator: ([QuadTree?]) -> Charge) where V.Iterator.Element == U {
+    init?<PARTICLE: Particle, COLLECTION: Collection>(particles: COLLECTION, initial: (PARTICLE) -> Charge, accumulator: ([QuadTree?]) -> Charge) where COLLECTION.Iterator.Element == PARTICLE {
+        
         guard let rect = particles.map({ $0.position }).boundingRect else { return nil }
         self.init(particles: particles, rect: rect, initial: initial, accumulator: accumulator)
     }
     
-    init?<U: Particle, V: Collection>(particles: V, rect: CGRect, initial: (U) -> Charge, accumulator: ([QuadTree?]) -> Charge) where V.Iterator.Element == U {
+    init?<PARTICLE: Particle, COLLECTION: Collection>(particles: COLLECTION, rect: CGRect, initial: (PARTICLE) -> Charge, accumulator: ([QuadTree?]) -> Charge) where COLLECTION.Iterator.Element == PARTICLE {
+        
         let count = particles.count
         guard count > 0 else { return nil }
         if let particle = particles.first, count == 1 {
@@ -32,10 +34,10 @@ public enum QuadTree {
             let bottomLeft = CGRect(x: minX, y: midY, width: width, height: height)
             let bottomRight = CGRect(x: midX, y: midY, width: width, height: height)
             
-            var topLeftParticles: [U] = []
-            var topRightParticles: [U] = []
-            var bottomLeftParticles: [U] = []
-            var bottomRightParticles: [U] = []
+            var topLeftParticles: [PARTICLE] = []
+            var topRightParticles: [PARTICLE] = []
+            var bottomLeftParticles: [PARTICLE] = []
+            var bottomRightParticles: [PARTICLE] = []
             
             for particle in particles {
                 let position = particle.position
