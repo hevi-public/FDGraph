@@ -9,16 +9,16 @@
 import CoreGraphics
 import UIKit
 
-public enum QuadTree<T> {
-    case Leaf(CGPoint, T)
-    indirect case Internal(CGRect, QuadTree?, QuadTree?, QuadTree?, QuadTree?, T)
+public enum QuadTree {
+    case Leaf(CGPoint, Charge)
+    indirect case Internal(CGRect, QuadTree?, QuadTree?, QuadTree?, QuadTree?, Charge)
     
-    init?<U: Particle, V: Collection>(particles: V, initial: (U) -> T, accumulator: ([QuadTree<T>?]) -> T) where V.Iterator.Element == U {
+    init?<U: Particle, V: Collection>(particles: V, initial: (U) -> Charge, accumulator: ([QuadTree?]) -> Charge) where V.Iterator.Element == U {
         guard let rect = particles.map({ $0.position }).boundingRect else { return nil }
         self.init(particles: particles, rect: rect, initial: initial, accumulator: accumulator)
     }
     
-    init?<U: Particle, V: Collection>(particles: V, rect: CGRect, initial: (U) -> T, accumulator: ([QuadTree<T>?]) -> T) where V.Iterator.Element == U {
+    init?<U: Particle, V: Collection>(particles: V, rect: CGRect, initial: (U) -> Charge, accumulator: ([QuadTree?]) -> Charge) where V.Iterator.Element == U {
         let count = particles.count
         guard count > 0 else { return nil }
         if let particle = particles.first, count == 1 {
@@ -75,7 +75,7 @@ public enum QuadTree<T> {
         }
     }
     
-    var value: T {
+    var value: Charge {
         switch self {
         case let .Leaf(_, value):
             return value
@@ -84,7 +84,7 @@ public enum QuadTree<T> {
         }
     }
     
-    func visit(_ f: (QuadTree<T>) -> Bool) {
+    func visit(_ f: (QuadTree) -> Bool) {
         if f(self) {
             return
         }

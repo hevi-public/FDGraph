@@ -8,7 +8,7 @@
 
 import CoreGraphics
 
-typealias Charge = (strength: CGFloat, position: CGPoint)
+public typealias Charge = (strength: CGFloat, position: CGPoint)
 
 public final class ManyParticle: Force {
     
@@ -23,7 +23,7 @@ public final class ManyParticle: Force {
     }
     
     public func tick(alpha: CGFloat, particles: inout Set<NodeParticle>) {
-        let tree = QuadTree<Charge>(particles: particles,
+        let tree = QuadTree(particles: particles,
                                     initial: { (strength, $0.position) },
                                     accumulator: { (children) -> Charge in
                                         var value = children.reduce((0, .zero), { (accumulated, child) -> Charge in
