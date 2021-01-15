@@ -34,6 +34,7 @@ public class Node {
             self._parent = newValue
             _parent?.addChild(node: self)
             _parent?.updateValue()
+            nodeParticle?.updateCircleColor()
         }
     }
     var text: String
@@ -82,11 +83,15 @@ public class Node {
     }
     
     var root: Node? {
-        if parent != nil {
+        if !isRoot {
             return parent?.root
         } else {
             return self
         }
+    }
+    
+    var isRoot: Bool {
+        return parent == nil
     }
     
     var childNodesInTree: [Node] {
@@ -115,7 +120,9 @@ public class Node {
     
     var color: UIColor {
         get {
-            if fixed {
+            if isRoot {
+                return UIColor.orange
+            } else if fixed {
                 return UIColor.green
             } else {
                 return UIColor.blue
