@@ -8,7 +8,7 @@
 
 import CoreGraphics
 
-fileprivate typealias Charge = (CGFloat, CGPoint)
+typealias Charge = (strength: CGFloat, position: CGPoint)
 
 public final class ManyParticle: Force {
     
@@ -23,22 +23,25 @@ public final class ManyParticle: Force {
     }
     
     public func tick(alpha: CGFloat, particles: inout Set<NodeParticle>) {
-        let tree = QuadTree(particles: particles, initial: { (strength, $0.position) }, accumulator: { (children) -> Charge in
-            var value = children.reduce((0, .zero), { (accumulated, child) -> Charge in
-                guard let value = child?.value else { return accumulated }
-                return (accumulated.0 + value.0, accumulated.1 + (value.1 * value.0))
-            })
-            value.1 /= value.0
-            return value
-        })
-                
+        let tree = QuadTree<Charge>(particles: particles,
+                                    initial: { (strength, $0.position) },
+                                    accumulator: { (children) -> Charge in
+                                        var value = children.reduce((0, .zero), { (accumulated, child) -> Charge in
+                                            guard let value = child?.value else { return accumulated }
+                                            return (accumulated.strength + value.strength, accumulated.position + (value.position * value.strength))
+                                            
+                                        })
+                                        value.position /= value.strength
+                                        return value
+                                    })
+        
         for particle in particles {
             guard !particle.fixed else { continue }
             tree?.visit({ (quad) in
                 let value = quad.value
                 let width = quad.bounds.width
-                let delta = (value.1 - particle.position).jiggled
-
+                let delta = (value.position - particle.position).jiggled
+                
                 var distance2 = delta.x * delta.x + delta.y * delta.y
                 if distance2 < distanceMin2 {
                     distance2 = sqrt(distanceMin2 * distance2)
@@ -48,7 +51,7 @@ public final class ManyParticle: Force {
                 let barnesHut = (width * width / theta2 < distance2)
                 
                 if (barnesHut || quad.leaf) && distance2 < distanceMax2 {
-                    particle.velocity += (delta * alpha * value.0 / distance2)
+                    particle.velocity += (delta * alpha * value.strength / distance2)
                 }
                 return barnesHut
             })
