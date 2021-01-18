@@ -74,6 +74,7 @@ public class GraphUITextView: UITextView, UITextViewDelegate {
             print("enter pressed")
             graphUITextdelegate?.shouldSave(text: textView.text)
             self.endEditing(true)
+            self.setContentOffset(.zero, animated: true)
             return false
         }
         
