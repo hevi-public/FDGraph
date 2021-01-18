@@ -17,7 +17,7 @@ public class Simulation {
     
     private let delegate: SimulationDelegate?
     
-    public var tickCallback: (() -> ())?
+    public var followCallback: (() -> ())?
     
     private let alphaTarget: CGFloat = 0
     private let alphaMin: CGFloat = 0.1
@@ -120,7 +120,7 @@ public class Simulation {
             tick(&allParticles)
         }
         
-        tickCallback?()
+        followCallback?()
         
 //        NotificationCenter.default.post(name: .graphTick, object: nil, userInfo: nil)
     }

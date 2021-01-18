@@ -274,7 +274,7 @@ extension GraphController {
     public func follow(node: Node?) {
         self.graph.followedNode = node?.nodeParticle
         if let node = node {
-            self.graph.simulation.tickCallback = {
+            self.graph.simulation.followCallback = {
                 self.scrollView.contentOffsetToView(view: node.nodeParticle.circleContainer, animated: false)
             }
         }
@@ -382,6 +382,8 @@ extension GraphController {
     
     public func deselect(node: Node) {
         selectedNode = nil
+        self.graph.followedNode = nil
+        self.graph.simulation.followCallback = nil
         
         if let nodeParticle = node.nodeParticle {
             self.graph.deselect(nodeParticle: nodeParticle)
