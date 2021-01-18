@@ -206,6 +206,7 @@ extension GraphController {
     
     public func addNew(id: Int, contentType: ContentType) -> Node {
         let newNode = Node(id: id, parent: self.selectedNode, text: "")
+        follow(node: newNode)
         DispatchQueue.main.async {
             newNode.delegate = self.nodeDelegate
             self.graph.add(node: newNode.nodeParticle, parent: newNode.parent?.nodeParticle, contentType: contentType, addToForceParticles: true)
@@ -215,7 +216,7 @@ extension GraphController {
     
     public func add(node: Node, contentType: ContentType) {
         node.delegate = self.nodeDelegate
-        
+        follow(node: node)
         if let root = node.root {
             
             let childParticles = root.childNodesInTree.map { (node) -> NodeParticle in
@@ -274,7 +275,7 @@ extension GraphController {
         self.graph.followedNode = node?.nodeParticle
         if let node = node {
             self.graph.simulation.tickCallback = {
-                self.scrollView.scrollToView(view: node.nodeParticle.circleContainer, animated: false)
+                self.scrollView.contentOffsetToView(view: node.nodeParticle.circleContainer, animated: false)
             }
         }
     }

@@ -62,13 +62,26 @@ class GraphScrollView: UIScrollView {
         graphView?.frame = frameToCenter
     }
     
+    func contentOffsetToView(view:UIView, animated: Bool) {
+        if let superview = view.superview {
+            
+            let childStartPoint = superview.convert(view.center, to: self)
+            
+            let newX = floor(childStartPoint.x - self.bounds.width / 2)
+            let newY = floor(childStartPoint.y - self.bounds.height / 2)
+            
+            setContentOffset(CGPoint(x: newX, y: newY), animated: false)
+        }
+    }
+    
     func scrollToView(view:UIView, animated: Bool) {
-        if let origin = view.superview {
-            let childStartPoint = origin.convert(view.frame.origin, to: self)
+        if let superview = view.superview {
             
-            let newX = childStartPoint.x - self.bounds.width / 2
-            let newY = childStartPoint.y - self.bounds.height / 2
+            let childStartPoint = superview.convert(view.center, to: self)
             
+            let newX = floor(childStartPoint.x - self.bounds.width / 2)
+            let newY = floor(childStartPoint.y - self.bounds.height / 2)
+                        
             self.scrollRectToVisible(CGRect(x: newX, y: newY, width: self.frame.width, height: self.frame.height), animated: animated)
         }
     }
