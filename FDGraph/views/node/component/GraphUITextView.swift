@@ -18,16 +18,19 @@ public class GraphUITextView: UITextView, UITextViewDelegate {
 
     public var graphUITextdelegate: GraphUITextDelegate?
     
+    private var maxTextFieldHeight: CGFloat!
+    
     public func setup(graphUITextdelegate: GraphUITextDelegate, text: String, fontSize: CGFloat, textFieldWidth: Int, textFieldHeight: Int) {
         
         self.graphUITextdelegate = graphUITextdelegate
+        self.maxTextFieldHeight = CGFloat(textFieldHeight)
         
         self.layer.cornerRadius = 5
         self.layer.masksToBounds = true
         self.font = UIFont.systemFont(ofSize: fontSize)
         self.delegate = self
     
-        self.frame = CGRect(x: -textFieldWidth / 2, y: 0, width: textFieldWidth, height: textFieldHeight)
+        self.frame = CGRect(x: -textFieldWidth / 2, y: 0, width: textFieldWidth, height: 0)
         self.textColor = UIColor.lightGray
         self.backgroundColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 0.2008775685)
         self.text = text
@@ -35,11 +38,11 @@ public class GraphUITextView: UITextView, UITextViewDelegate {
         self.isEditable = true
         self.isSelectable = true
         
-        
-        
         let toolbar = createToolBar()
         
         self.inputAccessoryView = toolbar
+        
+        self.sizeToFit()
         
     }
 
@@ -72,6 +75,10 @@ public class GraphUITextView: UITextView, UITextViewDelegate {
             graphUITextdelegate?.shouldSave(text: textView.text)
             self.endEditing(true)
             return false
+        }
+        
+        if textView.frame.height < maxTextFieldHeight {
+            self.sizeToFit()
         }
         return true
     }
