@@ -19,11 +19,13 @@ public class GraphUITextView: UITextView, UITextViewDelegate {
     public var graphUITextdelegate: GraphUITextDelegate?
     
     private var maxTextFieldHeight: CGFloat!
+    private var maxTextFieldWidth: CGFloat!
     
     public func setup(graphUITextdelegate: GraphUITextDelegate, text: String, fontSize: CGFloat, textFieldWidth: Int, textFieldHeight: Int) {
         
         self.graphUITextdelegate = graphUITextdelegate
         self.maxTextFieldHeight = CGFloat(textFieldHeight)
+        self.maxTextFieldWidth = CGFloat(textFieldWidth)
         
         self.layer.cornerRadius = 5
         self.layer.masksToBounds = true
@@ -97,6 +99,16 @@ public class GraphUITextView: UITextView, UITextViewDelegate {
 
         if didHandleEvent == false {
             super.pressesBegan(presses, with: event)
+        }
+    }
+    
+    override public func sizeThatFits(_ size: CGSize) -> CGSize {
+        let superSizeThatFits = super.sizeThatFits(size)
+        
+        if superSizeThatFits.height < maxTextFieldHeight {
+            return CGSize(width: maxTextFieldWidth, height: superSizeThatFits.height)
+        } else {
+            return CGSize(width: maxTextFieldWidth, height: maxTextFieldHeight)
         }
     }
 }
