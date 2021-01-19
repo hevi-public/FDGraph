@@ -85,7 +85,9 @@ public class Simulation {
     
     public func stop() {
         print("simulation stop...")
-        delegate?.simulationStop()
+        DispatchQueue.global().async {
+            self.delegate?.simulationStop()
+        }
         displayLink?.remove(from: RunLoop.main, forMode: RunLoop.Mode.common)
     }
     
