@@ -280,6 +280,11 @@ extension GraphController {
         }
     }
     
+    public func unfollow() {
+        self.graph.followedNode = nil
+        self.graph.simulation.followCallback = nil
+    }
+    
     private func preSelectNextChild() {
         guard let selectedNode = selectedNode else { return }
         let children = selectedNode.children
@@ -382,8 +387,6 @@ extension GraphController {
     
     public func deselect(node: Node) {
         selectedNode = nil
-        self.graph.followedNode = nil
-        self.graph.simulation.followCallback = nil
         
         if let nodeParticle = node.nodeParticle {
             self.graph.deselect(nodeParticle: nodeParticle)

@@ -97,6 +97,7 @@ struct GraphUIView: UIViewControllerRepresentable {
                     let childParticles = root.childNodesInTree.map { (node) -> NodeParticle in
                         node.nodeParticle
                     }
+                    graphController.unfollow()
                     graphController.graph.setParticles(particles: childParticles)
                 }
             case .changed:
