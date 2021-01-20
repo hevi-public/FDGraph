@@ -52,7 +52,19 @@ public class Node {
             //            return !nodeEntity.expanded && !self.isLinkType && children.count > 0
         }
     }
-    var done: Bool
+    
+    private var _done: Bool = false
+    var done: Bool {
+        get {
+            return _done
+        }
+        
+        set {
+            _done = newValue
+            delegate?.save(node: self)
+            nodeParticle.updateCircleColor()
+        }
+    }
     
     var cell: UITableViewCell?
     
@@ -120,12 +132,14 @@ public class Node {
     
     var color: UIColor {
         get {
-            if isRoot {
-                return UIColor.orange
+            if done {
+                return .darkGray
+            } else if isRoot {
+                return .orange
             } else if fixed {
-                return UIColor.green
+                return .green
             } else {
-                return UIColor.blue
+                return .blue
             }
         }
     }
@@ -142,7 +156,7 @@ public class Node {
         self.children = []
         self.text = text
         self.expanded = expanded
-        self.done = done
+        self._done = done
         self.type = type
         self.parent = parent
         

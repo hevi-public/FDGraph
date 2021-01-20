@@ -129,6 +129,9 @@ class GraphController: UIViewController {
                     } else if key.characters == "o" {
                         scrollView.zoomOut()
                         didHandleEvent = true
+                    } else if key.characters == "d" {
+                        self.done()
+                        didHandleEvent = true
                     }
                 }
             }
@@ -417,6 +420,12 @@ extension GraphController {
     public func unpin(node: Node) {
         node.fixed = false
         self.graph.simulation.kick()
+    }
+    
+    public func done() {
+        if let node = self.selectedNode {
+            node.done = !node.done
+        }
     }
     
     
