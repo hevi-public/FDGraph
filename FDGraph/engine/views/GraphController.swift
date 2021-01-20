@@ -413,6 +413,8 @@ extension GraphController {
         
         self.graph.delete(node: node.nodeParticle)
         
+        node.delete()
+        
         if self.selectedNode == node {
             self.selectedNode = nil
         }

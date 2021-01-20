@@ -16,6 +16,7 @@ public protocol NodeDelegate {
     func handleDragged(node: Node, gestureRecognizer: UIGestureRecognizer)
     
     func save(node: Node)
+    func delete(node: Node)
 }
 
 public class Node {
@@ -191,6 +192,13 @@ public class Node {
     
     func save() {
         delegate?.save(node: self)
+    }
+    
+    func delete() {
+        if let toBeDeletedChildIndex = self.parent?.children.firstIndex(of: self) {
+            self.parent?.children.remove(at: toBeDeletedChildIndex)
+        }
+        delegate?.delete(node: self)
     }
 }
 

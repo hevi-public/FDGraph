@@ -89,6 +89,16 @@ class JsonFileBasedDataStore: DataStore {
         }
     }
     
+    func remove(node: Node) {
+        guard let nodeFromCacheIndex = fileCache.firstIndex(where: { jsonNode -> Bool in
+            jsonNode.id == node.id
+        }) else { return }
+        
+        fileCache.remove(at: nodeFromCacheIndex)
+        
+        updateFile()
+    }
+    
     public func getMaxId() -> Int? {
 //        let nodeWithMaxId = self.nodeStore.fetchAll().filter({ node -> Bool in
         let nodeWithMaxId = self.fetchAll().filter({ node -> Bool in

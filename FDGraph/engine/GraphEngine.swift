@@ -166,6 +166,11 @@ extension GraphEngine {
     // -MARK: DELETE
     public func delete(node: NodeParticle, shouldKick: Bool = true) {
         self.simulation.remove(particle: node)
+        
+        if let parentParticle = node.node.parent?.nodeParticle {
+            links.unlink(between: node, and: parentParticle)
+        }
+        
         UIView.animate(withDuration: 0.3, animations: {
             node.circleContainer.alpha = 0
         }) { (completed) in

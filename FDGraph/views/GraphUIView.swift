@@ -126,6 +126,9 @@ struct GraphUIView: UIViewControllerRepresentable {
             graphController.endEdit(node: node)
         }
         
+        func delete(node: Node) {
+            uiView.jsonStore.remove(node: node)
+        }
     }
     
     func handleAddRoot(position: CGPoint) {
