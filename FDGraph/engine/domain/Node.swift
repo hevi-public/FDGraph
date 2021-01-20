@@ -188,6 +188,10 @@ public class Node {
         self.children.append(node)
         _parent?.updateValue()
     }
+    
+    func save() {
+        delegate?.save(node: self)
+    }
 }
 
 extension Node: Equatable {

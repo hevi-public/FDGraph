@@ -125,6 +125,10 @@ extension GraphEngine {
         simulation.kick()
     }
     
+    public func unlink(between a: NodeParticle, and b: NodeParticle) {
+        links.unlink(between: a, and: b)
+        simulation.kick()
+    }
     
     
     // -MARK: SELECT

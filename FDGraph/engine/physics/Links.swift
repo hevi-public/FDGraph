@@ -21,19 +21,23 @@ public final class Links: Force {
     }
     
     public func link(between a: NodeParticle, and b: NodeParticle, strength: CGFloat? = nil, distance: CGFloat? = nil) {
-        let link = links.update(with: Link(between: a, and: b, strength: strength, distance: distance))
-        if link == nil {
+        let link = Link(between: a, and: b, strength: strength, distance: distance)
+        linkBetweens.append(LinkBetween(a: a, b: b, link: link))
+        
+        let updatedLink = links.update(with: link)
+        if updatedLink == nil {
             degrees[a] = (degrees[a] ?? 0) + 1
             degrees[b] = (degrees[b] ?? 0) + 1
-        } else if let link = link {
-            linkBetweens.append(LinkBetween(a: a, b: b, link: link))
         }
+//        else if let link = link {
+//            linkBetweens.append(LinkBetween(a: a, b: b, link: link))
+//        }
     }
 
     public func unlink(between a: NodeParticle, and b: NodeParticle) {
         
         let linkBetween = linkBetweens.first { (linkBetween) -> Bool in
-            linkBetween.a == a && linkBetween.b == b
+            linkBetween.a == a && linkBetween.b == b || linkBetween.a == b && linkBetween.b == a // TODO REMOVE OR, MAKE PARAMETERS EXPLICIT PARENT-CHILD? FROM-TO?
         }
         if let link = linkBetween?.link {
             links.remove(link)

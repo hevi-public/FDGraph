@@ -52,6 +52,8 @@ class GraphController: UIViewController {
         }
     }
     
+    private var nodeSelectedToBeMoved: Node?
+    
     private var isEditMode: Bool = false
     
     // -MARK: SETUP
@@ -131,6 +133,9 @@ class GraphController: UIViewController {
                         didHandleEvent = true
                     } else if key.characters == "d" {
                         self.done()
+                        didHandleEvent = true
+                    } else if key.characters == "m" {
+                        self.changeParent()
                         didHandleEvent = true
                     }
                 }
@@ -428,6 +433,43 @@ extension GraphController {
         }
     }
     
+    public func changeParent() {
+        guard nodeSelectedToBeMoved != nil else {
+            nodeSelectedToBeMoved = selectedNode
+            return
+        }
+        
+        if let toBeMoved = nodeSelectedToBeMoved,
+           nodeSelectedToBeMoved != selectedNode,
+           let selectedNode = self.selectedNode,
+           let toBeMovedParent = toBeMoved.parent {
+
+            
+            if let toBeMovedChildIndex = toBeMovedParent.children.firstIndex(of: toBeMoved) {
+                toBeMovedParent.children.remove(at: toBeMovedChildIndex)
+                
+                graph.unlink(between: toBeMovedParent.nodeParticle, and: toBeMoved.nodeParticle)
+                
+                toBeMoved.parent = selectedNode
+                
+                graph.link(between: selectedNode.nodeParticle, and: toBeMoved.nodeParticle)
+                
+                selectedNode.save()
+                toBeMoved.save()
+                
+                if let root = toBeMoved.root {
+                    let childParticles = root.childNodesInTree.map { (node) -> NodeParticle in
+                        node.nodeParticle
+                    }
+                    self.graph.setParticles(particles: childParticles)
+                }
+                
+                self.graph.simulation.kick()
+                
+                nodeSelectedToBeMoved = nil
+            }
+        }
+    }
     
     // TEMP
     
